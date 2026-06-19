@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
-import { PT_Mono } from "next/font/google";
+import { JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const ptMono = PT_Mono({
-  weight: "400",
+const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
-  variable: "--font-pt-mono",
+  variable: "--font-mono",
 });
 
 export const metadata: Metadata = {
@@ -21,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${ptMono.variable} antialiased bg-page-base text-gray-900 font-sans`}
+        className={`${jetbrainsMono.variable} antialiased bg-page-base text-gray-900 font-sans`}
       >
         {children}
       </body>

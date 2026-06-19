@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-pt-mono), ui-monospace, monospace;
-  --font-display: var(--font-pt-mono), ui-monospace, monospace;
-  --font-mono: var(--font-pt-mono), ui-monospace, monospace;
+  --font-sans: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-display: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-mono: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
   /* Color Palette from Blueprint */
   --color-page-base: #F0EEE9;
@@ -19,7 +19,7 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    font-size: 106.25%; /* Scales base to 17px, increasing font size and spacings slightly */
+    font-size: 112.5%; /* Scales base to 18px (a 12.5% increase in text sizes and spacing globally) */
   }
 
   body {
