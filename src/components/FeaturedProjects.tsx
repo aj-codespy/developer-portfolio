@@ -123,7 +123,7 @@ export default function FeaturedProjects({
   const displayedProjects = limit ? projects.slice(0, limit) : projects;
 
   return (
-    <section id="work" className="mx-auto max-w-7xl px-6 py-16">
+    <section id="work" className="mx-auto max-w-7xl px-6 pt-16 pb-4">
       {/* Header row */}
       <div className="mb-8 flex items-center justify-between">
         <div className="flex flex-col gap-1">

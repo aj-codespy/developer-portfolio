@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  --font-display: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  --font-mono: var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-sans: var(--font-mono), "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-display: var(--font-mono), "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
   /* Color Palette from Blueprint */
   --color-page-base: #F0EEE9;
@@ -19,14 +19,18 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    font-size: 112.5%; /* Scales base to 18px (a 12.5% increase in text sizes and spacing globally) */
+    font-size: 118.75%; /* Scales base to 19px, increasing font size and spacings globally */
   }
 
   body {
     background-color: var(--color-page-base);
     color: var(--color-dark-card);
-    font-family: var(--font-sans);
+    font-family: var(--font-mono), monospace;
   }
+}
+
+* {
+  font-family: var(--font-mono), "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
 }
 
 /* Radial mesh gradient hero background */

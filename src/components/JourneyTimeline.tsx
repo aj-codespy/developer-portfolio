@@ -27,15 +27,15 @@ const nodeVariants = {
 
 export default function JourneyTimeline() {
   return (
-    <section id="journey" className="max-w-7xl mx-auto px-6 py-24 font-mono">
-      <div className="bg-dark-card rounded-[2.5rem] p-10 md:p-16 text-white overflow-hidden border border-white/5">
+    <section id="journey" className="max-w-7xl mx-auto px-6 pt-4 pb-10 font-mono">
+      <div className="bg-dark-card rounded-[2rem] pt-6 pb-8 px-6 md:pt-8 md:pb-10 md:px-10 text-white overflow-hidden border border-white/5">
         {/* Header */}
-        <p className="text-xs uppercase tracking-widest text-accent-blue mb-12 font-bold">
+        <p className="text-xs uppercase tracking-widest text-accent-blue mb-4 font-bold">
           // HOW I GOT HERE
         </p>
 
         {/* ===== Desktop / Horizontal Zig-Zag Timeline (md+) ===== */}
-        <div className="hidden md:block relative h-[380px] my-4">
+        <div className="hidden md:block relative h-[240px] my-2">
           {/* Centered Connecting Line */}
           <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 h-0.5 bg-white/10">
             <motion.div
@@ -68,14 +68,14 @@ export default function JourneyTimeline() {
                   {/* Alternating Text Containers positioned absolutely relative to center */}
                   {isEven ? (
                     /* EVEN index: Content goes ABOVE the line */
-                    <div className="absolute bottom-[calc(50%+20px)] left-1/2 -translate-x-1/2 w-48 text-center flex flex-col items-center justify-end">
+                    <div className="absolute bottom-[calc(50%+10px)] left-1/2 -translate-x-1/2 w-48 text-center flex flex-col items-center justify-end">
                       <p className="text-sm font-bold text-white group-hover:text-accent-blue transition-colors duration-300">{item.title}</p>
                       <p className="text-[10px] text-gray-400 mt-2 leading-relaxed">{item.subtitle}</p>
                       <span className="text-sm font-bold text-accent-blue mt-3 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">{item.year}</span>
                     </div>
                   ) : (
                     /* ODD index: Content goes BELOW the line */
-                    <div className="absolute top-[calc(50%+20px)] left-1/2 -translate-x-1/2 w-48 text-center flex flex-col items-center justify-start">
+                    <div className="absolute top-[calc(50%+10px)] left-1/2 -translate-x-1/2 w-48 text-center flex flex-col items-center justify-start">
                       <span className="text-sm font-bold text-accent-blue mb-3 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">{item.year}</span>
                       <p className="text-sm font-bold text-white group-hover:text-accent-blue transition-colors duration-300">{item.title}</p>
                       <p className="text-[10px] text-gray-400 mt-2 leading-relaxed">{item.subtitle}</p>
@@ -150,7 +150,7 @@ export default function JourneyTimeline() {
 
         {/* ===== Origin story footer ===== */}
         <motion.div
-          className="mt-16 flex flex-col sm:flex-row items-start gap-8 border-t border-white/5 pt-10"
+          className="mt-4 flex flex-col sm:flex-row items-start gap-8 border-t border-white/5 pt-6"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
