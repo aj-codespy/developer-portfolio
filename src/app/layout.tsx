@@ -1,21 +1,11 @@
 import type { Metadata } from "next";
-import { Inter, Syne, JetBrains_Mono } from "next/font/google";
+import { PT_Mono } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
+const ptMono = PT_Mono({
+  weight: "400",
   subsets: ["latin"],
-  variable: "--font-inter",
-});
-
-const syne = Syne({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  variable: "--font-syne",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
+  variable: "--font-pt-mono",
 });
 
 export const metadata: Metadata = {
@@ -31,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${syne.variable} ${jetbrainsMono.variable} antialiased bg-page-base text-gray-900 font-sans`}
+        className={`${ptMono.variable} antialiased bg-page-base text-gray-900 font-sans`}
       >
         {children}
       </body>
