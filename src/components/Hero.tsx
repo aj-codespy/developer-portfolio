@@ -56,7 +56,7 @@ export default function Hero() {
           {/* Headline */}
           <motion.h1
             variants={itemVariants}
-            className="font-display text-5xl sm:text-6xl lg:text-[4.5rem] font-extrabold tracking-tight text-dark-card leading-[1.05] mb-5"
+            className="font-display text-[2.25rem] sm:text-5xl lg:text-[3.75rem] font-extrabold tracking-tight text-dark-card leading-[1.05] mb-5"
           >
             I build AI apps
             <br />
