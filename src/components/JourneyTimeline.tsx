@@ -27,17 +27,17 @@ const nodeVariants = {
 
 export default function JourneyTimeline() {
   return (
-    <section id="journey" className="max-w-7xl mx-auto px-6 py-20">
+    <section id="journey" className="max-w-7xl mx-auto px-6 py-24 font-mono">
       <div className="bg-dark-card rounded-[2.5rem] p-10 md:p-16 text-white overflow-hidden border border-white/5">
         {/* Header */}
-        <p className="font-mono text-xs uppercase tracking-widest text-accent-blue mb-10">
-          HOW I GOT HERE
+        <p className="text-xs uppercase tracking-widest text-accent-blue mb-12 font-bold">
+          // HOW I GOT HERE
         </p>
 
-        {/* ===== Desktop / Horizontal Timeline (md+) ===== */}
-        <div className="hidden md:block relative py-16">
-          {/* Connecting line */}
-          <div className="absolute top-[calc(50%+1px)] left-0 right-0 h-0.5 bg-white/10">
+        {/* ===== Desktop / Horizontal Zig-Zag Timeline (md+) ===== */}
+        <div className="hidden md:block relative h-[380px] my-4">
+          {/* Centered Connecting Line */}
+          <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 h-0.5 bg-white/10">
             <motion.div
               className="h-full bg-accent-blue/40 origin-left"
               initial={{ scaleX: 0 }}
@@ -48,37 +48,49 @@ export default function JourneyTimeline() {
           </div>
 
           {/* Nodes grid */}
-          <div className="grid grid-cols-6 relative z-10 gap-4">
+          <div className="grid grid-cols-6 h-full relative z-10">
             {timelineData.map((item, i) => {
               const isLast = i === timelineData.length - 1;
+              const isEven = i % 2 === 0;
+
               return (
                 <motion.div
                   key={item.year}
-                  className="flex flex-col items-center text-center group cursor-default"
+                  className="flex flex-col items-center justify-center h-full relative group cursor-default"
                   custom={i}
                   variants={nodeVariants}
                   initial="hidden"
                   whileInView="visible"
-                  whileHover={{ y: -10, scale: 1.08 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                  whileHover={{ y: isEven ? -8 : 8, scale: 1.05 }}
+                  transition={{ type: "spring", stiffness: 350, damping: 25 }}
                   viewport={{ once: true, amount: 0.3 }}
                 >
-                  {/* Top label - set fixed minimum height to align dots perfectly */}
-                  <div className="mb-6 min-h-[90px] flex flex-col justify-end">
-                    <p className="text-sm font-bold text-white group-hover:text-accent-blue transition-colors duration-300">{item.title}</p>
-                    <p className="text-xs text-gray-400 mt-1.5 leading-relaxed">{item.subtitle}</p>
-                  </div>
+                  {/* Alternating Text Containers positioned absolutely relative to center */}
+                  {isEven ? (
+                    /* EVEN index: Content goes ABOVE the line */
+                    <div className="absolute bottom-[calc(50%+20px)] left-1/2 -translate-x-1/2 w-48 text-center flex flex-col items-center justify-end">
+                      <p className="text-sm font-bold text-white group-hover:text-accent-blue transition-colors duration-300">{item.title}</p>
+                      <p className="text-[10px] text-gray-400 mt-2 leading-relaxed">{item.subtitle}</p>
+                      <span className="text-sm font-bold text-accent-blue mt-3 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">{item.year}</span>
+                    </div>
+                  ) : (
+                    /* ODD index: Content goes BELOW the line */
+                    <div className="absolute top-[calc(50%+20px)] left-1/2 -translate-x-1/2 w-48 text-center flex flex-col items-center justify-start">
+                      <span className="text-sm font-bold text-accent-blue mb-3 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md">{item.year}</span>
+                      <p className="text-sm font-bold text-white group-hover:text-accent-blue transition-colors duration-300">{item.title}</p>
+                      <p className="text-[10px] text-gray-400 mt-2 leading-relaxed">{item.subtitle}</p>
+                    </div>
+                  )}
 
-                  {/* Dot */}
-                  <div className="w-3.5 h-3.5 rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.3)] flex-shrink-0 group-hover:scale-130 group-hover:bg-accent-blue group-hover:shadow-[0_0_15px_rgba(37,99,235,0.8)] transition-all duration-300" />
-
-                  {/* Bottom label — year */}
-                  <div className="mt-6 flex items-center gap-1.5 justify-center">
-                    <span className="text-xl font-mono font-bold text-accent-blue">{item.year}</span>
-                    {isLast && (
+                  {/* Dot (Guaranteed to be perfectly centered in the row) */}
+                  <div className="w-3.5 h-3.5 rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.3)] flex-shrink-0 z-20 group-hover:scale-135 group-hover:bg-accent-blue group-hover:shadow-[0_0_15px_rgba(37,99,235,0.8)] transition-all duration-300" />
+                  
+                  {/* Arrow Indicator for last item */}
+                  {isLast && (
+                    <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-20 hidden lg:block">
                       <ArrowRight className="w-4 h-4 text-accent-blue animate-pulse" />
-                    )}
-                  </div>
+                    </div>
+                  )}
                 </motion.div>
               );
             })}
@@ -119,7 +131,7 @@ export default function JourneyTimeline() {
 
                   {/* Content */}
                   <div className="flex items-baseline gap-4">
-                    <span className="text-xl font-mono font-bold text-accent-blue shrink-0 flex items-center gap-1">
+                    <span className="text-sm font-bold text-accent-blue bg-white/5 border border-white/10 px-2 py-0.5 rounded-md shrink-0 flex items-center gap-1">
                       {item.year}
                       {isLast && (
                         <ArrowRight className="w-4 h-4 text-accent-blue group-hover:translate-x-1 transition-transform" />
@@ -127,7 +139,7 @@ export default function JourneyTimeline() {
                     </span>
                     <div>
                       <p className="text-sm font-bold text-white group-hover:text-accent-blue transition-colors duration-300">{item.title}</p>
-                      <p className="text-xs text-gray-400 mt-1.5 leading-relaxed">{item.subtitle}</p>
+                      <p className="text-[10px] text-gray-400 mt-2 leading-relaxed">{item.subtitle}</p>
                     </div>
                   </div>
                 </motion.div>
@@ -157,7 +169,7 @@ export default function JourneyTimeline() {
           </motion.div>
 
           {/* Paragraph */}
-          <p className="text-sm md:text-base text-gray-300 leading-relaxed max-w-3xl">
+          <p className="text-xs md:text-sm text-gray-300 leading-relaxed max-w-3xl">
             {"Born in Bihar and raised in Mumbai, I've spent my engineering journey learning what textbooks don't teach. From freelance content writing pre-AI to building multi-agent clinical decision systems today, my drive is to reduce monetary stress for my parents and build a comfortable future. Whether it's training my body to run through shin splints or building software through late nights, I stay open to new challenges, upgrade my skills, and build for the real world."}
           </p>
         </motion.div>
