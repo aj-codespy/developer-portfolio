@@ -4,12 +4,12 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 const timelineData = [
-  { year: "2021", title: "Found AI", subtitle: "A tutorial turned into an obsession with how models actually work." },
-  { year: "2022", title: "First Real Build", subtitle: "Stopped watching tutorials, started shipping broken code that worked." },
-  { year: "2023", title: "Datathon Wins", subtitle: "2nd place at IIT Goa and PICT — built under pressure, on a deadline." },
-  { year: "2024", title: "Built getPlaced", subtitle: "Took an idea to a live product students actually use." },
-  { year: "2025", title: "Aligned Automation", subtitle: "Built an agentic validation engine in production using LangGraph." },
-  { year: "2026", title: "Going Global", subtitle: "Now building AI products and looking for the right team to build with." },
+  { year: "2007", title: "Mumbai Move", subtitle: "Moved to the city of dreams from Bihar. Rollercoaster school years began." },
+  { year: "2019", title: "Lockdown Freelancing", subtitle: "Discovered hacking basics, starting content writing pre-AI." },
+  { year: "2023", title: "Pune & AI Major", subtitle: "Entered university, starting from absolute zero in web dev, cloud, and AI." },
+  { year: "2024", title: "Hackathons & Confidence", subtitle: "Won multiple hackathons outside the classroom; secured first internship." },
+  { year: "2025", title: "Corporate Coding", subtitle: "Corporate engineering at Aligned Automation. Developed commercial, AI production code." },
+  { year: "2026", title: "Running & Real growth", subtitle: "Building daily running discipline, upskilling tech/sales. Entering final year." },
 ];
 
 const nodeVariants = {
@@ -156,7 +156,7 @@ export default function JourneyTimeline() {
 
           {/* Paragraph */}
           <p className="text-sm md:text-base text-gray-300 leading-relaxed max-w-2xl">
-            It started with a tutorial and a curiosity I couldn't shake. That curiosity turned into late nights, broken code, and eventually working products. Datathons taught me to build under pressure. Internships taught me to build for production. Now I build AI products end to end — and I'm looking for a team that wants to build something real, together.
+            {"Born in Bihar and raised in Mumbai, I've spent my engineering journey learning what textbooks don't teach. From freelance content writing pre-AI to building multi-agent clinical decision systems today, my drive is to reduce monetary stress for my parents and build a comfortable future. Whether it's training my body to run through shin splints or building software through late nights, I stay open to new challenges, upgrade my skills, and build for the real world."}
           </p>
         </motion.div>
       </div>
