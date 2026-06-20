@@ -104,13 +104,13 @@ export default function Hero() {
 
         {/* Right Column — Photo + Floating Cards */}
         <motion.div
-          className="lg:col-span-6 flex justify-center"
+          className="lg:col-span-6 flex justify-center lg:self-start lg:pt-1.5"
           initial={{ opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
           {/* Wrapper container for photo and cards so absolute positioning is relative to this wrapper, not the column */}
-          <div className="relative w-full max-w-[360px]">
+          <div className="relative w-full max-w-[400px]">
             {/* Photo Card */}
             <motion.div 
               whileHover={{ scale: 1.03, rotate: 1 }}
