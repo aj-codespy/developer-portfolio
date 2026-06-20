@@ -81,15 +81,15 @@ export default function BentoGrid() {
           <motion.div 
             whileHover={{ y: -6, scale: 1.01, rotate: 0.2 }}
             transition={{ type: "spring", stiffness: 400, damping: 30 }}
-            className="lg:col-span-4 bg-[#F4F3EF] rounded-[2rem] p-6 flex flex-col border border-black/5 shadow-sm hover:shadow-md transition-shadow min-h-[380px]"
+            className="lg:col-span-4 bg-[#F4F3EF] rounded-[2rem] p-6 flex flex-col border border-black/5 shadow-sm hover:shadow-md transition-shadow min-h-[330px]"
           >
-            <h3 className="font-display text-[1.75rem] font-extrabold text-dark-card mb-3 tracking-tight">Mindset</h3>
-            <p className="text-gray-500 text-sm leading-relaxed mb-4">
+            <h3 className="font-display text-2xl font-extrabold text-dark-card mb-2 tracking-tight">Mindset</h3>
+            <p className="text-gray-500 text-xs leading-relaxed mb-3">
               Building more than software. Running, training, and discipline give me the focus to keep shipping.
             </p>
 
             {/* Inner Image */}
-            <div className="relative w-full flex-1 min-h-[110px] rounded-2xl overflow-hidden mb-4 group cursor-pointer border border-black/5 shadow-inner">
+            <div className="relative w-full flex-1 min-h-[90px] rounded-2xl overflow-hidden mb-3 group cursor-pointer border border-black/5 shadow-inner">
               <img
                 src="/run.jpg"
                 alt="Running for growth and discipline"
@@ -103,7 +103,7 @@ export default function BentoGrid() {
               </div>
             </div>
 
-            <p className="text-gray-500 text-sm leading-relaxed mt-auto">
+            <p className="text-gray-500 text-xs leading-relaxed mt-auto">
               Mastering body and mind is how I stay sharp.
             </p>
           </motion.div>
@@ -144,40 +144,40 @@ export default function BentoGrid() {
           <motion.div 
             whileHover={{ y: -6, scale: 1.01, rotate: -0.2 }}
             transition={{ type: "spring", stiffness: 400, damping: 30 }}
-            className="lg:col-span-4 bg-[#F4F3EF] rounded-[2rem] p-6 flex flex-col border border-black/5 shadow-sm hover:shadow-md transition-shadow min-h-[380px]"
+            className="lg:col-span-4 bg-[#F4F3EF] rounded-[2rem] p-6 flex flex-col border border-black/5 shadow-sm hover:shadow-md transition-shadow min-h-[330px]"
           >
-            <h3 className="font-display text-[1.75rem] font-extrabold text-dark-card mb-3 tracking-tight">Craft</h3>
-            <p className="text-gray-500 text-sm leading-relaxed mb-3">
+            <h3 className="font-display text-2xl font-extrabold text-dark-card mb-2 tracking-tight">Craft</h3>
+            <p className="text-gray-500 text-xs leading-relaxed mb-2.5">
               Building AI apps, automations, and the products behind them.
             </p>
-            <p className="text-gray-500 text-sm leading-relaxed mb-4">
+            <p className="text-gray-500 text-xs leading-relaxed mb-3">
               Technical enough to build it, commercial enough to know if it's worth building — that's the gap I work in.
             </p>
 
             {/* Tech Pills */}
-            <div className="flex flex-wrap gap-2 mb-4">
+            <div className="flex flex-wrap gap-2 mb-3">
               {['LangGraph', 'FastAPI', 'Next.js', 'Supabase', 'Gemini'].map(tech => (
-                <span key={tech} className="px-3 py-1.5 bg-white text-[11px] font-bold text-gray-600 rounded-lg border border-black/5 flex items-center gap-1.5 shadow-sm">
+                <span key={tech} className="px-2.5 py-1 bg-white text-[10px] font-bold text-gray-600 rounded-lg border border-black/5 flex items-center gap-1.5 shadow-sm">
                   <span className="w-1.5 h-1.5 rounded-full bg-accent-blue opacity-70" />
                   {tech}
                 </span>
               ))}
             </div>
 
-            <div className="mt-auto border-t border-black/5 pt-4">
+            <div className="mt-auto border-t border-black/5 pt-3">
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-2">
                   <span className="relative flex h-2 w-2">
                     <span className="absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 animate-ping" />
                     <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
                   </span>
-                  <span className="text-[10px] font-bold text-gray-700 tracking-wider uppercase">Active & Available</span>
+                  <span className="text-[9px] font-bold text-gray-700 tracking-wider uppercase">Active & Available</span>
                 </div>
                 <span className="text-[9px] font-mono font-bold bg-green-500/10 text-green-700 px-2 py-0.5 rounded-full uppercase">
                   Remote / Reloc
                 </span>
               </div>
-              <p className="text-gray-500 text-[13px] leading-relaxed">
+              <p className="text-gray-500 text-xs leading-relaxed">
                 Open to remote-first AI roles globally & select contract work.
               </p>
             </div>

@@ -80,9 +80,19 @@ export default function Experience() {
         <p className="text-xs uppercase tracking-widest text-accent-blue mb-4 font-bold">
           // PROFESSIONAL EXPERIENCE
         </p>
-        <h2 className="font-display text-3xl font-extrabold text-dark-card mb-8 tracking-tight">
-          Work History
-        </h2>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+          <h2 className="font-display text-3xl font-extrabold text-dark-card tracking-tight">
+            Work History
+          </h2>
+          <a
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-dark-card text-white hover:bg-black px-4 py-2.5 rounded-xl text-xs font-bold transition-all shadow-md hover:-translate-y-0.5 active:translate-y-0 w-fit"
+          >
+            <span>View Resume PDF →</span>
+          </a>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
           {/* Sidebar / Tabs List */}

@@ -63,7 +63,7 @@ export default function Hero() {
 
           <motion.div variants={itemVariants} className="max-w-lg mb-8">
             <p className="text-base text-muted-text leading-relaxed">
-              Most engineers wait to be told what to build. I get on the call, hear the actual problem, and go build it — same week, not next sprint.
+              Most engineers wait to be told what to build. I get on the call, hear the actual problem, and go build it.
             </p>
             <p className="text-base text-muted-text leading-relaxed mt-2.5">
               Brainstorming features that solve real problems isn't a side task for me — it's where the work actually starts.
