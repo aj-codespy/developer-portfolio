@@ -130,7 +130,7 @@ export default function Hero() {
               animate={{ opacity: 1, scale: 1 }}
               whileHover={{ y: -5, scale: 1.05 }}
               transition={{ delay: 0.5, duration: 0.4 }}
-              className="absolute -top-3 -right-4 bg-dark-card text-white text-xs font-semibold px-4 py-2 rounded-full shadow-xl cursor-default animate-bounce-subtle z-20"
+              className="absolute -top-3 -right-4 md:-right-[206px] lg:-right-[100px] xl:-right-[206px] bg-dark-card text-white text-xs font-semibold px-4 py-2 rounded-full shadow-xl cursor-default animate-bounce-subtle z-20"
             >
               Built & scaled getPlaced to 4K+ users
             </motion.div>
@@ -141,7 +141,7 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               whileHover={{ y: -5, rotate: -2, scale: 1.05 }}
               transition={{ duration: 0.5, delay: 0.6 }}
-              className="hidden sm:block absolute bottom-16 -left-12 bg-dark-card text-white p-4 rounded-xl shadow-xl border border-white/10 max-w-[180px] z-20 cursor-default"
+              className="hidden sm:block absolute bottom-16 -left-12 lg:-left-[117px] bg-dark-card text-white p-4 rounded-xl shadow-xl border border-white/10 max-w-[180px] z-20 cursor-default"
             >
               <p className="font-display font-bold text-sm mb-1">My edge:</p>
               <p className="text-[11px] text-gray-300 leading-relaxed">
@@ -155,7 +155,7 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               whileHover={{ y: -5, rotate: 2, scale: 1.05 }}
               transition={{ duration: 0.5, delay: 0.7 }}
-              className="hidden sm:block absolute bottom-4 -right-16 bg-white/95 backdrop-blur-sm p-4 rounded-xl shadow-xl border border-black/5 max-w-[210px] z-20 cursor-default"
+              className="hidden sm:block absolute bottom-4 -right-16 lg:-right-[90px] xl:-right-[136px] bg-white/95 backdrop-blur-sm p-4 rounded-xl shadow-xl border border-black/5 max-w-[210px] z-20 cursor-default"
             >
               <p className="font-semibold text-xs text-dark-card leading-snug">
                 FastAPI · LangGraph · Firebase
