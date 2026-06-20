@@ -24,14 +24,14 @@ export default function BentoGrid() {
           <motion.div 
             whileHover={{ y: -6, scale: 1.01, rotate: -0.2 }}
             transition={{ type: "spring", stiffness: 400, damping: 30 }}
-            className="md:col-span-4 bg-[#EDEDE8] rounded-[2rem] p-6 flex flex-col items-center justify-center min-h-[200px] border border-black/5 shadow-sm hover:shadow-md transition-shadow"
+            className="md:col-span-4 bg-accent-blue rounded-[2rem] p-6 flex flex-col items-center justify-center min-h-[200px] border border-black/5 shadow-sm hover:shadow-md transition-shadow"
           >
-            <h2 className="font-display text-[2.25rem] leading-[0.95] font-extrabold text-dark-card text-center tracking-tighter">
+            <h2 className="font-display text-[2.25rem] leading-[0.95] font-extrabold text-white text-center tracking-tighter">
               AYUSH
               <br />
               JHA
             </h2>
-            <p className="mt-3 text-[10px] font-bold tracking-[0.25em] text-gray-500 uppercase">
+            <p className="mt-3 text-[10px] font-bold tracking-[0.25em] text-white/80 uppercase">
               AI Engineer & Builder
             </p>
           </motion.div>
@@ -44,12 +44,11 @@ export default function BentoGrid() {
             <div className="relative w-full h-full flex items-center justify-center">
               {highlights.map((item, idx) => {
                 const isActive = idx === activeIdx;
-                // Calculate transform based on position relative to active card
-                const offset = idx - activeIdx;
-                const x = offset * 110; // push left or right
-                const rotate = offset * 4; // rotate slightly
-                const scale = isActive ? 1.05 : 0.9;
-                const zIndex = isActive ? 10 : 0;
+                // Static layout positions to prevent layout-shift jittering on hover
+                const x = (idx - 2) * 105;
+                const rotate = isActive ? 0 : (idx - 2) * 4;
+                const scale = isActive ? 1.08 : 0.92;
+                const zIndex = isActive ? 30 : idx;
                 
                 return (
                   <motion.div
