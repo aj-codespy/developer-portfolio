@@ -19,7 +19,7 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    font-size: 106.25%; /* Scales base to ~17px for comfortable reading */
+    font-size: 100%; /* Scales base to 16px for comfortable reading */
   }
 
   body {

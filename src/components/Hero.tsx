@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Zap } from "lucide-react";
 import Link from "next/link";
 
 const containerVariants = {
@@ -47,9 +46,8 @@ export default function Hero() {
               Available for Hiring
             </div>
             <span className="text-muted-text text-sm font-medium hidden sm:inline">·</span>
-            <span className="text-sm font-medium text-muted-text flex items-center gap-1.5">
-              <Zap className="w-4 h-4 text-accent-blue" />
-              Application-Layer AI Engineer
+            <span className="text-sm font-medium text-muted-text">
+              ⚡ Builder who talks to users first
             </span>
           </motion.div>
 
@@ -58,17 +56,17 @@ export default function Hero() {
             variants={itemVariants}
             className="font-display text-[2.25rem] sm:text-5xl lg:text-[3.75rem] font-extrabold tracking-tight text-dark-card leading-[1.05] mb-5"
           >
-            I build AI apps
+            I build like it's my own company.
             <br />
-            that ship.
+            Because that's how I think.
           </motion.h1>
 
           <motion.div variants={itemVariants} className="max-w-lg mb-8">
             <p className="text-base text-muted-text leading-relaxed">
-              I turn AI ideas into real, working products — not prototypes that die in a notebook.
+              Most engineers wait to be told what to build. I get on the call, hear the actual problem, and go build it — same week, not next sprint.
             </p>
-            <p className="text-base text-muted-text leading-relaxed mt-1.5">
-              I work where the model meets the user: APIs, UI, and everything that makes it real.
+            <p className="text-base text-muted-text leading-relaxed mt-2.5">
+              Brainstorming features that solve real problems isn't a side task for me — it's where the work actually starts.
             </p>
           </motion.div>
 
@@ -79,10 +77,9 @@ export default function Hero() {
           >
             <Link
               href="#contact"
-              className="bg-dark-card text-white px-6 py-3 rounded-xl font-semibold text-sm flex items-center gap-2 hover:bg-black transition-all hover:-translate-y-0.5 active:translate-y-0"
+              className="bg-dark-card text-white px-6 py-3 rounded-xl font-semibold text-sm flex items-center hover:bg-black transition-all hover:-translate-y-0.5 active:translate-y-0"
             >
-              Get in touch
-              <ArrowRight className="w-4 h-4" />
+              Get in touch →
             </Link>
             <Link
               href="#work"
@@ -91,28 +88,41 @@ export default function Hero() {
               See my work
             </Link>
           </motion.div>
+
+          {/* Credibility Strip */}
+          <motion.div
+            variants={itemVariants}
+            className="mt-8 border-t border-black/5 pt-5 w-full text-xs text-muted-text font-mono flex flex-wrap gap-y-2 gap-x-4 items-center"
+          >
+            <span>20+ cold conversations with founders</span>
+            <span className="text-accent-blue opacity-50">•</span>
+            <span>1 product shipped solo</span>
+            <span className="text-accent-blue opacity-50">•</span>
+            <span>0 specs handed to me</span>
+          </motion.div>
         </motion.div>
 
         {/* Right Column — Photo + Floating Cards */}
         <motion.div
-          className="lg:col-span-6 relative flex justify-center"
+          className="lg:col-span-6 flex justify-center"
           initial={{ opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.7, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
-          {/* Photo Card */}
-          <motion.div 
-            whileHover={{ scale: 1.03, rotate: 1 }}
-            transition={{ type: "spring", stiffness: 400, damping: 25 }}
-            className="relative w-full max-w-[360px] z-10"
-          >
-            <div className="aspect-[3/4] w-full rounded-2xl overflow-hidden bg-gray-100 border border-black/5 shadow-2xl relative">
+          {/* Wrapper container for photo and cards so absolute positioning is relative to this wrapper, not the column */}
+          <div className="relative w-full max-w-[360px]">
+            {/* Photo Card */}
+            <motion.div 
+              whileHover={{ scale: 1.03, rotate: 1 }}
+              transition={{ type: "spring", stiffness: 400, damping: 25 }}
+              className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden bg-gray-100 border border-black/5 shadow-2xl z-10"
+            >
               <img
                 src="/ayush.jpg"
                 alt="Ayush Jha"
                 className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
               />
-            </div>
+            </motion.div>
 
             {/* Floating Badge */}
             <motion.div
@@ -120,44 +130,41 @@ export default function Hero() {
               animate={{ opacity: 1, scale: 1 }}
               whileHover={{ y: -5, scale: 1.05 }}
               transition={{ delay: 0.5, duration: 0.4 }}
-              className="absolute -top-2 -right-4 bg-dark-card text-white text-xs font-semibold px-4 py-2 rounded-full shadow-xl flex items-center gap-2 cursor-default"
+              className="absolute -top-3 -right-4 bg-dark-card text-white text-xs font-semibold px-4 py-2 rounded-full shadow-xl cursor-default animate-bounce-subtle z-20"
             >
-              <span className="w-2 h-2 rounded-full bg-accent-blue animate-pulse" />
               Built & shipped getPlaced
             </motion.div>
-          </motion.div>
 
-          {/* Dark Info Card — Bottom Left */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            whileHover={{ y: -5, rotate: -2, scale: 1.05 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-            className="hidden sm:block absolute bottom-6 -left-4 lg:-left-8 bg-dark-card text-white p-4 rounded-xl shadow-xl border border-white/10 max-w-[180px] z-20 cursor-default"
-          >
-            <p className="font-display font-bold text-sm mb-0.5">My edge:</p>
-            <p className="text-xs text-gray-300 leading-relaxed">
-              I ship, not just prototype.
-            </p>
-            <Zap className="w-3.5 h-3.5 text-accent-blue mt-2.5" />
-          </motion.div>
+            {/* Dark Info Card — Bottom Left */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              whileHover={{ y: -5, rotate: -2, scale: 1.05 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+              className="hidden sm:block absolute bottom-16 -left-12 bg-dark-card text-white p-4 rounded-xl shadow-xl border border-white/10 max-w-[180px] z-20 cursor-default"
+            >
+              <p className="font-display font-bold text-sm mb-1">My edge:</p>
+              <p className="text-[11px] text-gray-300 leading-relaxed">
+                I've sat in the user call AND written the code.
+              </p>
+            </motion.div>
 
-          {/* Light Info Card — Bottom Right */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            whileHover={{ y: -5, rotate: 2, scale: 1.05 }}
-            transition={{ duration: 0.5, delay: 0.7 }}
-            className="hidden sm:block absolute bottom-0 -right-4 lg:-right-8 bg-white/95 backdrop-blur-sm p-4 rounded-xl shadow-xl border border-black/5 max-w-[210px] z-20 cursor-default"
-          >
-            <p className="font-semibold text-sm text-dark-card leading-snug">
-              FastAPI · LangGraph · Supabase
-            </p>
-            <p className="text-xs text-muted-text mt-1.5 leading-relaxed">
-              Shipping agentic AI systems people actually use.
-            </p>
-            <div className="w-3 h-3 rounded-full border-2 border-accent-blue mt-2.5" />
-          </motion.div>
+            {/* Light Info Card — Bottom Right */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              whileHover={{ y: -5, rotate: 2, scale: 1.05 }}
+              transition={{ duration: 0.5, delay: 0.7 }}
+              className="hidden sm:block absolute bottom-4 -right-16 bg-white/95 backdrop-blur-sm p-4 rounded-xl shadow-xl border border-black/5 max-w-[210px] z-20 cursor-default"
+            >
+              <p className="font-semibold text-xs text-dark-card leading-snug">
+                FastAPI · LangGraph · Firebase
+              </p>
+              <p className="text-[10px] text-muted-text mt-1.5 leading-relaxed">
+                The tools change. What doesn't: understanding the actual problem before writing a line of code.
+              </p>
+            </motion.div>
+          </div>
         </motion.div>
       </div>
     </section>
