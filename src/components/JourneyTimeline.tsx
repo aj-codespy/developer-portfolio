@@ -7,7 +7,7 @@ const timelineData = [
   { year: "2007", title: "Mumbai Move", subtitle: "Moved to the city of dreams from Bihar. Rollercoaster school years began." },
   { year: "2019", title: "Lockdown Freelancing", subtitle: "Discovered hacking basics, starting content writing pre-AI." },
   { year: "2023", title: "Pune & AI Major", subtitle: "Entered university, starting from absolute zero in web dev, cloud, and AI." },
-  { year: "2024", title: "Hackathons & Confidence", subtitle: "Won multiple hackathons outside the classroom; secured first internship." },
+  { year: "2024", title: "Hackathons & Confidence", subtitle: "Won 7 hackathons outside the classroom; secured first internship." },
   { year: "2025", title: "Corporate Coding", subtitle: "Corporate engineering at Aligned Automation. Developed commercial, AI production code." },
   { year: "2026", title: "Shipped First SaaS", subtitle: "Launched getPlaced, scaling to 4k+ users. Upskilling in sales, marketing & GTM." },
 ];

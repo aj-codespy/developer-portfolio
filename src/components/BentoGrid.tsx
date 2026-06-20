@@ -4,13 +4,15 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 
 const highlights = [
-  { category: "INTERNSHIP", desc: "Built an agentic validation engine using LangGraph at Aligned Automation." },
-  { category: "COMPETITIONS", desc: "2nd place at IIT Goa and PICT datathons — built under pressure, shipped on time." },
-  { category: "FOUNDER", desc: "Built and launched getPlaced, an AI resume builder live at getplaced.online." },
+  { category: "FOUNDER", desc: "Built and launched getPlaced, an AI resume builder scaled to 4,000+ active users at getplaced.online." },
+  { category: "HACKATHONS", desc: "7 Hackathon wins outside the classroom — coding through 36-hour sprints, prototyping, and shipping under pressure." },
+  { category: "INTERNSHIP", desc: "Built an agentic validation engine using LangGraph at Aligned Automation, aligning technical engineering with clients." },
+  { category: "CLIENTS & SALES", desc: "Managed freelance content clients pre-AI. Handled pricing, feedback cycles, client negotiations, and end-to-end delivery." },
+  { category: "PRESENTATION", desc: "Pitched AI products to judges, demoed to teams, and translated complex ML concepts into clear business narratives." },
 ];
 
 export default function BentoGrid() {
-  const [activeIdx, setActiveIdx] = useState(1);
+  const [activeIdx, setActiveIdx] = useState(2);
 
   return (
     <section className="max-w-7xl mx-auto px-6 py-10">
@@ -53,6 +55,8 @@ export default function BentoGrid() {
                   <motion.div
                     key={idx}
                     onHoverStart={() => setActiveIdx(idx)}
+                    onMouseEnter={() => setActiveIdx(idx)}
+                    onClick={() => setActiveIdx(idx)}
                     animate={{ x, rotate, scale, zIndex }}
                     transition={{ type: "spring", stiffness: 300, damping: 25 }}
                     className={`absolute w-56 bg-white/90 backdrop-blur-md p-6 rounded-2xl border border-black/5 shadow-md cursor-pointer ${
