@@ -184,6 +184,88 @@ export default function BentoGrid() {
           </motion.div>
 
         </div>
+
+        {/* ROW 3 - Education & Status */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+          {/* Education Dossier */}
+          <motion.div 
+            whileHover={{ y: -6, scale: 1.01, rotate: 0.1 }}
+            transition={{ type: "spring", stiffness: 400, damping: 30 }}
+            className="lg:col-span-8 bg-[#F4F3EF] rounded-[2rem] p-6 flex flex-col border border-black/5 shadow-sm hover:shadow-md transition-shadow min-h-[220px]"
+          >
+            <h3 className="font-display text-[1.75rem] font-extrabold text-dark-card mb-4 tracking-tight">Education Dossier</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 flex-1">
+              {/* University */}
+              <div className="flex flex-col border-l-2 border-accent-blue/30 pl-4 py-1">
+                <p className="text-[9px] font-bold tracking-wider text-accent-blue uppercase mb-1">UNIVERSITY</p>
+                <a href="https://www.mmcoe.edu.in" target="_blank" rel="noopener noreferrer" className="text-xs font-bold text-dark-card hover:text-accent-blue transition-colors leading-tight mb-1.5 flex items-center gap-1">
+                  MMCOE
+                  <span className="text-[9px] font-normal text-gray-400">↗</span>
+                </a>
+                <p className="text-[10px] text-gray-500 leading-snug mb-2">B.E. Artificial Intelligence & Data Science</p>
+                <div className="mt-auto">
+                  <p className="text-[9px] text-gray-400">Class of 2027</p>
+                  <p className="text-xs font-bold text-dark-card mt-0.5">GPA: 9.3/10</p>
+                </div>
+              </div>
+
+              {/* High School */}
+              <div className="flex flex-col border-l-2 border-accent-blue/30 pl-4 py-1">
+                <p className="text-[9px] font-bold tracking-wider text-accent-blue uppercase mb-1">JUNIOR COLLEGE</p>
+                <a href="https://www.chmcollege.in" target="_blank" rel="noopener noreferrer" className="text-xs font-bold text-dark-card hover:text-accent-blue transition-colors leading-tight mb-1.5 flex items-center gap-1">
+                  Smt. CHM College
+                  <span className="text-[9px] font-normal text-gray-400">↗</span>
+                </a>
+                <p className="text-[10px] text-gray-500 leading-snug mb-2">Higher Secondary Certificate (HSC)</p>
+                <div className="mt-auto">
+                  <p className="text-[9px] text-gray-400">Class of 2023</p>
+                  <p className="text-xs font-bold text-dark-card mt-0.5">63% (US: ~3.0 GPA)</p>
+                </div>
+              </div>
+
+              {/* School */}
+              <div className="flex flex-col border-l-2 border-accent-blue/30 pl-4 py-1">
+                <p className="text-[9px] font-bold tracking-wider text-accent-blue uppercase mb-1">SECONDARY SCHOOL</p>
+                <a href="https://sssecondary.edu.in" target="_blank" rel="noopener noreferrer" className="text-xs font-bold text-dark-card hover:text-accent-blue transition-colors leading-tight mb-1.5 flex items-center gap-1">
+                  New Era High School
+                  <span className="text-[9px] font-normal text-gray-400">↗</span>
+                </a>
+                <p className="text-[10px] text-gray-500 leading-snug mb-2">Secondary School Certificate (SSC)</p>
+                <div className="mt-auto">
+                  <p className="text-[9px] text-gray-400">Class of 2021</p>
+                  <p className="text-xs font-bold text-dark-card mt-0.5">93% (US: ~4.0 GPA)</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Job Status Card */}
+          <motion.div 
+            whileHover={{ y: -6, scale: 1.01, rotate: -0.1 }}
+            transition={{ type: "spring", stiffness: 400, damping: 30 }}
+            className="lg:col-span-4 bg-dark-card rounded-[2rem] p-6 flex flex-col border border-white/5 shadow-sm hover:shadow-md transition-shadow min-h-[220px]"
+          >
+            <h3 className="font-display text-[1.5rem] font-bold text-white mb-2 tracking-tight">Status</h3>
+            <div className="flex flex-col gap-3 my-auto font-mono text-xs">
+              <div className="flex justify-between items-center border-b border-white/10 pb-1.5">
+                <span className="text-gray-400 text-[10px]">EMPLOYMENT</span>
+                <span className="text-green-400 font-bold text-[10px]">SEEKING ROLES</span>
+              </div>
+              <div className="flex justify-between items-center border-b border-white/10 pb-1.5">
+                <span className="text-gray-400 text-[10px]">LATEST INT.</span>
+                <span className="text-white text-[10px]">Aligned Automation</span>
+              </div>
+              <div className="flex justify-between items-center border-b border-white/10 pb-1.5">
+                <span className="text-gray-400 text-[10px]">FREELANCE</span>
+                <span className="text-accent-blue font-bold text-[10px]">ACTIVE & OPEN</span>
+              </div>
+            </div>
+            <a href="#contact" className="mt-auto text-center py-2.5 px-4 bg-white/5 border border-white/10 text-white rounded-xl text-xs font-bold hover:bg-white/10 transition-colors uppercase tracking-wider">
+              Discuss Opportunities
+            </a>
+          </motion.div>
+        </div>
+
       </div>
     </section>
   );
