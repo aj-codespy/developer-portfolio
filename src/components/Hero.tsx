@@ -58,7 +58,7 @@ export default function Hero() {
           >
             I build like it's my own company.
             <br />
-            Because that's how I think.
+            
           </motion.h1>
 
           <motion.div variants={itemVariants} className="max-w-lg mb-8">
@@ -132,7 +132,7 @@ export default function Hero() {
               transition={{ delay: 0.5, duration: 0.4 }}
               className="absolute -top-3 -right-4 bg-dark-card text-white text-xs font-semibold px-4 py-2 rounded-full shadow-xl cursor-default animate-bounce-subtle z-20"
             >
-              Built & shipped getPlaced
+              Built & scaled getPlaced to 4K+ users
             </motion.div>
 
             {/* Dark Info Card — Bottom Left */}
