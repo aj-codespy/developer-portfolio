@@ -34,7 +34,7 @@ const platforms: CodingPlatform[] = [
     name: "Codeforces",
     rating: "1308",
     title: "Pupil",
-    solved: "200+ Problems",
+    solved: "150+ Problems",
     percentile: "Active Contestant",
     color: "border-blue-500/20 text-blue-600 bg-blue-500/5",
     profileUrl: "https://codeforces.com/profile/aj.codes.py"
@@ -43,7 +43,7 @@ const platforms: CodingPlatform[] = [
     name: "CodeChef",
     rating: "1633",
     title: "3-Star",
-    solved: "200+ Problems",
+    solved: "300+ Problems",
     percentile: "Top 12% globally",
     color: "border-emerald-500/20 text-emerald-600 bg-emerald-500/5",
     profileUrl: "https://www.codechef.com/users/aj_codespy"
@@ -52,10 +52,10 @@ const platforms: CodingPlatform[] = [
 
 const achievements: Achievement[] = [
   {
-    position: "1st Prize (Winner)",
+    position: "2nd Prize (Winner)",
     competition: "Mindspark 2025",
     organizer: "COEP Pune",
-    details: "Secured first place in technical innovation and algorithmic development."
+    details: "Secured Second place in clear Analysis using visually appealing Dashboards"
   },
   {
     position: "1st Prize (Winner)",
