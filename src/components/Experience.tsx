@@ -166,7 +166,7 @@ export default function Experience() {
           </div>
 
           {/* Job Details Box */}
-          <div className="md:col-span-8 min-h-[300px] flex flex-col justify-between">
+          <div className="md:col-span-8 min-h-[300px] md:h-[360px] flex flex-col justify-between">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeJobIdx}
