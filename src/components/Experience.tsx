@@ -17,17 +17,17 @@ interface Job {
 const jobs: Job[] = [
   {
     id: "aligned",
-    role: "AI Engineer Intern",
+    role: "AI Intern",
     company: "Aligned Automation",
     url: "https://alignedautomation.com",
-    duration: "June 2025 - Nov 2025",
+    duration: "Jan 2026 - Apr 2026",
     points: [
-      "Built and deployed an agentic validation engine using LangGraph and FastAPI to streamline document workflows.",
-      "Collaborated closely with seasoned software engineers to implement production-grade, secure, and clean code architectures.",
-      "Optimized model inference pipelines and established robust unit testing suites to ensure system reliability.",
-      "Aligned technical engineering with client specifications, translating complex system designs into business value."
+      "Developed an Agentic Validation engine using LangGraph and LLMs, automating 80% of data validation.",
+      "Engineered a robust supervisor agent architecture, reducing data quality issues by 30% through automated fixes.",
+      "Analyzed complex NASCAR race data, performing preprocessing on 100GB+ to derive critical performance insights.",
+      "Automated a comprehensive data analysis pipeline for NASCAR data, improving processing efficiency by 40%."
     ],
-    tech: ["LangGraph", "FastAPI", "Python", "Supabase", "Git"]
+    tech: ["LangGraph", "Python", "LLMs", "Data Pipelines", "NASCAR Data"]
   },
   {
     id: "freelancing",
@@ -36,25 +36,23 @@ const jobs: Job[] = [
     url: "",
     duration: "2024 - 2025 (Intermittent)",
     points: [
-      "Designed, developed, and launched custom AI tools, scraping automation pipelines, and analytics dashboards for clients.",
-      "Managed end-to-end client communications: gathered requirements, negotiated pricing, and handled product delivery.",
-      "Built and marketed getPlaced organically, scaling the AI resume builder platform to over 4,000+ active users.",
-      "Wrote and published long-form technical content on AI engineering, building personal brand and audience engagement."
+      "I made a few AI and full stack projects for a few businesses for improving their overall workflow."
     ],
-    tech: ["Next.js", "React", "Python", "Streamlit", "Gemini API", "Pinecone"]
+    tech: ["Next.js", "React", "Python", "Full Stack", "AI Integrations"]
   },
   {
     id: "rhv",
-    role: "Software / AI Intern",
+    role: "ML Intern",
     company: "RHV Group",
     url: "",
-    duration: "July 2024 - Oct 2024",
+    duration: "Aug 2024 - Nov 2024",
     points: [
-      "Developed web applications and integrated database systems to optimize data storage and operational workflows.",
-      "Explored machine learning architectures and assisted in writing data preprocessing scripts for training datasets.",
-      "Gained hands-on experience in building under pressure, shipping on-time deliverables, and working in a team environment."
+      "Built machine learning recommendation models using Python, increasing client engagement by 15%.",
+      "Optimized sales data quality through rigorous cleaning, improving data accuracy by 25% for models.",
+      "Delivered impactful technical presentations to 5+ clients, securing positive feedback on model value.",
+      "Collaborated closely with 3+ clients to understand business requirements, ensuring tailored ML solution development."
     ],
-    tech: ["Web Development", "Python", "SQL", "APIs", "Data Prep"]
+    tech: ["Python", "Machine Learning", "Data Prep", "Client Relations"]
   },
   {
     id: "buildspace",
