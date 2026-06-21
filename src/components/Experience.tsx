@@ -83,27 +83,24 @@ export default function Experience() {
     if (!container) return;
 
     const handleWheel = (e: WheelEvent) => {
+      // Unconditionally prevent browser page scrolling while cursor is inside this container
+      e.preventDefault();
+
       const isScrollDown = e.deltaY > 0;
       const isScrollUp = e.deltaY < 0;
 
       if (isScrollDown) {
-        if (activeJobIdxRef.current < jobs.length - 1) {
-          // Prevent page scroll as long as we can slide down in the list
-          e.preventDefault();
-
-          const now = Date.now();
-          if (now - lastScrollTime.current >= 650 && Math.abs(e.deltaY) >= 15) {
+        const now = Date.now();
+        if (now - lastScrollTime.current >= 650 && Math.abs(e.deltaY) >= 15) {
+          if (activeJobIdxRef.current < jobs.length - 1) {
             setActiveJobIdx((prev) => prev + 1);
             lastScrollTime.current = now;
           }
         }
       } else if (isScrollUp) {
-        if (activeJobIdxRef.current > 0) {
-          // Prevent page scroll as long as we can slide up in the list
-          e.preventDefault();
-
-          const now = Date.now();
-          if (now - lastScrollTime.current >= 650 && Math.abs(e.deltaY) >= 15) {
+        const now = Date.now();
+        if (now - lastScrollTime.current >= 650 && Math.abs(e.deltaY) >= 15) {
+          if (activeJobIdxRef.current > 0) {
             setActiveJobIdx((prev) => prev - 1);
             lastScrollTime.current = now;
           }
