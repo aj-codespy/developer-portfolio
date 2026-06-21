@@ -20,12 +20,14 @@
   html {
     scroll-behavior: smooth;
     font-size: 100%; /* Scales base to 16px for comfortable reading */
+    overflow-x: hidden;
   }
 
   body {
     background-color: var(--color-page-base);
     color: var(--color-dark-card);
     font-family: var(--font-mono), monospace;
+    overflow-x: hidden;
   }
 }
 

@@ -10,7 +10,7 @@ import DotGrid from "@/components/DotGrid";
 
 export default function Home() {
   return (
-    <main className="min-h-screen relative">
+    <main className="min-h-screen relative overflow-x-hidden">
       <DotGrid />
       <Navbar />
       <Hero />
