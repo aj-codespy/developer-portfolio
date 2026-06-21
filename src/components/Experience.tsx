@@ -36,7 +36,10 @@ const jobs: Job[] = [
     url: "",
     duration: "2024 - 2025 (Intermittent)",
     points: [
-      "I made a few AI and full stack projects for a few businesses for improving their overall workflow."
+      "Designed and shipped custom full-stack web applications and AI workflows, automating key business processes to improve client operational efficiency.",
+      "Engineered high-volume data extraction and web scraping engines to compile and deliver qualified leads for business agencies.",
+      "Built interactive dashboards and integrated third-party APIs (analytics, database sync, and services) to streamline client operations.",
+      "Managed end-to-end client communication: gathered requirements, negotiated pricing, and handled complete product lifecycle delivery."
     ],
     tech: ["Next.js", "React", "Python", "Full Stack", "AI Integrations"]
   },
