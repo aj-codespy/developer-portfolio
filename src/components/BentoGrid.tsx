@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 const highlights = [
@@ -13,6 +13,16 @@ const highlights = [
 
 export default function BentoGrid() {
   const [activeIdx, setActiveIdx] = useState(2);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <section className="max-w-7xl mx-auto px-6 py-10">
@@ -45,7 +55,7 @@ export default function BentoGrid() {
               {highlights.map((item, idx) => {
                 const isActive = idx === activeIdx;
                 // Static layout positions to prevent layout-shift jittering on hover
-                const x = (idx - 2) * 105;
+                const x = (idx - 2) * (isMobile ? 48 : 105);
                 const rotate = isActive ? 0 : (idx - 2) * 4;
                 const scale = isActive ? 1.08 : 0.92;
                 const zIndex = isActive ? 30 : idx;

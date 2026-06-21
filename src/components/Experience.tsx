@@ -84,27 +84,23 @@ export default function Experience() {
     if (!container) return;
 
     const handleWheel = (e: WheelEvent) => {
-      // Unconditionally prevent browser page scrolling while cursor is inside this container
-      e.preventDefault();
-
       const isScrollDown = e.deltaY > 0;
       const isScrollUp = e.deltaY < 0;
 
-      if (isScrollDown) {
+      // Only hijack page scroll if we are actively transitioning between job tabs
+      if (isScrollDown && activeJobIdxRef.current < jobs.length - 1) {
+        e.preventDefault();
         const now = Date.now();
         if (now - lastScrollTime.current >= 650 && Math.abs(e.deltaY) >= 15) {
-          if (activeJobIdxRef.current < jobs.length - 1) {
-            setActiveJobIdx((prev) => prev + 1);
-            lastScrollTime.current = now;
-          }
+          setActiveJobIdx((prev) => prev + 1);
+          lastScrollTime.current = now;
         }
-      } else if (isScrollUp) {
+      } else if (isScrollUp && activeJobIdxRef.current > 0) {
+        e.preventDefault();
         const now = Date.now();
         if (now - lastScrollTime.current >= 650 && Math.abs(e.deltaY) >= 15) {
-          if (activeJobIdxRef.current > 0) {
-            setActiveJobIdx((prev) => prev - 1);
-            lastScrollTime.current = now;
-          }
+          setActiveJobIdx((prev) => prev - 1);
+          lastScrollTime.current = now;
         }
       }
     };
