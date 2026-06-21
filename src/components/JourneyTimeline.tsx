@@ -27,7 +27,7 @@ const nodeVariants = {
 
 export default function JourneyTimeline() {
   return (
-    <section id="journey" className="max-w-7xl mx-auto px-6 pt-4 pb-10 font-mono">
+    <section id="journey" className="max-w-7xl mx-auto px-6 pt-20 pb-20 font-mono">
       <div className="bg-dark-card rounded-[2rem] pt-6 pb-8 px-6 md:pt-8 md:pb-10 md:px-10 text-white overflow-hidden border border-white/5">
         {/* Header */}
         <p className="text-xs uppercase tracking-widest text-accent-blue mb-4 font-bold">

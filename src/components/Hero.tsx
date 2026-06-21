@@ -45,10 +45,6 @@ export default function Hero() {
               </span>
               Available for Hiring
             </div>
-            <span className="text-muted-text text-sm font-medium hidden sm:inline">·</span>
-            <span className="text-sm font-medium text-muted-text">
-             Builder who talks to users first
-            </span>
           </motion.div>
 
           {/* Headline */}

@@ -52,7 +52,7 @@ const cardVariants = {
 
 export default function BlogPreview() {
   return (
-    <section id="blog" className="max-w-7xl mx-auto px-6 pt-4 pb-16">
+    <section id="blog" className="max-w-7xl mx-auto px-6 pt-20 pb-16">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Left Column — Blog Cards */}
         <div className="lg:col-span-8">
