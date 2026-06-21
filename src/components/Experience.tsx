@@ -83,25 +83,30 @@ export default function Experience() {
     if (!container) return;
 
     const handleWheel = (e: WheelEvent) => {
-      if (Math.abs(e.deltaY) < 15) return;
+      const isScrollDown = e.deltaY > 0;
+      const isScrollUp = e.deltaY < 0;
 
-      const now = Date.now();
-      if (now - lastScrollTime.current < 650) {
-        e.preventDefault();
-        return;
-      }
-
-      if (e.deltaY > 0) {
+      if (isScrollDown) {
         if (activeJobIdxRef.current < jobs.length - 1) {
+          // Prevent page scroll as long as we can slide down in the list
           e.preventDefault();
-          setActiveJobIdx((prev) => prev + 1);
-          lastScrollTime.current = now;
+
+          const now = Date.now();
+          if (now - lastScrollTime.current >= 650 && Math.abs(e.deltaY) >= 15) {
+            setActiveJobIdx((prev) => prev + 1);
+            lastScrollTime.current = now;
+          }
         }
-      } else {
+      } else if (isScrollUp) {
         if (activeJobIdxRef.current > 0) {
+          // Prevent page scroll as long as we can slide up in the list
           e.preventDefault();
-          setActiveJobIdx((prev) => prev - 1);
-          lastScrollTime.current = now;
+
+          const now = Date.now();
+          if (now - lastScrollTime.current >= 650 && Math.abs(e.deltaY) >= 15) {
+            setActiveJobIdx((prev) => prev - 1);
+            lastScrollTime.current = now;
+          }
         }
       }
     };
