@@ -23,28 +23,28 @@ interface CodingPlatform {
 const platforms: CodingPlatform[] = [
   {
     name: "LeetCode",
-    rating: "1920",
-    title: "Knight",
-    solved: "800+ Problems",
-    percentile: "Top 4.5% globally",
+    rating: "1572",
+    title: "Active",
+    solved: "500+ Problems",
+    percentile: "Top 20% globally",
     color: "border-yellow-500/20 text-yellow-600 bg-yellow-500/5",
     profileUrl: "https://leetcode.com/u/aj_codess/"
   },
   {
     name: "Codeforces",
-    rating: "1480",
-    title: "Specialist",
-    solved: "300+ Problems",
+    rating: "1308",
+    title: "Pupil",
+    solved: "200+ Problems",
     percentile: "Active Contestant",
     color: "border-blue-500/20 text-blue-600 bg-blue-500/5",
     profileUrl: "https://codeforces.com/profile/aj.codes.py"
   },
   {
     name: "CodeChef",
-    rating: "1720",
+    rating: "1633",
     title: "3-Star",
-    solved: "250+ Problems",
-    percentile: "Top 8% globally",
+    solved: "200+ Problems",
+    percentile: "Top 12% globally",
     color: "border-emerald-500/20 text-emerald-600 bg-emerald-500/5",
     profileUrl: "https://www.codechef.com/users/aj_codespy"
   }
@@ -52,52 +52,70 @@ const platforms: CodingPlatform[] = [
 
 const achievements: Achievement[] = [
   {
-    position: "1st Place (Winner)",
-    competition: "Pune District HackFest 2024",
+    position: "1st Prize (Winner)",
+    competition: "Mindspark 2025",
+    organizer: "COEP Pune",
+    details: "Secured first place in technical innovation and algorithmic development."
+  },
+  {
+    position: "1st Prize (Winner)",
+    competition: "Databot AI Hackathon",
+    organizer: "IIIT Kottayam",
+    details: "Developed a functional generative AI agent pipeline within a 36-hour sprint."
+  },
+  {
+    position: "1st Prize (Winner)",
+    competition: "Datathon",
+    organizer: "SBUP College",
+    details: "Secured top rank by training and fine-tuning high-performance predictive algorithms."
+  },
+  {
+    position: "2nd Prize",
+    competition: "Start up Ideathon 2025",
+    organizer: "JSPM Tathwade College",
+    details: "Pitched an AI-driven startup prototype solving local agricultural and logistical issues."
+  },
+  {
+    position: "2nd Prize",
+    competition: "Quizatron (IT Tech Club)",
+    organizer: "MMCOE Dexterity 2025",
+    details: "Demonstrated broad knowledge in computer science, system architectures, and technology trivia."
+  },
+  {
+    position: "2nd Prize",
+    competition: "IIT Goa Datathon",
+    organizer: "IIT Goa",
+    details: "Competed nationally to engineer optimal predictive machine learning models."
+  },
+  {
+    position: "2nd Prize",
+    competition: "CodeVerse (Dexterity) 2024",
+    organizer: "MMCOE College",
+    details: "Competed in high-speed competitive coding and algorithmic puzzle challenges."
+  },
+  {
+    position: "2nd Prize",
+    competition: "Datathon",
+    organizer: "PICT College",
+    details: "Built and optimized data models to extract high-accuracy predictive insights."
+  },
+  {
+    position: "2nd Prize",
+    competition: "Dashboard Competition 2024",
+    organizer: "COEP Pune",
+    details: "Designed interactive data analytics dashboards to visualize complex civic data."
+  },
+  {
+    position: "Top 10 (Internal)",
+    competition: "Smart India Hackathon (SIH) 2025",
     organizer: "MMCOE Pune",
-    details: "Built and pitched a real-time hospital bed allocation system under 36 hours."
+    details: "Qualified in internal evaluations for national-level solution architectures."
   },
   {
-    position: "2nd Place",
-    competition: "Pune Smart City Hackathon",
-    organizer: "Pune Municipal Corporation",
-    details: "Designed a decentralized citizen grievance dashboard utilizing natural language processing."
-  },
-  {
-    position: "1st Place",
-    competition: "DevDeities NFC Sprint",
-    organizer: "Buildspace Community",
-    details: "Developed a WebSockets-based monitor for real-time tracking of NFC transactions."
-  },
-  {
-    position: "Finalist (Top 10)",
-    competition: "National Smart India Hackathon",
-    organizer: "Ministry of Education, Govt of India",
-    details: "Architected a scalable solution for rural education content distribution offline."
-  },
-  {
-    position: "1st Place",
-    competition: "CodeDev Hackathon",
-    organizer: "RHV Group Sprints",
-    details: "Built an automated data preprocessing and formatting agent for model training sets."
-  },
-  {
-    position: "3rd Place",
-    competition: "ByteSynergy Hackathon",
-    organizer: "Aligned Automation",
-    details: "Developed a LangGraph validation prototype for enterprise system workflows."
-  },
-  {
-    position: "1st Place (Winner)",
-    competition: "Innovate Pune Coding Battle",
-    organizer: "COEP Pune Tech Festival",
-    details: "Optimized complex algorithmic routing solutions under strict memory limitations."
-  },
-  {
-    position: "Elite Division",
-    competition: "LeetCode Biweekly Sprints",
-    organizer: "LeetCode Official",
-    details: "Placed inside top 2% of 40,000+ global participants in contest metrics."
+    position: "Top 10 (Finalist)",
+    competition: "NIT Warangal Datathon",
+    organizer: "NIT Warangal",
+    details: "Qualified in the top decile for data-driven analytics and statistical optimizations."
   }
 ];
 
@@ -169,7 +187,7 @@ export default function Achievements() {
                 </p>
               </div>
               <p className="text-[10px] text-gray-500 mt-4 leading-tight font-mono">
-                // Solved 1350+ algorithmic problems across all platforms.
+                // Solved 900+ algorithmic problems across all platforms.
               </p>
             </div>
           </div>
