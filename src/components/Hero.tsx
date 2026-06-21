@@ -47,7 +47,7 @@ export default function Hero() {
             </div>
             <span className="text-muted-text text-sm font-medium hidden sm:inline">·</span>
             <span className="text-sm font-medium text-muted-text">
-              ⚡ Builder who talks to users first
+             Builder who talks to users first
             </span>
           </motion.div>
 

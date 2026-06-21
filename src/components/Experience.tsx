@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ExternalLink, Calendar, Briefcase } from "lucide-react";
 
@@ -73,10 +73,51 @@ const jobs: Job[] = [
 
 export default function Experience() {
   const [activeJobIdx, setActiveJobIdx] = useState(0);
+  const activeJobIdxRef = useRef(activeJobIdx);
+  activeJobIdxRef.current = activeJobIdx;
+  const lastScrollTime = useRef(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const handleWheel = (e: WheelEvent) => {
+      if (Math.abs(e.deltaY) < 15) return;
+
+      const now = Date.now();
+      if (now - lastScrollTime.current < 650) {
+        e.preventDefault();
+        return;
+      }
+
+      if (e.deltaY > 0) {
+        if (activeJobIdxRef.current < jobs.length - 1) {
+          e.preventDefault();
+          setActiveJobIdx((prev) => prev + 1);
+          lastScrollTime.current = now;
+        }
+      } else {
+        if (activeJobIdxRef.current > 0) {
+          e.preventDefault();
+          setActiveJobIdx((prev) => prev - 1);
+          lastScrollTime.current = now;
+        }
+      }
+    };
+
+    container.addEventListener("wheel", handleWheel, { passive: false });
+    return () => {
+      container.removeEventListener("wheel", handleWheel);
+    };
+  }, []);
 
   return (
     <section className="max-w-7xl mx-auto px-6 py-10 font-mono">
-      <div className="bg-white/60 backdrop-blur-md rounded-[2rem] p-6 md:p-8 border border-black/5 shadow-sm">
+      <div 
+        ref={containerRef}
+        className="bg-white/60 backdrop-blur-md rounded-[2rem] p-6 md:p-8 border border-black/5 shadow-sm relative overflow-hidden"
+      >
         <p className="text-xs uppercase tracking-widest text-accent-blue mb-4 font-bold">
           // PROFESSIONAL EXPERIENCE
         </p>
@@ -96,21 +137,26 @@ export default function Experience() {
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
           {/* Sidebar / Tabs List */}
-          <div className="md:col-span-4 flex flex-row md:flex-col overflow-x-auto md:overflow-x-visible border-b md:border-b-0 md:border-l border-black/10 pb-2 md:pb-0 md:pr-4 gap-2 shrink-0 scrollbar-none">
+          <div className="md:col-span-4 flex flex-row md:flex-col overflow-x-auto md:overflow-x-visible border-b md:border-b-0 md:border-l border-black/10 pb-2 md:pb-0 md:pr-4 gap-2 shrink-0 scrollbar-none z-10">
             {jobs.map((job, idx) => {
               const isActive = idx === activeJobIdx;
               return (
                 <button
                   key={job.id}
                   onClick={() => setActiveJobIdx(idx)}
-                  className={`text-left px-4 py-3 rounded-xl text-xs font-bold transition-all whitespace-nowrap md:whitespace-normal flex items-center gap-2.5 ${
-                    isActive
-                      ? "bg-accent-blue/10 text-accent-blue border-l-2 md:border-l-4 border-accent-blue md:translate-x-1"
-                      : "text-gray-500 hover:text-dark-card hover:bg-gray-50"
+                  className={`relative text-left px-4 py-3 rounded-xl text-xs font-bold transition-colors duration-250 whitespace-nowrap md:whitespace-normal flex items-center gap-2.5 ${
+                    isActive ? "text-accent-blue" : "text-gray-500 hover:text-dark-card hover:bg-gray-50/50"
                   }`}
                 >
-                  <Briefcase className="w-3.5 h-3.5 flex-shrink-0" />
-                  {job.company}
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeJobBg"
+                      className="absolute inset-0 bg-accent-blue/10 rounded-xl border-l-2 md:border-l-4 border-accent-blue -z-10"
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                  <Briefcase className="w-3.5 h-3.5 flex-shrink-0 z-10" />
+                  <span className="z-10">{job.company}</span>
                 </button>
               );
             })}

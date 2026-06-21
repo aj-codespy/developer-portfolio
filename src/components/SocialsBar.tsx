@@ -131,7 +131,7 @@ export default function SocialsBar() {
               <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-green-500" />
             </span>
             <span className="text-sm text-dark-card">
-              ✦ Available for remote roles
+               Available for remote roles
             </span>
           </div>
         </div>
