@@ -194,46 +194,52 @@ export default function BentoGrid() {
             className="lg:col-span-8 bg-[#F4F3EF] rounded-[2rem] p-6 flex flex-col border border-black/5 shadow-sm hover:shadow-md transition-shadow min-h-[220px]"
           >
             <h3 className="font-display text-[1.75rem] font-extrabold text-dark-card mb-4 tracking-tight">Education Dossier</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 flex-1">
-              {/* University */}
-              <div className="flex flex-col border-l-2 border-accent-blue/30 pl-4 py-1">
-                <p className="text-[9px] font-bold tracking-wider text-accent-blue uppercase mb-1">UNIVERSITY</p>
-                <a href="https://www.mmcoe.edu.in" target="_blank" rel="noopener noreferrer" className="text-xs font-bold text-dark-card hover:text-accent-blue transition-colors leading-tight mb-1.5 flex items-center gap-1">
-                  MMCOE
-                  <span className="text-[9px] font-normal text-gray-400">↗</span>
-                </a>
-                <p className="text-[10px] text-gray-500 leading-snug mb-2">B.E. Artificial Intelligence & Data Science</p>
-                <div className="mt-auto">
-                  <p className="text-[9px] text-gray-400">Class of 2027</p>
-                  <p className="text-xs font-bold text-dark-card mt-0.5">GPA: 9.3/10</p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 flex-1 items-stretch">
+              {/* University (Highlighted Blue Card) */}
+              <div className="flex flex-col bg-accent-blue text-white rounded-2xl p-4 border border-white/10 shadow-md shadow-accent-blue/15 justify-between min-h-[150px]">
+                <div>
+                  <p className="text-[9px] font-bold tracking-wider text-white/80 uppercase mb-1">UNIVERSITY</p>
+                  <a href="https://www.mmcoe.edu.in" target="_blank" rel="noopener noreferrer" className="text-sm font-black text-white hover:text-white/80 transition-colors leading-tight mb-1 flex items-center gap-1">
+                    MMCOE
+                    <span className="text-[9px] font-normal text-white/60">↗</span>
+                  </a>
+                  <p className="text-[11px] text-white/90 leading-snug">B.E. Artificial Intelligence & Data Science</p>
+                </div>
+                <div className="mt-4 pt-2 border-t border-white/10">
+                  <p className="text-[9px] text-white/70">Class of 2027</p>
+                  <p className="text-sm font-black text-white mt-0.5">GPA: 9.3/10</p>
                 </div>
               </div>
 
               {/* High School */}
-              <div className="flex flex-col border-l-2 border-accent-blue/30 pl-4 py-1">
-                <p className="text-[9px] font-bold tracking-wider text-accent-blue uppercase mb-1">JUNIOR COLLEGE</p>
-                <a href="https://www.chmcollege.in" target="_blank" rel="noopener noreferrer" className="text-xs font-bold text-dark-card hover:text-accent-blue transition-colors leading-tight mb-1.5 flex items-center gap-1">
-                  Smt. CHM College
-                  <span className="text-[9px] font-normal text-gray-400">↗</span>
-                </a>
-                <p className="text-[10px] text-gray-500 leading-snug mb-2">Higher Secondary Certificate (HSC)</p>
-                <div className="mt-auto">
-                  <p className="text-[9px] text-gray-400">Class of 2023</p>
-                  <p className="text-xs font-bold text-dark-card mt-0.5">63% (US: ~3.0 GPA)</p>
+              <div className="flex flex-col border-l border-black/10 pl-4 py-1 justify-between">
+                <div>
+                  <p className="text-[8px] font-bold tracking-wider text-gray-400 uppercase mb-1">JUNIOR COLLEGE</p>
+                  <a href="https://www.chmcollege.in" target="_blank" rel="noopener noreferrer" className="text-[11px] font-bold text-dark-card hover:text-accent-blue transition-colors leading-tight mb-1 flex items-center gap-1">
+                    Smt. CHM College
+                    <span className="text-[8px] font-normal text-gray-400">↗</span>
+                  </a>
+                  <p className="text-[10px] text-gray-500 leading-snug">Higher Secondary Certificate (HSC)</p>
+                </div>
+                <div className="mt-4">
+                  <p className="text-[8px] text-gray-400">Class of 2023</p>
+                  <p className="text-[11px] font-bold text-dark-card mt-0.5">63% (US: ~3.0 GPA)</p>
                 </div>
               </div>
 
               {/* School */}
-              <div className="flex flex-col border-l-2 border-accent-blue/30 pl-4 py-1">
-                <p className="text-[9px] font-bold tracking-wider text-accent-blue uppercase mb-1">SECONDARY SCHOOL</p>
-                <a href="https://sssecondary.edu.in" target="_blank" rel="noopener noreferrer" className="text-xs font-bold text-dark-card hover:text-accent-blue transition-colors leading-tight mb-1.5 flex items-center gap-1">
-                  New Era High School
-                  <span className="text-[9px] font-normal text-gray-400">↗</span>
-                </a>
-                <p className="text-[10px] text-gray-500 leading-snug mb-2">Secondary School Certificate (SSC)</p>
-                <div className="mt-auto">
-                  <p className="text-[9px] text-gray-400">Class of 2021</p>
-                  <p className="text-xs font-bold text-dark-card mt-0.5">93% (US: ~4.0 GPA)</p>
+              <div className="flex flex-col border-l border-black/10 pl-4 py-1 justify-between">
+                <div>
+                  <p className="text-[8px] font-bold tracking-wider text-gray-400 uppercase mb-1">SECONDARY SCHOOL</p>
+                  <a href="https://sssecondary.edu.in" target="_blank" rel="noopener noreferrer" className="text-[11px] font-bold text-dark-card hover:text-accent-blue transition-colors leading-tight mb-1 flex items-center gap-1">
+                    New Era High School
+                    <span className="text-[8px] font-normal text-gray-400">↗</span>
+                  </a>
+                  <p className="text-[10px] text-gray-500 leading-snug">Secondary School Certificate (SSC)</p>
+                </div>
+                <div className="mt-4">
+                  <p className="text-[8px] text-gray-400">Class of 2021</p>
+                  <p className="text-[11px] font-bold text-dark-card mt-0.5">93% (US: ~4.0 GPA)</p>
                 </div>
               </div>
             </div>
