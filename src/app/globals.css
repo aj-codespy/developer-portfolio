@@ -27,7 +27,7 @@
     background-color: var(--color-page-base);
     color: var(--color-dark-card);
     font-family: var(--font-mono), monospace;
-    overflow-x: hidden;
+    overflow: visible;
   }
 }
 

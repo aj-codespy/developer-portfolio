@@ -12,7 +12,7 @@ export const metadata = {
 
 export default function WorkPage() {
   return (
-    <main className="min-h-screen relative overflow-x-hidden">
+    <main className="min-h-screen relative">
       <DotGrid />
       <Navbar />
       <div className="pt-24 flex flex-col gap-2"> {/* Top offset to avoid navbar overlapping */}
