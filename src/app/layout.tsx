@@ -10,6 +10,9 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "AI Engineer Portfolio",
   description: "I build AI apps that actually ship.",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({
