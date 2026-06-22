@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Copy, Check, Phone, ArrowUpRight } from "lucide-react";
 
@@ -47,6 +47,56 @@ const EMAIL = "ajayush2301@gmail.com";
 
 export default function SocialsBar() {
   const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    (function (C: any, A: string, L: string) {
+      let p = function (a: any, ar: any) {
+        a.q.push(ar);
+      };
+      let d = C.document;
+      C.Cal = C.Cal || function () {
+        let cal = C.Cal;
+        let ar = arguments;
+        if (!cal.loaded) {
+          cal.ns = {};
+          cal.q = cal.q || [];
+          const s = d.createElement("script");
+          s.src = A;
+          d.head.appendChild(s);
+          cal.loaded = true;
+        }
+        if (ar[0] === L) {
+          const api: any = function () {
+            p(api, arguments);
+          };
+          const namespace = ar[1];
+          api.q = api.q || [];
+          if (typeof namespace === "string") {
+            cal.ns[namespace] = cal.ns[namespace] || api;
+            p(cal.ns[namespace], ar);
+            p(cal, ["initNamespace", namespace]);
+          } else p(cal, ar);
+          return;
+        }
+        p(cal, ar);
+      };
+    })(window, "https://app.cal.com/embed/embed.js", "init");
+
+    const Cal = (window as any).Cal;
+    if (Cal) {
+      Cal("init", "30min", { origin: "https://app.cal.com" });
+      Cal.config = Cal.config || {};
+      Cal.config.forwardQueryParams = true;
+
+      Cal.ns["30min"]("inline", {
+        elementOrSelector: "#my-cal-inline-30min",
+        config: { "layout": "month_view", "useSlotsViewOnSmallScreen": "true" },
+        calLink: "aj-works/30min",
+      });
+
+      Cal.ns["30min"]("ui", { "hideEventTypeDetails": false, "layout": "month_view" });
+    }
+  }, []);
 
   const handleCopyEmail = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -162,6 +212,19 @@ export default function SocialsBar() {
       viewport={{ once: true, amount: 0.1 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
+      {/* Booking Widget */}
+      <div id="booking" className="border-t border-black/5 pt-12 mb-12">
+        <p className="text-xs uppercase tracking-widest text-accent-blue mb-2 font-bold">
+          // BOOK A MEETING
+        </p>
+        <h2 className="font-display text-2xl font-black text-dark-card tracking-tight uppercase mb-6">
+          Schedule a Session
+        </h2>
+        <div className="w-full rounded-[2rem] border border-black/5 bg-white/40 backdrop-blur-md shadow-sm overflow-hidden h-[620px] relative">
+          <div style={{ width: "100%", height: "100%", overflow: "scroll" }} id="my-cal-inline-30min" />
+        </div>
+      </div>
+
       <div className="border-t border-black/5 pt-12 mb-8 flex flex-col sm:flex-row sm:items-baseline justify-between gap-4">
         <div>
           <p className="text-xs uppercase tracking-widest text-accent-blue mb-2 font-bold">

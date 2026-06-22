@@ -47,7 +47,7 @@ export default function Navbar() {
         ))}
       </ul>
       <Link
-        href="/#contact"
+        href="/#booking"
         className="bg-dark-card text-white text-xs sm:text-sm font-semibold px-4 sm:px-5 py-2 rounded-full flex items-center gap-1.5 hover:bg-black transition-colors ml-1 whitespace-nowrap"
       >
         Book a Call
