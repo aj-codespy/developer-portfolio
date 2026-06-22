@@ -6,8 +6,8 @@ import Experience from "@/components/Experience";
 import Achievements from "@/components/Achievements";
 
 export const metadata = {
-  title: "Work | Ayush Jha Portfolio",
-  description: "A showcase of all the software products, AI tools, and platforms built by Ayush Jha.",
+  title: "Work & Experience | Ayush Jha Portfolio (AI Engineer)",
+  description: "Explore the complete portfolio of AI agents, LangGraph workflows, full-stack applications, and machine learning models shipped by Ayush Jha.",
 };
 
 export default function WorkPage() {

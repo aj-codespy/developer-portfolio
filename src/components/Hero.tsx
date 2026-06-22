@@ -54,12 +54,12 @@ export default function Hero() {
           >
             I build like it's my own company.
             <br />
-            
+            Because that's how I think.
           </motion.h1>
 
           <motion.div variants={itemVariants} className="max-w-lg mb-8">
             <p className="text-base text-muted-text leading-relaxed">
-              Most engineers wait to be told what to build. I get on the call, hear the actual problem, and go build it.
+              Most engineers wait to be told what to build. I get on the call, hear the actual problem, and go build it. As an AI Engineer & Agent Developer, I specialize in LangGraph orchestrations, workflow automations, and custom machine learning pipelines.
             </p>
             <p className="text-base text-muted-text leading-relaxed mt-2.5">
               I&apos;ve built my own product,{" "}
