@@ -40,11 +40,11 @@ export const metadata: Metadata = {
   publisher: "Ayush Jha",
   icons: {
     icon: [
-      { url: "/favicon.ico" },
-      { url: "/favicon.png", type: "image/png" },
+      { url: "/favicon.ico?v=4" },
+      { url: "/favicon.png?v=4", type: "image/png" },
     ],
-    shortcut: "/favicon.ico",
-    apple: "/favicon.png",
+    shortcut: "/favicon.ico?v=4",
+    apple: "/favicon.png?v=4",
   },
   robots: {
     index: true,
