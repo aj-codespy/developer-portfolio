@@ -62,7 +62,20 @@ export default function Hero() {
               Most engineers wait to be told what to build. I get on the call, hear the actual problem, and go build it.
             </p>
             <p className="text-base text-muted-text leading-relaxed mt-2.5">
-              Brainstorming features that solve real problems isn't a side task for me — it's where the work actually starts.
+              I&apos;ve built my own product,{" "}
+              <a 
+                href="https://getplaced.online" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-accent-blue hover:underline font-extrabold"
+              >
+                getPlaced
+              </a>
+              , which just hit{" "}
+              <span className="bg-accent-blue/10 text-accent-blue font-bold px-2 py-0.5 rounded-lg border border-accent-blue/20 inline-block font-mono text-sm">
+                4,000 followers
+              </span>
+              !
             </p>
           </motion.div>
 
