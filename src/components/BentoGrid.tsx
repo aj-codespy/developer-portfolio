@@ -157,16 +157,39 @@ export default function BentoGrid() {
             className="lg:col-span-4 bg-[#F4F3EF] rounded-[2rem] p-6 flex flex-col border border-black/5 shadow-sm hover:shadow-md transition-shadow min-h-[330px]"
           >
             <h3 className="font-display text-2xl font-extrabold text-dark-card mb-2 tracking-tight">Craft</h3>
-            <p className="text-gray-500 text-xs leading-relaxed mb-2.5">
-              Building AI apps, automations, and the products behind them.
-            </p>
-            <p className="text-gray-500 text-xs leading-relaxed mb-3">
-              Technical enough to build it, commercial enough to know if it's worth building — that's the gap I work in.
+            
+            {/* Visual Timeline of Skills */}
+            <div className="flex flex-col gap-2.5 my-2.5 font-mono text-[10px] text-gray-500">
+              <div className="flex gap-2">
+                <span className="text-accent-blue font-bold">01/</span>
+                <div>
+                  <strong className="text-dark-card uppercase font-semibold">Data Science</strong>
+                  <p className="text-[9px] text-gray-400">Solid practice in stats, analysis, and cleaning.</p>
+                </div>
+              </div>
+              <div className="flex gap-2">
+                <span className="text-accent-blue font-bold">02/</span>
+                <div>
+                  <strong className="text-dark-card uppercase font-semibold">Deep Learning</strong>
+                  <p className="text-[9px] text-gray-400">Custom model practice on image & text tasks.</p>
+                </div>
+              </div>
+              <div className="flex gap-2">
+                <span className="text-accent-blue font-bold">03/</span>
+                <div>
+                  <strong className="text-dark-card uppercase font-semibold">AI, Agents & Automation</strong>
+                  <p className="text-[9px] text-gray-400">Spent past year solving problems at the frontier.</p>
+                </div>
+              </div>
+            </div>
+
+            <p className="text-gray-500 text-[10.5px] leading-relaxed mb-3">
+              Professionally interned as DS, ML, and AI engineer — tackling everything from data pipelines to production backends.
             </p>
 
             {/* Tech Pills */}
             <div className="flex flex-wrap gap-2 mb-3">
-              {['LangGraph', 'FastAPI', 'Next.js', 'Supabase', 'Gemini'].map(tech => (
+              {['LangGraph', 'FastAPI', 'Next.js', 'Firebase', 'Gemini'].map(tech => (
                 <span key={tech} className="px-2.5 py-1 bg-white text-[10px] font-bold text-gray-600 rounded-lg border border-black/5 flex items-center gap-1.5 shadow-sm">
                   <span className="w-1.5 h-1.5 rounded-full bg-accent-blue opacity-70" />
                   {tech}

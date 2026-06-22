@@ -24,7 +24,7 @@ const projects: Project[] = [
     name: "getPlaced",
     description:
       "AI-powered interview prep platform helping students crack tech roles with real-time audio and behavioral feedback.",
-    pills: ["Next.js", "FastAPI", "Supabase"],
+    pills: ["Next.js", "FastAPI", "Firebase"],
     github: "https://github.com/aj-codespy/getplaced",
     liveUrl: "https://getplaced.online",
     logoPath: "/logos/getplaced.png",
@@ -51,7 +51,7 @@ const projects: Project[] = [
     name: "Vital",
     description:
       "Real-time medical agentic monitoring system streaming clinical vitals via WebSockets to predict patient risk and alert doctors.",
-    pills: ["Next.js", "WebSockets", "Supabase", "Chart.js"],
+    pills: ["Next.js", "WebSockets", "Firebase", "Chart.js"],
     github: "https://github.com/aj-codespy/NFC4_DevDeities",
     liveUrl: "",
     logoPath: "/logos/vital.png",
@@ -60,7 +60,7 @@ const projects: Project[] = [
     name: "AI Form Builder",
     description:
       "Dynamic form generator for SMBs that structures, customizes, and renders complete surveys and questionnaires instantly from simple prompts.",
-    pills: ["Next.js", "Gemini API", "Tailwind CSS", "Supabase"],
+    pills: ["Next.js", "Gemini API", "Tailwind CSS", "Firebase"],
     github: "https://github.com/aj-codespy/AIFormBuilder",
     liveUrl: "https://aj-aiformbuilder.streamlit.app",
     logoPath: "/logos/aiformbuilder.png",
@@ -87,7 +87,7 @@ const projects: Project[] = [
     name: "Tax Minimisation",
     description:
       "Full-stack gamified learning platform educating students on tax structures, income generation, assets, liabilities, and investment strategies.",
-    pills: ["Next.js", "Node.js", "Supabase", "Framer Motion"],
+    pills: ["Next.js", "Node.js", "Firebase", "Framer Motion"],
     github: "https://github.com/aj-codespy/tax_minimisation",
     liveUrl: "",
     logoPath: "/logos/taxminimisation.png",

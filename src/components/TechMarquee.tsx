@@ -6,7 +6,7 @@ const techStack = [
   { name: "FastAPI", color: "#F97316" },
   { name: "LangChain", color: "#22C55E" },
   { name: "React", color: "#3B82F6" },
-  { name: "Supabase", color: "#22C55E" },
+  { name: "Firebase", color: "#FFA611" },
   { name: "Gemini", color: "#3B82F6" },
   { name: "LangGraph", color: "#7C3AED" },
   { name: "Next.js", color: "#0F0F0F" },
