@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ExternalLink, Calendar, Briefcase } from "lucide-react";
 
@@ -74,47 +74,10 @@ const jobs: Job[] = [
 
 export default function Experience() {
   const [activeJobIdx, setActiveJobIdx] = useState(0);
-  const activeJobIdxRef = useRef(activeJobIdx);
-  activeJobIdxRef.current = activeJobIdx;
-  const lastScrollTime = useRef(0);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    const handleWheel = (e: WheelEvent) => {
-      const isScrollDown = e.deltaY > 0;
-      const isScrollUp = e.deltaY < 0;
-
-      // Only hijack page scroll if we are actively transitioning between job tabs
-      if (isScrollDown && activeJobIdxRef.current < jobs.length - 1) {
-        e.preventDefault();
-        const now = Date.now();
-        if (now - lastScrollTime.current >= 650 && Math.abs(e.deltaY) >= 15) {
-          setActiveJobIdx((prev) => prev + 1);
-          lastScrollTime.current = now;
-        }
-      } else if (isScrollUp && activeJobIdxRef.current > 0) {
-        e.preventDefault();
-        const now = Date.now();
-        if (now - lastScrollTime.current >= 650 && Math.abs(e.deltaY) >= 15) {
-          setActiveJobIdx((prev) => prev - 1);
-          lastScrollTime.current = now;
-        }
-      }
-    };
-
-    container.addEventListener("wheel", handleWheel, { passive: false });
-    return () => {
-      container.removeEventListener("wheel", handleWheel);
-    };
-  }, []);
 
   return (
     <section className="max-w-7xl mx-auto px-6 py-10 font-mono">
       <div 
-        ref={containerRef}
         className="bg-white/60 backdrop-blur-md rounded-[2rem] p-6 md:p-8 border border-black/5 shadow-sm relative overflow-hidden"
       >
         <p className="text-xs uppercase tracking-widest text-accent-blue mb-4 font-bold">
