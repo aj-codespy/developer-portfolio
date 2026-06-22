@@ -169,11 +169,11 @@ export default function FeaturedProjects({
                 href={project.liveUrl} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="absolute inset-0 z-0" 
+                className="absolute inset-0 z-10" 
               />
             )}
 
-            <div className="relative z-10 flex flex-col h-full justify-between">
+            <div className="relative z-0 flex flex-col h-full justify-between">
               <div>
                 {/* Header: Icon on Left, Title on Right, GitHub on far Right */}
                 <div className="flex items-start justify-between gap-4">
