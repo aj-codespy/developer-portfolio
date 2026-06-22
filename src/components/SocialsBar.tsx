@@ -47,8 +47,30 @@ const EMAIL = "ajayush2301@gmail.com";
 
 export default function SocialsBar() {
   const [copied, setCopied] = useState(false);
+  const [calLoaded, setCalLoaded] = useState(false);
 
   useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setCalLoaded(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.01 }
+    );
+
+    const section = document.getElementById("booking");
+    if (section) {
+      observer.observe(section);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!calLoaded) return;
+
     (function (C: any, A: string, L: string) {
       let p = function (a: any, ar: any) {
         a.q.push(ar);
@@ -96,7 +118,7 @@ export default function SocialsBar() {
 
       Cal.ns["30min"]("ui", { "hideEventTypeDetails": false, "layout": "month_view" });
     }
-  }, []);
+  }, [calLoaded]);
 
   const handleCopyEmail = async (e: React.MouseEvent) => {
     e.preventDefault();
