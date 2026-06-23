@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { JetBrains_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 
 const jetbrainsMono = JetBrains_Mono({
@@ -135,6 +136,7 @@ export default function RootLayout({
         className={`${jetbrainsMono.variable} antialiased bg-page-base text-gray-900 font-mono`}
       >
         {children}
+        <Analytics />
       </body>
     </html>
   );
