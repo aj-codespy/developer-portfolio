@@ -1,7 +1,22 @@
 "use client";
 
+import { useRef } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { 
+  ArrowLeft,
+  ArrowRight, 
+  ArrowUpRight, 
+  GraduationCap, 
+  TrendingUp, 
+  Activity, 
+  Clipboard, 
+  Scale, 
+  Coins, 
+  Stethoscope, 
+  Search, 
+  FileText, 
+  MessageSquare 
+} from "lucide-react";
 import Link from "next/link";
 
 const GithubIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
@@ -16,7 +31,9 @@ interface Project {
   pills: string[];
   github: string;
   liveUrl: string;
-  logoPath: string;
+  color: string;
+  iconColor: string;
+  iconType: string;
 }
 
 const projects: Project[] = [
@@ -27,7 +44,9 @@ const projects: Project[] = [
     pills: ["Next.js", "FastAPI", "Firebase"],
     github: "https://github.com/aj-codespy/getplaced",
     liveUrl: "https://getplaced.online",
-    logoPath: "/logos/getplaced.png",
+    color: "from-emerald-500/10 to-teal-500/10",
+    iconColor: "text-emerald-600",
+    iconType: "graduation-cap",
   },
   {
     name: "Cureify",
@@ -36,7 +55,9 @@ const projects: Project[] = [
     pills: ["LangGraph", "Multimodal AI", "FastAPI", "React"],
     github: "https://github.com/aj-codespy/Cureify-02",
     liveUrl: "https://cureifyy.streamlit.app",
-    logoPath: "/logos/cureify.png",
+    color: "from-cyan-500/10 to-blue-500/10",
+    iconColor: "text-cyan-600",
+    iconType: "stethoscope",
   },
   {
     name: "FinChat",
@@ -45,7 +66,9 @@ const projects: Project[] = [
     pills: ["Streamlit", "Gemini API", "LangChain", "yFinance"],
     github: "https://github.com/aj-codespy/FinChat",
     liveUrl: "https://finchat-hackx.streamlit.app",
-    logoPath: "/logos/finchat.png",
+    color: "from-amber-500/10 to-orange-500/10",
+    iconColor: "text-amber-600",
+    iconType: "trending-up",
   },
   {
     name: "Vital",
@@ -54,7 +77,9 @@ const projects: Project[] = [
     pills: ["Next.js", "WebSockets", "Firebase", "Chart.js"],
     github: "https://github.com/aj-codespy/NFC4_DevDeities",
     liveUrl: "",
-    logoPath: "/logos/vital.png",
+    color: "from-rose-500/10 to-red-500/10",
+    iconColor: "text-rose-600",
+    iconType: "activity",
   },
   {
     name: "AI Form Builder",
@@ -63,7 +88,9 @@ const projects: Project[] = [
     pills: ["Next.js", "Gemini API", "Tailwind CSS", "Firebase"],
     github: "https://github.com/aj-codespy/AIFormBuilder",
     liveUrl: "https://aj-aiformbuilder.streamlit.app",
-    logoPath: "/logos/aiformbuilder.png",
+    color: "from-violet-500/10 to-purple-500/10",
+    iconColor: "text-violet-600",
+    iconType: "clipboard",
   },
   {
     name: "LawBuddy",
@@ -72,7 +99,9 @@ const projects: Project[] = [
     pills: ["LangChain", "Gemini API", "Pinecone", "Python"],
     github: "https://github.com/aj-codespy/LawBuddy",
     liveUrl: "https://aj-law-buddy.streamlit.app",
-    logoPath: "/logos/lawbuddy.png",
+    color: "from-slate-500/10 to-stone-500/10",
+    iconColor: "text-slate-600",
+    iconType: "scale",
   },
   {
     name: "Lead Scraper",
@@ -81,7 +110,9 @@ const projects: Project[] = [
     pills: ["Streamlit", "Python", "BeautifulSoup", "Pandas"],
     github: "https://github.com/aj-codespy/Lead_Scraper",
     liveUrl: "https://lead-scraper.streamlit.app",
-    logoPath: "/logos/leadscraper.png",
+    color: "from-slate-500/10 to-stone-500/10",
+    iconColor: "text-slate-600",
+    iconType: "search",
   },
   {
     name: "Tax Minimisation",
@@ -90,9 +121,38 @@ const projects: Project[] = [
     pills: ["Next.js", "Node.js", "Firebase", "Framer Motion"],
     github: "https://github.com/aj-codespy/tax_minimisation",
     liveUrl: "",
-    logoPath: "/logos/taxminimisation.png",
+    color: "from-indigo-500/10 to-blue-500/10",
+    iconColor: "text-indigo-600",
+    iconType: "coins",
   },
 ];
+
+const getProjectIcon = (type: string, className: string) => {
+  switch (type) {
+    case "graduation-cap":
+      return <GraduationCap className={className} />;
+    case "trending-up":
+      return <TrendingUp className={className} />;
+    case "activity":
+      return <Activity className={className} />;
+    case "clipboard":
+      return <Clipboard className={className} />;
+    case "scale":
+      return <Scale className={className} />;
+    case "coins":
+      return <Coins className={className} />;
+    case "stethoscope":
+      return <Stethoscope className={className} />;
+    case "search":
+      return <Search className={className} />;
+    case "file-text":
+      return <FileText className={className} />;
+    case "message-square":
+      return <MessageSquare className={className} />;
+    default:
+      return <FileText className={className} />;
+  }
+};
 
 const cardVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -108,19 +168,29 @@ const cardVariants = {
 };
 
 interface FeaturedProjectsProps {
-  limit?: number;
-  showViewAll?: boolean;
   title?: string;
   subtitle?: string;
 }
 
 export default function FeaturedProjects({
-  limit,
-  showViewAll = true,
   title = "Crafted Software",
   subtitle = "Featured Projects",
 }: FeaturedProjectsProps) {
-  const displayedProjects = limit ? projects.slice(0, limit) : projects;
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      const container = scrollContainerRef.current;
+      container.scrollBy({ left: -container.clientWidth, behavior: "smooth" });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      const container = scrollContainerRef.current;
+      container.scrollBy({ left: container.clientWidth, behavior: "smooth" });
+    }
+  };
 
   return (
     <section id="work" className="mx-auto max-w-7xl px-6 pt-16 pb-20">
@@ -134,20 +204,33 @@ export default function FeaturedProjects({
             {title}
           </h2>
         </div>
-        {showViewAll && (
-          <Link
-            href="/work"
-            className="flex items-center gap-1 text-sm font-semibold text-accent-blue transition-colors hover:text-accent-blue/80"
+        
+        {/* Slider Navigation Buttons */}
+        <div className="flex items-center gap-2">
+          <button
+            onClick={scrollLeft}
+            className="w-10 h-10 rounded-xl bg-white hover:bg-gray-50 border border-black/10 flex items-center justify-center text-dark-card transition-all hover:scale-105 active:scale-95 shadow-sm cursor-pointer"
+            title="Previous Projects"
           >
-            View all work
-            <ArrowRight className="h-4 w-4" />
-          </Link>
-        )}
+            <ArrowLeft className="w-5 h-5" />
+          </button>
+          <button
+            onClick={scrollRight}
+            className="w-10 h-10 rounded-xl bg-white hover:bg-gray-50 border border-black/10 flex items-center justify-center text-dark-card transition-all hover:scale-105 active:scale-95 shadow-sm cursor-pointer"
+            title="Next Projects"
+          >
+            <ArrowRight className="w-5 h-5" />
+          </button>
+        </div>
       </div>
 
-      {/* Project cards grid */}
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-        {displayedProjects.map((project, i) => (
+      {/* Project cards slider */}
+      <div 
+        ref={scrollContainerRef}
+        className="flex gap-6 overflow-x-auto scrollbar-none snap-x snap-mandatory pb-4"
+        style={{ scrollBehavior: "smooth" }}
+      >
+        {projects.map((project, i) => (
           <motion.div
             key={project.name}
             custom={i}
@@ -157,7 +240,7 @@ export default function FeaturedProjects({
             variants={cardVariants}
             whileHover={project.liveUrl ? { y: -6 } : {}}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            className={`overflow-hidden rounded-[2rem] border border-black/5 bg-[#F4F3EF] p-6 flex flex-col justify-between group transition-all duration-300 min-h-[250px] relative ${
+            className={`flex-none w-full md:w-[calc(33.333%-16px)] snap-start overflow-hidden rounded-[2rem] border border-black/5 bg-[#F4F3EF] p-6 flex flex-col justify-between group transition-all duration-300 min-h-[250px] relative ${
               project.liveUrl 
                 ? "cursor-pointer hover:bg-[#EDEDE8] hover:shadow-xl hover:shadow-black/5" 
                 : "cursor-default"
@@ -179,14 +262,10 @@ export default function FeaturedProjects({
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex items-center gap-4 flex-1">
                     {/* Small square image/icon container */}
-                    <div className={`w-12 h-12 rounded-2xl overflow-hidden border border-black/5 flex items-center justify-center shadow-sm relative transition-transform duration-300 ${
+                    <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${project.color} border border-black/5 flex items-center justify-center shadow-sm relative overflow-hidden transition-transform duration-300 ${
                       project.liveUrl ? "group-hover:scale-105" : ""
                     }`}>
-                      <img 
-                        src={project.logoPath} 
-                        alt={`${project.name} logo`} 
-                        className="w-full h-full object-cover"
-                      />
+                      {getProjectIcon(project.iconType, `w-6 h-6 ${project.iconColor}`)}
                     </div>
                     
                     {/* Title & Arrow */}

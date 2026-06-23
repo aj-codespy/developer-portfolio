@@ -2,7 +2,9 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import BentoGrid from "@/components/BentoGrid";
 import TechMarquee from "@/components/TechMarquee";
+import Experience from "@/components/Experience";
 import FeaturedProjects from "@/components/FeaturedProjects";
+import Achievements from "@/components/Achievements";
 import JourneyTimeline from "@/components/JourneyTimeline";
 import BlogPreview from "@/components/BlogPreview";
 import SocialsBar from "@/components/SocialsBar";
@@ -16,7 +18,9 @@ export default function Home() {
       <Hero />
       <BentoGrid />
       <TechMarquee />
-      <FeaturedProjects limit={3} />
+      <Experience />
+      <FeaturedProjects />
+      <Achievements />
       <JourneyTimeline />
       <BlogPreview />
       <SocialsBar />

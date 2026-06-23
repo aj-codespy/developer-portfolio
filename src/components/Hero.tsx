@@ -96,6 +96,14 @@ export default function Hero() {
             >
               See my work
             </Link>
+            <a
+              href="https://drive.google.com/file/d/1btEtSIFYdw65ZmStVckE6DvITPPG4HRr/view?usp=share_link"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-white text-dark-card border border-black/10 px-6 py-3 rounded-xl font-semibold text-sm hover:bg-gray-50 transition-all hover:-translate-y-0.5 active:translate-y-0"
+            >
+              Résumé
+            </a>
           </motion.div>
 
           {/* Credibility Strip */}

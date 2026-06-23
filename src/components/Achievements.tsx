@@ -104,18 +104,6 @@ const achievements: Achievement[] = [
     competition: "Dashboard Competition 2024",
     organizer: "COEP Pune",
     details: "Designed interactive data analytics dashboards to visualize complex civic data."
-  },
-  {
-    position: "Top 10 (Internal)",
-    competition: "Smart India Hackathon (SIH) 2025",
-    organizer: "MMCOE Pune",
-    details: "Qualified in internal evaluations for national-level solution architectures."
-  },
-  {
-    position: "Top 10 (Finalist)",
-    competition: "NIT Warangal Datathon",
-    organizer: "NIT Warangal",
-    details: "Qualified in the top decile for data-driven analytics and statistical optimizations."
   }
 ];
 
@@ -130,25 +118,25 @@ export default function Achievements() {
           Ratings & Achievements
         </h2>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
           
           {/* Left Column — Coding Platform Ratings */}
-          <div className="lg:col-span-5 flex flex-col gap-4">
-            <h3 className="text-sm font-bold text-dark-card border-b border-black/5 pb-2 mb-2 flex items-center gap-2">
+          <div className="lg:col-span-5 flex flex-col gap-3">
+            <h3 className="text-sm font-bold text-dark-card border-b border-black/5 pb-2 mb-1 flex items-center gap-2">
               <BarChart2 className="w-4 h-4 text-accent-blue" />
               Platform Standings
             </h3>
             
-            <div className="grid grid-cols-1 gap-4">
+            <div className="grid grid-cols-1 gap-3">
               {platforms.map((plat) => (
                 <a
                   key={plat.name}
                   href={plat.profileUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group bg-white rounded-2xl p-5 border border-black/5 shadow-sm hover:shadow-md transition-all hover:-translate-y-0.5 active:translate-y-0"
+                  className="group bg-white rounded-2xl p-4 border border-black/5 shadow-sm hover:shadow-md transition-all hover:-translate-y-0.5 active:translate-y-0"
                 >
-                  <div className="flex justify-between items-center mb-3">
+                  <div className="flex justify-between items-center mb-2">
                     <span className="font-display font-bold text-sm text-dark-card group-hover:text-accent-blue transition-colors">
                       {plat.name}
                     </span>
@@ -166,7 +154,7 @@ export default function Achievements() {
                     </span>
                   </div>
                   
-                  <div className="flex justify-between items-center mt-3 pt-3 border-t border-black/5 text-xs text-gray-500">
+                  <div className="flex justify-between items-center mt-2.5 pt-2.5 border-t border-black/5 text-xs text-gray-500">
                     <span>{plat.solved}</span>
                     <span className="text-[10px] bg-black/5 text-dark-card font-mono px-2 py-0.5 rounded">
                       {plat.percentile}
@@ -176,9 +164,9 @@ export default function Achievements() {
               ))}
             </div>
             
-            <div className="bg-dark-card text-white p-5 rounded-2xl border border-white/5 shadow-md mt-2 flex-1 flex flex-col justify-between">
+            <div className="bg-dark-card text-white p-4 rounded-2xl border border-white/5 shadow-md mt-1 flex-1 flex flex-col justify-between">
               <div>
-                <h4 className="text-xs font-bold text-accent-blue uppercase tracking-widest mb-2 flex items-center gap-2">
+                <h4 className="text-xs font-bold text-accent-blue uppercase tracking-widest mb-1.5 flex items-center gap-2">
                   <Zap className="w-3.5 h-3.5" />
                   ALGORITHMIC CORE
                 </h4>
@@ -186,21 +174,21 @@ export default function Achievements() {
                   Solving complex problems isn't just about syntax. It's about data structures, time complexity bounds, and designing correct algorithms under pressure. My standings validate my capability to write highly optimized, correct code.
                 </p>
               </div>
-              <p className="text-[10px] text-gray-500 mt-4 leading-tight font-mono">
+              <p className="text-[10px] text-gray-500 mt-3 leading-tight font-mono">
                 // Solved 900+ algorithmic problems across all platforms.
               </p>
             </div>
           </div>
 
           {/* Right Column — Competition Wins & Honors List */}
-          <div className="lg:col-span-7 flex flex-col gap-4">
-            <h3 className="text-sm font-bold text-dark-card border-b border-black/5 pb-2 mb-2 flex items-center gap-2">
+          <div className="lg:col-span-7 flex flex-col gap-3">
+            <h3 className="text-sm font-bold text-dark-card border-b border-black/5 pb-2 mb-1 flex items-center gap-2">
               <Trophy className="w-4 h-4 text-accent-blue" />
               Competition Wins & Placement
             </h3>
 
-            <div className="bg-white rounded-2xl border border-black/5 shadow-sm divide-y divide-black/5 overflow-hidden">
-              <div className="max-h-[520px] overflow-y-auto scrollbar-none">
+            <div className="bg-white rounded-2xl border border-black/5 shadow-sm divide-y divide-black/5 overflow-hidden flex-1 flex flex-col">
+              <div className="overflow-y-auto scrollbar-none flex-1 h-[320px] lg:h-auto">
                 {achievements.map((ach, idx) => (
                   <div key={idx} className="p-4 hover:bg-gray-50/50 transition-colors flex gap-4 items-start">
                     <div className="bg-accent-blue/10 text-accent-blue p-2 rounded-lg shrink-0 mt-0.5">
