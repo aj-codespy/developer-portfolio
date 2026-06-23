@@ -53,8 +53,6 @@ export default function Hero() {
             className="font-display text-[2.25rem] sm:text-5xl lg:text-[3.75rem] font-extrabold tracking-tight text-dark-card leading-[1.05] mb-5"
           >
             I build like it's my own company.
-            <br />
-            Because that's how I think.
           </motion.h1>
 
           <motion.div variants={itemVariants} className="max-w-lg mb-8">
