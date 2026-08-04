@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { gsap, useGSAP, MOTION_QUERIES } from "@/lib/gsap";
+import { gsap, useGSAP, prefersReducedMotion } from "@/lib/gsap";
 
 const techStack = [
   { name: "FastAPI", color: "#F97316" },
@@ -17,23 +17,46 @@ const techStack = [
 
 export default function TechMarquee() {
   const sectionRef = useRef<HTMLElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const tweenRef = useRef<gsap.core.Tween | null>(null);
 
   useGSAP(
     () => {
-      const mm = gsap.matchMedia();
-      mm.add({ reduce: MOTION_QUERIES.reduce }, (ctx) => {
-        const { reduce } = (ctx.conditions ?? {}) as { reduce: boolean };
-        if (reduce) return;
+      // Note: this component deliberately does NOT use gsap.matchMedia —
+      // mm.add() callbacks never fire here (observed in dev; other components
+      // are fine), so we gate reduced-motion directly instead.
+      if (prefersReducedMotion()) return;
+      const ctx = gsap.context(() => {
         gsap.from(sectionRef.current, {
           autoAlpha: 0,
           duration: 0.6,
           ease: "power2.out",
           scrollTrigger: { trigger: sectionRef.current, start: "top 95%", once: true },
         });
-      });
+        // Seamless ticker: track holds the stack twice; -50% of its
+        // content width = exactly one stack, so the loop never jumps.
+        tweenRef.current = gsap.to(trackRef.current, {
+          xPercent: -50,
+          duration: 25,
+          ease: "none",
+          repeat: -1,
+        });
+      }, sectionRef);
+      return () => ctx.revert();
     },
     { scope: sectionRef }
   );
+
+  // Smoothly slow to a stop / resume on hover (React-driven, no listener leaks).
+  const setPaused = (paused: boolean) => {
+    if (!tweenRef.current) return;
+    gsap.to(tweenRef.current, {
+      timeScale: paused ? 0 : 1,
+      duration: 0.4,
+      ease: "power2.out",
+      overwrite: true,
+    });
+  };
 
   return (
     <section
@@ -48,13 +71,17 @@ export default function TechMarquee() {
           </span>
 
           {/* Marquee container */}
-          <div className="relative min-w-0 flex-1 overflow-hidden">
+          <div
+            className="relative min-w-0 flex-1 overflow-hidden"
+            onPointerEnter={() => setPaused(true)}
+            onPointerLeave={() => setPaused(false)}
+          >
             {/* Fade edges */}
             <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-page-base to-transparent" />
             <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-page-base to-transparent" />
 
             {/* Scrolling track — duplicated for seamless loop */}
-            <div className="marquee-track" aria-hidden="true">
+            <div ref={trackRef} className="flex w-max will-change-transform" aria-hidden="true">
               {[...techStack, ...techStack].map((tech, i) => (
                 <div
                   key={`${tech.name}-${i}`}

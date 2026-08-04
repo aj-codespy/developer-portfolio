@@ -49,20 +49,8 @@
     radial-gradient(ellipse at 80% 20%, rgba(59, 130, 246, 0.06) 0%, transparent 50%);
 }
 
-/* Tech stack marquee animation */
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-.marquee-track {
-  display: flex;
-  animation: marquee 25s linear infinite;
-}
-
-.marquee-track:hover {
-  animation-play-state: paused;
-}
+/* Tech stack marquee — motion moved to GSAP (see TechMarquee.tsx); the
+   track only carries flex layout here, width comes from the w-max class. */
 
 /* Timeline line grow animation */
 @keyframes timeline-grow {
