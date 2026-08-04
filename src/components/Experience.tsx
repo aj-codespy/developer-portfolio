@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { gsap, useGSAP, MOTION_QUERIES } from "@/lib/gsap";
-import { ExternalLink, Calendar, Briefcase } from "lucide-react";
+import { PhosphorIcon } from "@/components/icons/phosphor-icon";
 
 interface Job {
   id: string;
@@ -244,7 +244,7 @@ export default function Experience() {
                     isActive ? "text-accent-blue" : "text-gray-600 hover:text-dark-card hover:bg-gray-50/50"
                   }`}
                 >
-                  <Briefcase className="w-3.5 h-3.5 flex-shrink-0 z-10" />
+                  <PhosphorIcon name="Briefcase" className="w-3.5 h-3.5 flex-shrink-0 z-10" />
                   <span className="z-10">{job.company}</span>
                 </button>
               );
@@ -273,7 +273,7 @@ export default function Experience() {
                           className="text-xs font-bold text-accent-blue hover:underline inline-flex items-center gap-0.5"
                         >
                           @{jobs[displayedIdx].company}
-                          <ExternalLink className="w-3 h-3" />
+                          <PhosphorIcon name="ExternalLink" className="w-3 h-3" />
                         </a>
                       ) : (
                         <span className="text-xs font-bold text-gray-500">@{jobs[displayedIdx].company}</span>
@@ -281,7 +281,7 @@ export default function Experience() {
                     </h3>
                   </div>
                   <div className="flex items-center gap-1.5 text-xs text-gray-600 font-medium whitespace-nowrap">
-                    <Calendar className="w-3.5 h-3.5 text-accent-blue/70" />
+                    <PhosphorIcon name="Calendar" className="w-3.5 h-3.5 text-accent-blue/70" />
                     <span>{jobs[displayedIdx].duration}</span>
                   </div>
                 </div>

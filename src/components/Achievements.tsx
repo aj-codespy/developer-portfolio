@@ -1,6 +1,6 @@
 "use client";
 
-import { Award, BarChart2, Trophy, Zap } from "lucide-react";
+import { PhosphorIcon } from "@/components/icons/phosphor-icon";
 
 interface Achievement {
   position: string;
@@ -125,7 +125,7 @@ export default function Achievements() {
           {/* Left Column — Coding Platform Ratings */}
           <div className="lg:col-span-5 flex flex-col gap-3">
             <h3 className="text-sm font-bold text-dark-card border-b border-black/5 pb-2 mb-1 flex items-center gap-2">
-              <BarChart2 className="w-4 h-4 text-accent-blue" />
+              <PhosphorIcon name="BarChart2" className="w-4 h-4 text-accent-blue" />
               Platform Standings
             </h3>
             
@@ -169,7 +169,7 @@ export default function Achievements() {
             <div className="bg-dark-card text-white p-4 rounded-2xl border border-white/5 shadow-md mt-1 flex-1 flex flex-col justify-between">
               <div>
                 <h4 className="text-xs font-bold text-accent-blue uppercase tracking-widest mb-1.5 flex items-center gap-2">
-                  <Zap className="w-3.5 h-3.5" />
+                  <PhosphorIcon name="Zap" className="w-3.5 h-3.5" />
                   ALGORITHMIC CORE
                 </h4>
                 <p className="text-xs text-gray-300 leading-relaxed">
@@ -185,7 +185,7 @@ export default function Achievements() {
           {/* Right Column — Competition Wins & Honors List */}
           <div className="lg:col-span-7 flex flex-col gap-3">
             <h3 className="text-sm font-bold text-dark-card border-b border-black/5 pb-2 mb-1 flex items-center gap-2">
-              <Trophy className="w-4 h-4 text-accent-blue" />
+              <PhosphorIcon name="Trophy" className="w-4 h-4 text-accent-blue" />
               Competition Wins & Placement
             </h3>
 
@@ -193,7 +193,7 @@ export default function Achievements() {
               {firstPrizes.map((ach, idx) => (
                 <div key={idx} className="bg-white rounded-2xl border border-black/5 shadow-sm p-4 hover:bg-gray-50/50 transition-colors flex gap-4 items-start">
                   <div className="bg-accent-blue/10 text-accent-blue p-2 rounded-lg shrink-0 mt-0.5">
-                    <Award className="w-4 h-4" />
+                    <PhosphorIcon name="Award" className="w-4 h-4" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-1">
@@ -216,7 +216,7 @@ export default function Achievements() {
 
               <div className="bg-white rounded-2xl border border-black/5 shadow-sm p-4">
                 <h4 className="text-xs font-bold text-dark-card mb-3 flex items-center gap-2">
-                  <Award className="w-3.5 h-3.5 text-accent-blue" />
+                  <PhosphorIcon name="Award" className="w-3.5 h-3.5 text-accent-blue" />
                   2nd Prize — {secondPrizes.length} more wins
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-3">

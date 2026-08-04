@@ -60,16 +60,16 @@ export default function Hero() {
 
           // --- Entrance choreography -------------------------------------
           const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
-          tl.from(q("[data-hero='eyebrow']"), { y: 16, autoAlpha: 0, duration: 0.5 })
-            .from(q("[data-hero='copy']"), { y: 20, autoAlpha: 0, duration: 0.6 }, "-=0.25")
+          tl.from(q("[data-hero='eyebrow']"), { y: 16, autoAlpha: 0, duration: 0.4 })
+            .from(q("[data-hero='copy']"), { y: 20, autoAlpha: 0, duration: 0.5 }, "-=0.2")
             .from(
               q("[data-hero='cta']"),
-              { y: 14, autoAlpha: 0, duration: 0.45, stagger: 0.08 },
-              "-=0.35"
+              { y: 14, autoAlpha: 0, duration: 0.4, stagger: 0.08 },
+              "-=0.3"
             )
-            .from(q("[data-hero='cred']"), { y: 10, autoAlpha: 0, duration: 0.45 }, "-=0.3");
-          tl.from(rightRef.current, { x: 40, autoAlpha: 0, duration: 0.7 }, 0.15);
-          tl.from(badgeRef.current, { scale: 0.8, autoAlpha: 0, duration: 0.4, ease: "back.out(1.7)" }, 0.55);
+            .from(q("[data-hero='cred']"), { y: 10, autoAlpha: 0, duration: 0.4 }, "-=0.3");
+          tl.from(rightRef.current, { x: 40, autoAlpha: 0, duration: 0.6 }, 0.1);
+          tl.from(badgeRef.current, { scale: 0.8, autoAlpha: 0, duration: 0.35, ease: "back.out(1.7)" }, 0.45);
 
           // --- Headline: word-by-word rise (re-splits on font load) ------
           if (h1Ref.current) {
@@ -81,9 +81,9 @@ export default function Hero() {
                 gsap.from(self.words, {
                   y: 26,
                   autoAlpha: 0,
-                  stagger: 0.045,
-                  delay: 0.15,
-                  duration: 0.7,
+                  stagger: 0.04,
+                  delay: 0.1,
+                  duration: 0.6,
                   ease: "power3.out",
                 }),
             });
@@ -261,7 +261,7 @@ export default function Hero() {
             <span className="text-accent-blue opacity-50">•</span>
             <span>1 product shipped solo</span>
             <span className="text-accent-blue opacity-50">•</span>
-            <span>0 specs — just raw problems</span>
+            <span>0 specs. Just raw problems.</span>
           </div>
         </div>
 

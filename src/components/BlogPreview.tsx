@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { ArrowUpRight, ArrowRight, PenLine } from "lucide-react";
+import { PhosphorIcon } from "@/components/icons/phosphor-icon";
 import { gsap, useGSAP, MOTION_QUERIES } from "@/lib/gsap";
 
 const blogPosts = [
@@ -109,7 +109,7 @@ export default function BlogPreview() {
               <span className="text-xs font-mono text-gray-500 uppercase tracking-wider">
                 {post.date}
               </span>
-              <ArrowUpRight className="w-4 h-4 text-gray-400 group-hover:text-accent-blue group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
+              <PhosphorIcon name="ArrowUpRight" className="w-4 h-4 text-gray-400 group-hover:text-accent-blue group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
             </div>
             <h3 className="font-display text-lg font-bold text-dark-card leading-snug mb-2 group-hover:text-accent-blue transition-colors duration-300">
               {post.title}
@@ -121,7 +121,7 @@ export default function BlogPreview() {
               <span className="text-xs font-mono text-gray-500">{post.readTime}</span>
               <span className="text-xs font-bold text-accent-blue inline-flex items-center gap-1">
                 Read article
-                <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform duration-300" />
+                <PhosphorIcon name="ArrowRight" className="w-3 h-3 group-hover:translate-x-0.5 transition-transform duration-300" />
               </span>
             </div>
           </a>
@@ -135,11 +135,11 @@ export default function BlogPreview() {
       >
         <div className="flex items-center gap-4">
           <div className="w-10 h-10 rounded-xl bg-accent-blue/10 text-accent-blue flex items-center justify-center flex-shrink-0">
-            <PenLine className="w-5 h-5" />
+            <PhosphorIcon name="PenLine" className="w-5 h-5" />
           </div>
           <div>
             <p className="text-sm font-bold text-dark-card">Get the full essays</p>
-            <p className="text-xs text-gray-600">Deep dives on AI, engineering, and building in public — straight to your inbox.</p>
+            <p className="text-xs text-gray-600">Deep dives on AI, engineering, and building in public. Straight to your inbox.</p>
           </div>
         </div>
         <a
@@ -149,7 +149,7 @@ export default function BlogPreview() {
           className="shrink-0 px-4 py-2.5 bg-accent-blue text-white text-xs font-bold rounded-xl hover:bg-accent-blue/90 transition-colors duration-300 inline-flex items-center gap-1.5"
         >
           Subscribe on Substack
-          <ArrowUpRight className="w-3.5 h-3.5" />
+          <PhosphorIcon name="ArrowUpRight" className="w-3.5 h-3.5" />
         </a>
       </div>
     </section>

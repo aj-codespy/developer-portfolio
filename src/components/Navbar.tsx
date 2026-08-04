@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { PhosphorIcon } from "@/components/icons/phosphor-icon";
 import { gsap, ScrollTrigger, useGSAP, MOTION_QUERIES } from "@/lib/gsap";
 
 export default function Navbar() {
@@ -107,7 +107,7 @@ export default function Navbar() {
           className="bg-dark-card text-white text-xs sm:text-sm font-semibold px-4 sm:px-5 py-2.5 rounded-full flex items-center gap-1.5 hover:bg-black transition-colors whitespace-nowrap"
         >
           Book a Call
-          <ArrowRight className="w-3.5 h-3.5 hidden sm:block" />
+          <PhosphorIcon name="ArrowRight" className="w-3.5 h-3.5 hidden sm:block" />
         </Link>
       </span>
     </nav>

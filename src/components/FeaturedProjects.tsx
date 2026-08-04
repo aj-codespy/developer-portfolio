@@ -2,21 +2,7 @@
 
 import { useRef, useState } from "react";
 import { gsap, useGSAP, MOTION_QUERIES } from "@/lib/gsap";
-import { 
-  ArrowLeft,
-  ArrowRight, 
-  ArrowUpRight, 
-  GraduationCap, 
-  TrendingUp, 
-  Activity, 
-  Clipboard, 
-  Scale, 
-  Coins, 
-  Stethoscope, 
-  Search, 
-  FileText, 
-  MessageSquare 
-} from "lucide-react";
+import { PhosphorIcon } from "@/components/icons/phosphor-icon";
 
 const GithubIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="currentColor">
@@ -39,7 +25,7 @@ const projects: Project[] = [
   {
     name: "getPlaced",
     description:
-      "AI resume builder that turns your background and any job description into an ATS-optimized resume — scored, tailored, and ready to apply.",
+      "AI resume builder that turns your background and any job description into an ATS-optimized resume: scored, tailored, and ready to apply.",
     pills: ["Next.js", "FastAPI", "Firebase"],
     github: "https://github.com/aj-codespy/getplaced",
     liveUrl: "https://getplaced.online",
@@ -129,27 +115,27 @@ const projects: Project[] = [
 const getProjectIcon = (type: string, className: string) => {
   switch (type) {
     case "graduation-cap":
-      return <GraduationCap className={className} />;
+      return <PhosphorIcon name="GraduationCap" className={className} />;
     case "trending-up":
-      return <TrendingUp className={className} />;
+      return <PhosphorIcon name="TrendingUp" className={className} />;
     case "activity":
-      return <Activity className={className} />;
+      return <PhosphorIcon name="Activity" className={className} />;
     case "clipboard":
-      return <Clipboard className={className} />;
+      return <PhosphorIcon name="Clipboard" className={className} />;
     case "scale":
-      return <Scale className={className} />;
+      return <PhosphorIcon name="Scale" className={className} />;
     case "coins":
-      return <Coins className={className} />;
+      return <PhosphorIcon name="Coins" className={className} />;
     case "stethoscope":
-      return <Stethoscope className={className} />;
+      return <PhosphorIcon name="Stethoscope" className={className} />;
     case "search":
-      return <Search className={className} />;
+      return <PhosphorIcon name="Search" className={className} />;
     case "file-text":
-      return <FileText className={className} />;
+      return <PhosphorIcon name="FileText" className={className} />;
     case "message-square":
-      return <MessageSquare className={className} />;
+      return <PhosphorIcon name="MessageSquare" className={className} />;
     default:
-      return <FileText className={className} />;
+      return <PhosphorIcon name="FileText" className={className} />;
   }
 };
 
@@ -160,7 +146,7 @@ interface FeaturedProjectsProps {
 
 export default function FeaturedProjects({
   title = "Crafted Software",
-  subtitle = "Featured Projects",
+  subtitle = "// Featured Projects",
 }: FeaturedProjectsProps) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
@@ -270,14 +256,14 @@ export default function FeaturedProjects({
             className="w-11 h-11 rounded-xl bg-white hover:bg-gray-50 border border-black/10 flex items-center justify-center text-dark-card transition-all hover:scale-105 active:scale-95 shadow-sm cursor-pointer"
             aria-label="Previous projects"
           >
-            <ArrowLeft className="w-5 h-5" />
+            <PhosphorIcon name="ArrowLeft" className="w-5 h-5" />
           </button>
           <button
             onClick={scrollRight}
             className="w-11 h-11 rounded-xl bg-white hover:bg-gray-50 border border-black/10 flex items-center justify-center text-dark-card transition-all hover:scale-105 active:scale-95 shadow-sm cursor-pointer"
             aria-label="Next projects"
           >
-            <ArrowRight className="w-5 h-5" />
+            <PhosphorIcon name="ArrowRight" className="w-5 h-5" />
           </button>
         </div>
       </div>
@@ -339,7 +325,7 @@ export default function FeaturedProjects({
                       }`}>
                         {project.name}
                         {project.liveUrl && (
-                          <ArrowUpRight className="h-4 w-4 opacity-0 -translate-y-0.5 translate-x-0.5 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all duration-300 text-accent-blue" />
+                          <PhosphorIcon name="ArrowUpRight" className="h-4 w-4 opacity-0 -translate-y-0.5 translate-x-0.5 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all duration-300 text-accent-blue" />
                         )}
                       </h3>
                       <p className="text-xs font-mono text-gray-500 uppercase tracking-widest mt-0.5">

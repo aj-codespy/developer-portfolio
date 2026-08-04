@@ -2,11 +2,12 @@
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import { PhosphorIcon } from "@/components/icons/phosphor-icon";
 import { gsap, useGSAP, MOTION_QUERIES } from "@/lib/gsap";
 
 const highlights = [
   { category: "FOUNDER", desc: "Built and launched getPlaced, an AI resume builder scaled to 5,000+ active users at getplaced.online." },
-  { category: "HACKATHONS", desc: "9 competition wins outside the classroom — coding through 36-hour sprints, prototyping, and shipping under pressure." },
+  { category: "HACKATHONS", desc: "9 competition wins outside the classroom. 36-hour sprints, prototyping, and shipping under pressure." },
   { category: "INTERNSHIP", desc: "Built an agentic validation engine using LangGraph at Aligned Automation, aligning technical engineering with clients." },
   { category: "CLIENTS & SALES", desc: "Managed freelance content clients pre-AI. Handled pricing, feedback cycles, client negotiations, and end-to-end delivery." },
   { category: "PRESENTATION", desc: "Pitched AI products to judges, demoed to teams, and translated complex ML concepts into clear business narratives." },
@@ -313,7 +314,7 @@ export default function BentoGrid() {
             </div>
 
             <p className="text-gray-600 text-xs leading-relaxed mb-3">
-              Professionally interned as DS, ML, and AI engineer — tackling everything from data pipelines to production backends.
+              Professionally interned as DS, ML, and AI engineer, tackling everything from data pipelines to production backends.
             </p>
 
             {/* Tech Pills */}
@@ -357,7 +358,7 @@ export default function BentoGrid() {
                   <p className="text-xs font-bold tracking-wider text-white/90 uppercase mb-1">UNIVERSITY</p>
                   <a href="https://www.mmcoe.edu.in" target="_blank" rel="noopener noreferrer" className="text-sm font-black text-white hover:text-white/80 transition-colors leading-tight mb-1 flex items-center gap-1">
                     MMCOE
-                    <span className="text-[10px] font-normal text-white/75">↗</span>
+                    <PhosphorIcon name="ArrowUpRight" className="w-3 h-3 text-white/75" />
                   </a>
                   <p className="text-xs text-white/90 leading-snug">B.E. Artificial Intelligence & Data Science</p>
                 </div>
@@ -373,7 +374,7 @@ export default function BentoGrid() {
                   <p className="text-xs font-bold tracking-wider text-gray-500 uppercase mb-1">JUNIOR COLLEGE</p>
                   <a href="https://www.chmcollege.in" target="_blank" rel="noopener noreferrer" className="text-xs font-bold text-dark-card hover:text-accent-blue transition-colors leading-tight mb-1.5 flex items-center gap-1">
                     Smt. CHM College
-                    <span className="text-[10px] font-normal text-gray-500">↗</span>
+                    <PhosphorIcon name="ArrowUpRight" className="w-3 h-3 text-gray-500" />
                   </a>
                   <p className="text-xs text-gray-600 leading-snug mb-2">Higher Secondary Certificate (HSC)</p>
                 </div>
@@ -389,7 +390,7 @@ export default function BentoGrid() {
                   <p className="text-xs font-bold tracking-wider text-gray-500 uppercase mb-1">SECONDARY SCHOOL</p>
                   <a href="https://sssecondary.edu.in" target="_blank" rel="noopener noreferrer" className="text-xs font-bold text-dark-card hover:text-accent-blue transition-colors leading-tight mb-1.5 flex items-center gap-1">
                     New Era High School
-                    <span className="text-[10px] font-normal text-gray-500">↗</span>
+                    <PhosphorIcon name="ArrowUpRight" className="w-3 h-3 text-gray-500" />
                   </a>
                   <p className="text-xs text-gray-600 leading-snug mb-2">Secondary School Certificate (SSC)</p>
                 </div>

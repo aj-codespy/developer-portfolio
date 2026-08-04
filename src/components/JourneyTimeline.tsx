@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+import { PhosphorIcon } from "@/components/icons/phosphor-icon";
 import { gsap, useGSAP, MOTION_QUERIES } from "@/lib/gsap";
 
 const timelineData = [
@@ -163,7 +163,7 @@ export default function JourneyTimeline() {
                   {/* Arrow Indicator for last item */}
                   {isLast && (
                     <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-20 hidden lg:block">
-                      <ArrowRight className="w-4 h-4 text-accent-blue animate-pulse" />
+                      <PhosphorIcon name="ArrowRight" className="w-4 h-4 text-accent-blue animate-pulse" />
                     </div>
                   )}
                 </div>
@@ -198,7 +198,7 @@ export default function JourneyTimeline() {
                     <span className="text-sm font-bold text-accent-blue bg-white/5 border border-white/10 px-2 py-0.5 rounded-md shrink-0 flex items-center gap-1">
                       {item.year}
                       {isLast && (
-                        <ArrowRight className="w-4 h-4 text-accent-blue group-hover:translate-x-1 transition-transform" />
+                        <PhosphorIcon name="ArrowRight" className="w-4 h-4 text-accent-blue group-hover:translate-x-1 transition-transform" />
                       )}
                     </span>
                     <div>

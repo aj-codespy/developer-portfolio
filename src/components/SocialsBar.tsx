@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { gsap, useGSAP, MOTION_QUERIES } from "@/lib/gsap";
-import { Copy, Check, Phone } from "lucide-react";
+import { PhosphorIcon } from "@/components/icons/phosphor-icon";
 
 /* Inline SVG icons for socials */
 const GithubIcon = () => (
@@ -206,7 +206,7 @@ export default function SocialsBar() {
     },
     {
       name: "Copy Email",
-      icon: copied ? <Check className="w-4.5 h-4.5 text-green-300 animate-pulse" /> : <Copy className="w-4.5 h-4.5" />,
+      icon: copied ? <PhosphorIcon name="Check" className="w-4.5 h-4.5 text-green-300 animate-pulse" /> : <PhosphorIcon name="Copy" className="w-4.5 h-4.5" />,
       isCopy: true,
       bgColor: "bg-accent-blue",
       textColor: "text-white",
@@ -216,7 +216,7 @@ export default function SocialsBar() {
     },
     {
       name: "Call Me",
-      icon: <Phone className="w-4.5 h-4.5" />,
+      icon: <PhosphorIcon name="Phone" className="w-4.5 h-4.5" />,
       href: "tel:+918591413107",
       bgColor: "bg-[#16A34A]",
       textColor: "text-white",
@@ -280,6 +280,9 @@ export default function SocialsBar() {
         <h2 className="font-display text-2xl font-black text-dark-card tracking-tight uppercase mb-6">
           Book a Call
         </h2>
+        <p className="text-sm text-gray-600 leading-relaxed max-w-md mb-6">
+          Tell me what you&apos;re building. Or what you&apos;d build differently.
+        </p>
         <div className="w-full rounded-[2rem] border border-black/5 bg-white/40 backdrop-blur-md shadow-sm overflow-hidden h-[520px] relative">
           <div style={{ width: "100%", height: "100%", overflow: "scroll" }} id="my-cal-inline-30min" />
         </div>
