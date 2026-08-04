@@ -21,7 +21,7 @@ interface Project {
   iconColor: string;
   iconType: string;
   metric?: string;
-  mockup?: "ats" | "transcript";
+  mockup?: "ats" | "transcript" | "pipeline" | "chart" | "vitals" | "form" | "qa" | "table";
 }
 
 const projects: Project[] = [
@@ -60,6 +60,7 @@ const projects: Project[] = [
     color: "from-cyan-500/10 to-blue-500/10",
     iconColor: "text-cyan-600",
     iconType: "stethoscope",
+    mockup: "pipeline",
   },
   {
     name: "FinChat",
@@ -71,6 +72,7 @@ const projects: Project[] = [
     color: "from-amber-500/10 to-orange-500/10",
     iconColor: "text-amber-600",
     iconType: "trending-up",
+    mockup: "chart",
   },
   {
     name: "Vital",
@@ -82,6 +84,7 @@ const projects: Project[] = [
     color: "from-rose-500/10 to-red-500/10",
     iconColor: "text-rose-600",
     iconType: "activity",
+    mockup: "vitals",
   },
   {
     name: "AI Form Builder",
@@ -93,6 +96,7 @@ const projects: Project[] = [
     color: "from-blue-500/10 to-sky-500/10",
     iconColor: "text-blue-600",
     iconType: "clipboard",
+    mockup: "form",
   },
   {
     name: "LawBuddy",
@@ -104,6 +108,7 @@ const projects: Project[] = [
     color: "from-slate-500/10 to-stone-500/10",
     iconColor: "text-slate-600",
     iconType: "scale",
+    mockup: "qa",
   },
   {
     name: "Lead Scraper",
@@ -115,6 +120,7 @@ const projects: Project[] = [
     color: "from-slate-500/10 to-stone-500/10",
     iconColor: "text-slate-600",
     iconType: "search",
+    mockup: "table",
   },
   {
     name: "Tax Minimisation",
@@ -230,6 +236,190 @@ function HireLoopTranscriptMockup() {
         <p data-hl-line className="text-gray-300">ai&gt; Strong. Scoring against the rubric — 4.2/5. Next.</p>
         <p data-hl-line className="text-gray-500">sys&gt; Transcript streamed to hiring team · qualified</p>
       </div>
+    </div>
+  );
+}
+
+/* Supporting-project mini mockups: crafted product UI, proof-of-build framing */
+function MiniMockup({ kind }: { kind: NonNullable<Project["mockup"]> }) {
+  return (
+    <div
+      data-mini-mockup={kind}
+      aria-hidden
+      className="mt-5 rounded-2xl border border-black/10 bg-white p-4 shadow-sm relative overflow-hidden"
+    >
+      {kind === "pipeline" && (
+        <>
+          <div className="flex items-center justify-between gap-3">
+            <span className="font-mono text-[11px] uppercase tracking-widest text-gray-500">clinical pipeline · cureify</span>
+            <span className="inline-flex items-center gap-1.5 font-mono text-[10px] text-gray-400">
+              <span className="h-1.5 w-1.5 rounded-full bg-cyan-500 animate-pulse" aria-hidden /> multi-agent
+            </span>
+          </div>
+          <div className="mt-3 flex items-center gap-2">
+            <span className="flex flex-col items-center justify-center w-12 h-10 rounded-lg border border-black/10 bg-surface-muted">
+              <PhosphorIcon name="FileText" className="w-4 h-4 text-gray-500" />
+              <span className="font-mono text-[9px] text-gray-500 mt-0.5">records</span>
+            </span>
+            <PhosphorIcon name="ArrowRight" className="w-3.5 h-3.5 text-cyan-600 shrink-0" />
+            <div className="flex flex-wrap gap-1 flex-1 min-w-0">
+              {["summarizer", "radiologist", "recommender"].map((a) => (
+                <span key={a} className="px-2 py-0.5 rounded-md bg-cyan-500/10 border border-cyan-500/25 text-cyan-700 font-mono text-[9px] font-semibold">
+                  {a}
+                </span>
+              ))}
+            </div>
+          </div>
+          <div className="mt-3 rounded-lg border border-black/5 bg-surface-muted p-2.5">
+            <div className="flex items-baseline justify-between gap-2">
+              <span className="font-mono text-[10px] uppercase tracking-widest text-gray-500">recommendation</span>
+              <span className="font-mono text-[10px] font-bold text-cyan-700">87%</span>
+            </div>
+            <p className="mt-0.5 text-xs font-semibold text-dark-card">high risk — cardiac event · refer</p>
+            <div className="mt-1.5 h-1.5 rounded-full bg-cyan-500/10 overflow-hidden">
+              <div className="h-full w-[87%] rounded-full bg-gradient-to-r from-cyan-500 to-cyan-400" />
+            </div>
+          </div>
+        </>
+      )}
+      {kind === "chart" && (
+        <>
+          <div className="flex items-center justify-between gap-3">
+            <span className="font-mono text-[11px] uppercase tracking-widest text-gray-500">live analysis · finchat</span>
+            <span className="inline-flex items-center gap-1.5 font-mono text-[10px] text-gray-400">
+              <span className="h-1.5 w-1.5 rounded-full bg-amber-500 animate-pulse" aria-hidden /> yfinance
+            </span>
+          </div>
+          <div className="mt-3 flex items-center gap-3">
+            <span className="font-mono text-[10px] font-bold text-emerald-600">NIFTY 50 ▲ 1.24%</span>
+            <span className="font-mono text-[10px] font-bold text-emerald-600">RELIANCE ▲ 0.8%</span>
+            <span className="font-mono text-[10px] text-gray-400 ml-auto">1D</span>
+          </div>
+          <svg viewBox="0 0 200 48" className="mt-2 w-full h-12" role="img">
+            <rect x="6" y="30" width="18" height="18" rx="3" className="fill-amber-500/25" />
+            <rect x="30" y="22" width="18" height="26" rx="3" className="fill-amber-500/35" />
+            <rect x="54" y="26" width="18" height="22" rx="3" className="fill-amber-500/45" />
+            <rect x="78" y="14" width="18" height="34" rx="3" className="fill-amber-500/60" />
+            <rect x="102" y="20" width="18" height="28" rx="3" className="fill-amber-500/70" />
+            <rect x="126" y="8" width="18" height="40" rx="3" className="fill-amber-500" />
+            <rect x="150" y="16" width="18" height="32" rx="3" className="fill-amber-500/80" />
+            <rect x="174" y="10" width="18" height="38" rx="3" className="fill-amber-500/90" />
+          </svg>
+          <p className="mt-2 font-mono text-[10px] text-gray-500">
+            <span className="text-gray-400">Q:</span> is this IPO a buy? <span className="text-gray-400">→</span> 3 of 5 factors positive
+          </p>
+        </>
+      )}
+      {kind === "vitals" && (
+        <>
+          <div className="flex items-center justify-between gap-3">
+            <span className="font-mono text-[11px] uppercase tracking-widest text-gray-500">live vitals · vital</span>
+            <span className="inline-flex items-center gap-1.5 font-mono text-[10px] text-gray-400">
+              <span className="h-1.5 w-1.5 rounded-full bg-rose-500 animate-pulse" aria-hidden /> websocket
+            </span>
+          </div>
+          <svg viewBox="0 0 220 44" className="mt-3 w-full h-11" role="img" aria-label="streaming ECG trace">
+            <polyline
+              points="0,22 14,22 20,22 26,14 32,32 38,12 44,34 50,22 64,22 70,22 76,18 82,26 88,10 94,36 100,22 114,22 120,22 126,16 132,30 138,14 144,36 150,22 164,22 170,22 176,20 182,24 188,8 194,38 200,22 214,22 220,22"
+              className="fill-none stroke-rose-500"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+          <div className="mt-2 grid grid-cols-3 gap-2">
+            {[
+              ["HR", "72 bpm"],
+              ["SpO₂", "98%"],
+              ["BP", "120/80"],
+            ].map(([k, v]) => (
+              <div key={k} className="rounded-lg border border-black/5 bg-surface-muted p-1.5 text-center">
+                <p className="font-mono text-[9px] uppercase tracking-widest text-gray-500">{k}</p>
+                <p className="font-mono text-[11px] font-bold text-dark-card tabular-nums">{v}</p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-2 font-mono text-[10px] text-gray-500">
+            <span className="text-gray-400">alert:</span> risk moderate · paged dr. sharma
+          </p>
+        </>
+      )}
+      {kind === "form" && (
+        <>
+          <div className="flex items-center justify-between gap-3">
+            <span className="font-mono text-[11px] uppercase tracking-widest text-gray-500">prompt → form · ai form builder</span>
+            <span className="inline-flex items-center gap-1.5 font-mono text-[10px] text-gray-400">
+              <span className="h-1.5 w-1.5 rounded-full bg-accent-blue animate-pulse" aria-hidden /> gemini
+            </span>
+          </div>
+          <p className="mt-3 font-mono text-[10px] text-gray-500">
+            <span className="text-accent-blue">&gt;</span> create a customer feedback survey
+          </p>
+          <div className="mt-2 rounded-lg border border-black/5 bg-surface-muted p-2.5">
+            <p className="text-xs font-semibold text-dark-card">How likely are you to recommend us?</p>
+            <div className="mt-1.5 flex items-center gap-1.5">
+              {[1, 2, 3, 4, 5].map((n) => (
+                <span key={n} className={`h-3 w-3 rounded-full ${n <= 4 ? "bg-accent-blue" : "bg-black/10"}`} />
+              ))}
+              <span className="ml-auto font-mono text-[9px] text-gray-500">required</span>
+            </div>
+            <div className="mt-2 h-6 rounded-md border border-black/10 bg-white px-2 flex items-center">
+              <span className="font-mono text-[9px] text-gray-400">optional comment…</span>
+            </div>
+          </div>
+          <p className="mt-2 font-mono text-[10px] text-gray-500">✓ 12 questions generated · 4 sections</p>
+        </>
+      )}
+      {kind === "qa" && (
+        <>
+          <div className="flex items-center justify-between gap-3">
+            <span className="font-mono text-[11px] uppercase tracking-widest text-gray-500">legal rag · lawbuddy</span>
+            <span className="inline-flex items-center gap-1.5 font-mono text-[10px] text-gray-400">
+              <span className="h-1.5 w-1.5 rounded-full bg-slate-500 animate-pulse" aria-hidden /> 3 sources
+            </span>
+          </div>
+          <p className="mt-3 font-mono text-[10px] text-gray-500">
+            <span className="text-gray-400">Q:</span> what does article 21 protect?
+          </p>
+          <div className="mt-2 rounded-lg border border-black/5 bg-surface-muted p-2.5">
+            <p className="text-xs leading-relaxed text-dark-card">
+              Right to <span className="font-semibold">life &amp; personal liberty</span> — not absolute; protected by due process.
+            </p>
+          </div>
+          <div className="mt-2 flex flex-wrap gap-1">
+            {["art 21", "constitution", "cited ×3"].map((c) => (
+              <span key={c} className="px-2 py-0.5 rounded-md bg-slate-500/10 border border-slate-500/25 text-slate-600 font-mono text-[9px] font-semibold">
+                {c}
+              </span>
+            ))}
+          </div>
+        </>
+      )}
+      {kind === "table" && (
+        <>
+          <div className="flex items-center justify-between gap-3">
+            <span className="font-mono text-[11px] uppercase tracking-widest text-gray-500">lead scraper · yelp export</span>
+            <span className="inline-flex items-center gap-1.5 font-mono text-[10px] text-gray-400">
+              <span className="h-1.5 w-1.5 rounded-full bg-slate-500 animate-pulse" aria-hidden /> 3 countries
+            </span>
+          </div>
+          <div className="mt-3 divide-y divide-black/5 rounded-lg border border-black/5 bg-surface-muted">
+            {[
+              ["Smile Dental", "★ 4.8", "contact"],
+              ["Garden Café", "★ 4.5", "contact"],
+              ["Apex Fitness", "★ 4.6", "contact"],
+            ].map(([name, rating, action]) => (
+              <div key={name} className="flex items-center gap-2 px-2.5 py-1.5">
+                <PhosphorIcon name="Search" className="w-3 h-3 text-gray-400 shrink-0" />
+                <span className="text-xs font-semibold text-dark-card truncate">{name}</span>
+                <span className="font-mono text-[10px] text-amber-600 ml-auto">{rating}</span>
+                <span className="font-mono text-[9px] text-accent-blue">{action}</span>
+              </div>
+            ))}
+          </div>
+          <p className="mt-2 font-mono text-[10px] text-gray-500">1,240 leads exported → leads.xlsx</p>
+        </>
+      )}
     </div>
   );
 }
@@ -514,6 +704,11 @@ export default function FeaturedProjects({
                 {/* Scroll-driven product mockups */}
                 {project.mockup === "ats" && <GetPlacedSheetMockup />}
                 {project.mockup === "transcript" && <HireLoopTranscriptMockup />}
+                {project.mockup &&
+                  project.mockup !== "ats" &&
+                  project.mockup !== "transcript" && (
+                    <MiniMockup kind={project.mockup} />
+                  )}
               </div>
 
               {/* Footer details: pills */}
