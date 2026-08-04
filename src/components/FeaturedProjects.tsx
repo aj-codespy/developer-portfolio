@@ -165,7 +165,7 @@ function GetPlacedSheetMockup() {
       className="mt-5 rounded-2xl border border-accent-blue/20 bg-white p-4 shadow-sm relative overflow-hidden"
     >
       <div className="flex items-center justify-between gap-3">
-        <span className="font-mono text-[10px] uppercase tracking-widest text-gray-500">
+        <span className="font-mono text-[11px] uppercase tracking-widest text-gray-500">
           ATS pipeline · getplaced
         </span>
         <span className="inline-flex items-center gap-1.5 font-mono text-[10px] text-gray-400">
@@ -178,12 +178,12 @@ function GetPlacedSheetMockup() {
       <div className="mt-3 flex items-center gap-2" aria-hidden>
         <span className="flex flex-col items-center justify-center w-12 h-10 rounded-lg border border-black/10 bg-surface-muted">
           <PhosphorIcon name="FileText" className="w-4 h-4 text-gray-500" />
-          <span className="font-mono text-[8px] text-gray-400 mt-0.5">resume</span>
+          <span className="font-mono text-[9px] text-gray-500 mt-0.5">resume</span>
         </span>
         <PhosphorIcon name="ArrowRight" className="w-3.5 h-3.5 text-accent-blue shrink-0" />
         <span className="flex flex-col items-center justify-center w-12 h-10 rounded-lg bg-accent-blue/10 border border-accent-blue/25">
           <PhosphorIcon name="Check" className="w-4 h-4 text-accent-blue" />
-          <span className="font-mono text-[8px] text-accent-blue mt-0.5">AI tailors</span>
+          <span className="font-mono text-[9px] font-semibold text-accent-blue mt-0.5">AI tailors</span>
         </span>
         <PhosphorIcon name="ArrowRight" className="w-3.5 h-3.5 text-accent-blue shrink-0" />
         <div className="flex-1 min-w-0">
@@ -193,14 +193,14 @@ function GetPlacedSheetMockup() {
               0
             </span>
           </div>
-          <div className="mt-1.5 h-1.5 rounded-full bg-accent-blue/10 overflow-hidden">
+          <div className="mt-1.5 h-2 rounded-full bg-accent-blue/10 overflow-hidden">
             <div
               data-ats-bar
               className="h-full w-full rounded-full bg-gradient-to-r from-accent-blue to-blue-400"
               style={{ transform: "scaleX(0)", transformOrigin: "left" }}
             />
           </div>
-          <p className="mt-1 font-mono text-[9px] text-gray-400">target: frontend engineer · 0 → 92</p>
+          <p className="mt-1 font-mono text-[10px] text-gray-500">target: frontend engineer · 0→92</p>
         </div>
       </div>
     </div>
