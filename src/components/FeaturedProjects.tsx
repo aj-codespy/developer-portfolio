@@ -21,6 +21,7 @@ interface Project {
   iconColor: string;
   iconType: string;
   metric?: string;
+  mockup?: "ats" | "transcript";
 }
 
 const projects: Project[] = [
@@ -35,6 +36,19 @@ const projects: Project[] = [
     iconColor: "text-emerald-600",
     iconType: "graduation-cap",
     metric: "5,000+ users",
+    mockup: "ats",
+  },
+  {
+    name: "HireLoop",
+    description:
+      "AI interview platform: a live AI interviewer screens candidates, streams a structured transcript to the team, and hands over a qualified shortlist.",
+    pills: ["Next.js", "FastAPI", "Supabase", "WebSockets"],
+    github: "",
+    liveUrl: "",
+    color: "from-blue-500/10 to-indigo-500/10",
+    iconColor: "text-blue-600",
+    iconType: "message-square",
+    mockup: "transcript",
   },
   {
     name: "Cureify",
@@ -142,6 +156,84 @@ const getProjectIcon = (type: string, className: string) => {
   }
 };
 
+/* getPlaced: scroll-driven ATS product-sheet mockup (pipeline → score) */
+function GetPlacedSheetMockup() {
+  return (
+    <div
+      data-ats-mockup
+      aria-label="getPlaced demonstration: resume goes through AI tailoring and scores 92 out of 100 on the ATS"
+      className="mt-5 rounded-2xl border border-accent-blue/20 bg-white p-4 shadow-sm relative overflow-hidden"
+    >
+      <div className="flex items-center justify-between gap-3">
+        <span className="font-mono text-[10px] uppercase tracking-widest text-gray-500">
+          ATS pipeline · getplaced
+        </span>
+        <span className="inline-flex items-center gap-1.5 font-mono text-[10px] text-gray-400">
+          <span className="h-1.5 w-1.5 rounded-full bg-accent-blue animate-pulse" aria-hidden />
+          live
+        </span>
+      </div>
+
+      {/* product-sheet pipeline */}
+      <div className="mt-3 flex items-center gap-2" aria-hidden>
+        <span className="flex flex-col items-center justify-center w-12 h-10 rounded-lg border border-black/10 bg-surface-muted">
+          <PhosphorIcon name="FileText" className="w-4 h-4 text-gray-500" />
+          <span className="font-mono text-[8px] text-gray-400 mt-0.5">resume</span>
+        </span>
+        <PhosphorIcon name="ArrowRight" className="w-3.5 h-3.5 text-accent-blue shrink-0" />
+        <span className="flex flex-col items-center justify-center w-12 h-10 rounded-lg bg-accent-blue/10 border border-accent-blue/25">
+          <PhosphorIcon name="Check" className="w-4 h-4 text-accent-blue" />
+          <span className="font-mono text-[8px] text-accent-blue mt-0.5">AI tailors</span>
+        </span>
+        <PhosphorIcon name="ArrowRight" className="w-3.5 h-3.5 text-accent-blue shrink-0" />
+        <div className="flex-1 min-w-0">
+          <div className="flex items-baseline justify-between gap-2">
+            <span className="font-mono text-[10px] uppercase tracking-widest text-gray-500">ATS score</span>
+            <span data-ats-score className="font-display text-xl font-black text-accent-blue tabular-nums leading-none">
+              0
+            </span>
+          </div>
+          <div className="mt-1.5 h-1.5 rounded-full bg-accent-blue/10 overflow-hidden">
+            <div
+              data-ats-bar
+              className="h-full w-full rounded-full bg-gradient-to-r from-accent-blue to-blue-400"
+              style={{ transform: "scaleX(0)", transformOrigin: "left" }}
+            />
+          </div>
+          <p className="mt-1 font-mono text-[9px] text-gray-400">target: frontend engineer · 0 → 92</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* HireLoop: scroll-driven live-interview transcript mockup */
+function HireLoopTranscriptMockup() {
+  return (
+    <div
+      data-hl-mockup
+      aria-label="HireLoop demonstration: a live AI interview transcript streams while the candidate answers"
+      className="mt-5 rounded-2xl bg-dark-card p-4 text-white shadow-sm relative overflow-hidden"
+    >
+      <div className="flex items-center gap-2">
+        <span className="relative flex h-2 w-2">
+          <span className="absolute inline-flex h-full w-full rounded-full bg-accent-blue opacity-75 animate-ping" />
+          <span className="relative inline-flex h-2 w-2 rounded-full bg-accent-blue" />
+        </span>
+        <span className="font-mono text-[10px] uppercase tracking-widest text-gray-400">
+          live interview · hireloop
+        </span>
+      </div>
+      <div className="mt-3 space-y-2 font-mono text-[11px] leading-relaxed">
+        <p data-hl-line className="text-gray-300">ai&gt; Tell me about a time you shipped under pressure.</p>
+        <p data-hl-line className="text-accent-blue">you&gt; Cut scope twice, shipped the core path. 5k users on it.</p>
+        <p data-hl-line className="text-gray-300">ai&gt; Strong. Scoring against the rubric — 4.2/5. Next.</p>
+        <p data-hl-line className="text-gray-500">sys&gt; Transcript streamed to hiring team · qualified</p>
+      </div>
+    </div>
+  );
+}
+
 interface FeaturedProjectsProps {
   title?: string;
   subtitle?: string;
@@ -159,6 +251,7 @@ export default function FeaturedProjects({
   // Assigned inside useGSAP (gated by pointer type + reduced-motion)
   const lift = useRef<(over: boolean, el: HTMLElement | null) => void>(() => {});
   const tiltTo = useRef<(el: HTMLElement | null, rx: number, ry: number) => void>(() => {});
+  const playTranscript = useRef<() => void>(() => {});
 
   useGSAP(
     (_ctx, contextSafeArg) => {
@@ -186,6 +279,58 @@ export default function FeaturedProjects({
               scrollTrigger: { trigger: card, start: "top 92%", once: true },
             });
           });
+
+          // getPlaced: scroll-driven ATS score (count-up 0 → 92 + bar fill)
+          const atsPanel = sectionRef.current?.querySelector("[data-ats-mockup]");
+          if (atsPanel) {
+            const atsScore = atsPanel.querySelector("[data-ats-score]");
+            const atsBar = atsPanel.querySelector("[data-ats-bar]");
+            if (atsScore && atsBar) {
+              const counter = { v: 0 };
+              gsap.to(counter, {
+                v: 92,
+                duration: 1.6,
+                ease: "power2.out",
+                scrollTrigger: { trigger: atsPanel, start: "top 88%", once: true },
+                onUpdate: () => {
+                  atsScore.textContent = String(Math.round(counter.v));
+                },
+              });
+              gsap.fromTo(
+                atsBar,
+                { scaleX: 0 },
+                {
+                  scaleX: 0.92,
+                  duration: 1.6,
+                  ease: "power2.out",
+                  scrollTrigger: { trigger: atsPanel, start: "top 88%", once: true },
+                }
+              );
+            }
+          }
+
+          // HireLoop: transcript stream — played once the card enters the
+          // carousel viewport (carousel onScroll drives it; see handleScroll)
+          const hlPanel = sectionRef.current?.querySelector("[data-hl-mockup]") as HTMLElement | null;
+          if (hlPanel) {
+            const hlLines = hlPanel.querySelectorAll("[data-hl-line]");
+            gsap.set(hlLines, { autoAlpha: 0 });
+            playTranscript.current = contextSafe(() => {
+              if (hlPanel.dataset.played) return;
+              hlPanel.dataset.played = "true";
+              gsap.fromTo(
+                hlLines,
+                { y: 10, autoAlpha: 0 },
+                {
+                  y: 0,
+                  autoAlpha: 1,
+                  duration: 0.5,
+                  stagger: 0.9,
+                  ease: "power2.out",
+                }
+              );
+            });
+          }
 
           if (fine) {
             lift.current = contextSafe((over, el) => {
@@ -220,6 +365,14 @@ export default function FeaturedProjects({
     const step = card ? card.offsetWidth + 24 : container.clientWidth;
     const idx = Math.round(container.scrollLeft / Math.max(step, 1));
     setSlideIdx(Math.min(Math.max(idx, 0), projects.length - 1));
+
+    // HireLoop transcript: play when its card enters the carousel viewport
+    const hlPanel = sectionRef.current?.querySelector("[data-hl-mockup]") as HTMLElement | null;
+    if (hlPanel && !hlPanel.dataset.played) {
+      const panelRect = hlPanel.getBoundingClientRect();
+      const cRect = container.getBoundingClientRect();
+      if (panelRect.left < cRect.right - 48) playTranscript.current();
+    }
   };
 
   const scrollLeft = () => {
@@ -344,23 +497,29 @@ export default function FeaturedProjects({
                   </div>
 
                   {/* GitHub button (above link so it is clickable) */}
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                    aria-label={`View ${project.name} source on GitHub`}
-                    title="View Source Code"
-                    className="w-9 h-9 rounded-full bg-white hover:bg-gray-100 border border-black/5 flex items-center justify-center text-gray-500 hover:text-dark-card transition-all hover:scale-110 shadow-sm relative z-20"
-                  >
-                    <GithubIcon className="w-4.5 h-4.5" />
-                  </a>
+                  {project.github && (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      aria-label={`View ${project.name} source on GitHub`}
+                      title="View Source Code"
+                      className="w-10 h-10 rounded-full bg-white hover:bg-gray-100 border border-black/5 flex items-center justify-center text-gray-500 hover:text-dark-card transition-all hover:scale-110 shadow-sm relative z-20"
+                    >
+                      <GithubIcon className="w-4.5 h-4.5" />
+                    </a>
+                  )}
                 </div>
 
                 {/* Short Description */}
-                <p className="mt-4 text-sm text-gray-600 leading-relaxed font-normal">
+                <p className="mt-4 text-[15px] text-gray-600 leading-relaxed font-normal">
                   {project.description}
                 </p>
+
+                {/* Scroll-driven product mockups */}
+                {project.mockup === "ats" && <GetPlacedSheetMockup />}
+                {project.mockup === "transcript" && <HireLoopTranscriptMockup />}
               </div>
 
               {/* Footer details: pills */}

@@ -198,13 +198,13 @@ export default function Hero() {
       <div
         aria-hidden
         ref={glow1Ref}
-        className="pointer-events-none absolute -top-24 -left-20 w-[460px] h-[460px] rounded-full blur-3xl"
+        className="pointer-events-none absolute -top-24 -left-20 w-[460px] h-[460px] rounded-full blur-3xl opacity-80 md:opacity-100"
         style={{ background: "radial-gradient(circle, rgba(37,99,235,0.16) 0%, transparent 65%)" }}
       />
       <div
         aria-hidden
         ref={glow2Ref}
-        className="pointer-events-none absolute top-1/4 -right-28 w-[520px] h-[520px] rounded-full blur-3xl"
+        className="pointer-events-none absolute top-1/4 -right-28 w-[520px] h-[520px] rounded-full blur-3xl opacity-80 md:opacity-100"
         style={{ background: "radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 65%)" }}
       />
       <div className="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-6 items-center">
