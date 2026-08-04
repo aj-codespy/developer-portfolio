@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { gsap, useGSAP, MOTION_QUERIES } from "@/lib/gsap";
+import { gsap, useGSAP, prefersReducedMotion, MOTION_QUERIES } from "@/lib/gsap";
 import { PhosphorIcon } from "@/components/icons/phosphor-icon";
 import TypingEyebrow from "@/components/TypingEyebrow";
 
@@ -258,17 +258,12 @@ export default function FeaturedProjects({
       const contextSafe = contextSafeArg!;
       const mm = gsap.matchMedia();
 
-      mm.add(
-        {
-          reduce: MOTION_QUERIES.reduce,
-          fine: MOTION_QUERIES.fine,
-        },
-        (ctx) => {
-          const { reduce, fine } = (ctx.conditions ?? {}) as { reduce: boolean; fine: boolean };
-          if (reduce) return;
+      // Run for ALL pointer types (touch included). Reduced-motion users get
+      // the static build — no animation setup at all.
+      if (prefersReducedMotion()) return;
 
-          // Reveal: cards rise in as they enter (each its own trigger)
-          cardRefs.current.forEach((card, i) => {
+      // Reveal: cards rise in as they enter (each its own trigger)
+      cardRefs.current.forEach((card, i) => {
             if (!card) return;
             gsap.from(card, {
               y: 30,
@@ -332,7 +327,8 @@ export default function FeaturedProjects({
             });
           }
 
-          if (fine) {
+          // Pointer-only niceties stay fine-gated (desktop hover lift + tilt)
+          mm.add({ fine: MOTION_QUERIES.fine }, () => {
             lift.current = contextSafe((over, el) => {
               if (!el || el.dataset.lift !== "true") return;
               gsap.to(el, { y: over ? -6 : 0, duration: over ? 0.3 : 0.45, ease: "power2.out", overwrite: "auto" });
@@ -341,12 +337,10 @@ export default function FeaturedProjects({
               if (!el) return;
               gsap.to(el, { rotationX: rx, rotationY: ry, duration: 0.3, ease: "power2.out", overwrite: "auto" });
             });
-          }
-        }
+          });
+        },
+        { scope: sectionRef }
       );
-    },
-    { scope: sectionRef }
-  );
 
   const handleTiltMove = (e: React.PointerEvent<HTMLDivElement>) => {
     const el = e.currentTarget;
