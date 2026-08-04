@@ -3,7 +3,18 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
-import { gsap, ScrollTrigger, SplitText, useGSAP, MOTION_QUERIES } from "@/lib/gsap";
+import { gsap, ScrollTrigger, SplitText, useGSAP, prefersReducedMotion, MOTION_QUERIES } from "@/lib/gsap";
+
+/**
+ * Typewriter cycler sentences — all real product claims, all ≤40 chars so each
+ * wraps to exactly 2 lines on every viewport (zero CLS while cycling).
+ * Arc: identity → shipped proof → shipping now.
+ */
+const HEADLINE_SENTENCES = [
+  "I build like it's my own company.",
+  "I shipped getPlaced — 5K people use it.",
+  "Now I'm teaching AI to interview for me.",
+];
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -17,6 +28,11 @@ export default function Hero() {
   const glow1Ref = useRef<HTMLDivElement>(null);
   const glow2Ref = useRef<HTMLDivElement>(null);
   const magnetRef = useRef<HTMLSpanElement>(null);
+  const pillRingRef = useRef<HTMLSpanElement>(null);
+  const heartbeatRef = useRef<HTMLSpanElement>(null);
+  const chipGetRef = useRef<HTMLSpanElement>(null);
+  const chipHireRef = useRef<HTMLSpanElement>(null);
+  const statusStackRef = useRef<HTMLDivElement>(null);
 
   // Hover/magnet functions are assigned inside useGSAP (gated by pointer type +
   // reduced-motion); these refs make the handlers safe no-ops until then.
@@ -45,156 +61,273 @@ export default function Hero() {
     (_context, contextSafeArg) => {
       const contextSafe = contextSafeArg!; // useGSAP always provides this at runtime
       const mm = gsap.matchMedia();
+
+      // Reduced-motion: fully static, all content visible.
+      if (prefersReducedMotion()) return;
+
       const q = gsap.utils.selector(sectionRef.current);
 
-      mm.add(
-        {
-          reduce: MOTION_QUERIES.reduce,
-          fine: MOTION_QUERIES.fine,
-          desktop: MOTION_QUERIES.desktop,
-        },
-        (ctx) => {
-          const { reduce, fine, desktop } = (ctx.conditions ?? {}) as {
-            reduce: boolean;
-            fine: boolean;
-            desktop: boolean;
-          };
-          if (reduce) return; // reduced-motion: fully static, content visible
+      // --- Ambient mesh glows: slow drift + breath (transform/opacity only) --
+      const drift1 = gsap.to(glow1Ref.current, { x: 70, y: 50, duration: 24, repeat: -1, yoyo: true, ease: "sine.inOut" });
+      const drift2 = gsap.to(glow2Ref.current, { x: -60, y: -40, duration: 30, repeat: -1, yoyo: true, ease: "sine.inOut" });
+      const breath1 = gsap.to(glow1Ref.current, { opacity: 0.72, scale: 1.05, duration: 9, repeat: -1, yoyo: true, ease: "sine.inOut" });
+      const breath2 = gsap.to(glow2Ref.current, { opacity: 0.65, scale: 1.06, duration: 11, repeat: -1, yoyo: true, ease: "sine.inOut" });
 
-          // --- Ambient mesh glows: slow drift (transform-only) ----------
-          gsap.to(glow1Ref.current, { x: 70, y: 50, duration: 24, repeat: -1, yoyo: true, ease: "sine.inOut" });
-          gsap.to(glow2Ref.current, { x: -60, y: -40, duration: 30, repeat: -1, yoyo: true, ease: "sine.inOut" });
+      // --- GSAP ping ring on the availability pill (replaces CSS animate-ping) --
+      gsap.set(pillRingRef.current, { scale: 1, opacity: 0.7 });
+      const pillRing = gsap.to(pillRingRef.current, {
+        scale: 2.6,
+        opacity: 0,
+        duration: 1.8,
+        repeat: -1,
+        ease: "power2.out",
+        delay: 0.4,
+      });
 
-          // --- Entrance choreography -------------------------------------
-          const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
-          tl.from(q("[data-hero='eyebrow']"), { y: 16, autoAlpha: 0, duration: 0.4 })
-            .from(q("[data-hero='copy']"), { y: 20, autoAlpha: 0, duration: 0.5 }, "-=0.2")
-            .from(
-              q("[data-hero='cta']"),
-              { y: 14, autoAlpha: 0, duration: 0.4, stagger: 0.08 },
-              "-=0.3"
-            )
-            .from(q("[data-hero='cred']"), { y: 10, autoAlpha: 0, duration: 0.4 }, "-=0.3");
-          tl.from(rightRef.current, { x: 40, autoAlpha: 0, duration: 0.6 }, 0.1);
-          tl.from(badgeRef.current, { scale: 0.8, autoAlpha: 0, duration: 0.35, ease: "back.out(1.7)" }, 0.45);
+      // --- Heartbeat dot on the "currently shipping" line --------------------
+      gsap.set(heartbeatRef.current, { scale: 1, opacity: 0.7 });
+      const heartbeat = gsap.to(heartbeatRef.current, {
+        scale: 2.2,
+        opacity: 0,
+        duration: 1.6,
+        repeat: -1,
+        ease: "power2.out",
+        delay: 0.9,
+      });
 
-          // --- Headline: word-by-word rise (re-splits on font load) ------
-          if (h1Ref.current) {
-            SplitText.create(h1Ref.current, {
-              type: "words",
-              aria: "auto",
-              autoSplit: true,
-              onSplit: (self) =>
-                gsap.from(self.words, {
-                  y: 26,
-                  autoAlpha: 0,
-                  stagger: 0.04,
-                  delay: 0.1,
-                  duration: 0.6,
-                  ease: "power3.out",
-                }),
-            });
-          }
+      // --- Proof chips: dim by default, pop when the cycler names them -------
+      gsap.set([chipGetRef.current, chipHireRef.current], { autoAlpha: 0.35, scale: 0.96, y: 6 });
+      const dimChips = () => {
+        gsap.to([chipGetRef.current, chipHireRef.current], {
+          autoAlpha: 0.35,
+          scale: 0.96,
+          y: 6,
+          duration: 0.3,
+          overwrite: "auto",
+        });
+      };
+      const popChip = (chip: HTMLElement | null) => {
+        if (!chip) return;
+        gsap.fromTo(
+          chip,
+          { autoAlpha: 0.35, scale: 0.9, y: 6 },
+          { autoAlpha: 1, scale: 1, y: 0, duration: 0.5, ease: "back.out(1.7)", overwrite: "auto" }
+        );
+      };
 
-          // --- 5K+ count-up when the badge scrolls into view -------------
-          const countUp = contextSafe(() => {
-            const counter = { val: 0 };
-            gsap.to(counter, {
-              val: 5,
-              duration: 1.4,
-              ease: "power1.out",
-              snap: { val: 1 },
-              onUpdate: () => {
-                if (countRef.current) countRef.current.textContent = `${Math.round(counter.val)}K+`;
-              },
-            });
+      // --- "My edge:" card → live terminal slot-roller (desktop only) --------
+      const step = 19; // 15px row + 4px space-y-1 gap
+      const roll = gsap.timeline({ repeat: -1, delay: 1.2 });
+      [1, 2, 3, 4].forEach((i) => {
+        roll
+          .to(statusStackRef.current, { y: -step * i, duration: 0.55, ease: "power3.inOut" })
+          .to(statusStackRef.current, { y: -step * i, duration: 1.3 });
+      });
+      roll.set(statusStackRef.current, { y: 0 }); // seamless: last row duplicates row 1
+
+      // --- Entrance choreography ---------------------------------------------
+      const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
+      tl.from(q("[data-hero='eyebrow']"), { y: 16, autoAlpha: 0, duration: 0.4 })
+        .from(q("[data-hero='copy']"), { y: 20, autoAlpha: 0, duration: 0.5 }, "-=0.2")
+        .from(
+          q("[data-hero='cta']"),
+          { y: 14, autoAlpha: 0, duration: 0.4, stagger: 0.08 },
+          "-=0.3"
+        )
+        .from(q("[data-hero='cred']"), { y: 10, autoAlpha: 0, duration: 0.4 }, "-=0.3");
+      tl.from(rightRef.current, { x: 40, autoAlpha: 0, duration: 0.6 }, 0.1);
+      tl.from(badgeRef.current, { scale: 0.8, autoAlpha: 0, duration: 0.35, ease: "back.out(1.7)" }, 0.45);
+
+      // --- Headline: word-by-word rise, then the typewriter cycler -----------
+      let splitInst: SplitText | null = null;
+      let cyclerStarted = false;
+      if (h1Ref.current) {
+        splitInst = SplitText.create(h1Ref.current, {
+          type: "words",
+          aria: "auto",
+          autoSplit: false,
+          onSplit: (self) =>
+            gsap.from(self.words, {
+              y: 26,
+              autoAlpha: 0,
+              stagger: 0.04,
+              delay: 0.1,
+              duration: 0.6,
+              ease: "power3.out",
+            }),
+        });
+      }
+
+      const startCycler = contextSafe(() => {
+        const h1 = h1Ref.current;
+        if (!h1 || cyclerStarted) return;
+        cyclerStarted = true;
+        splitInst?.revert(); // textContent writes would destroy split word spans
+        const text = h1.querySelector<HTMLElement>("[data-hl-text]");
+        if (!text) return;
+        // SplitText.revert() clears the span — restore the SSR sentence so the
+        // initial hold phase shows it (and reduced-motion/SEO never depend on this).
+        text.textContent = HEADLINE_SENTENCES[0];
+
+        const ct = gsap.timeline();
+        const type = (s: string) => {
+          const tp = { n: 0 };
+          ct.to(tp, {
+            n: s.length,
+            duration: Math.max(0.5, s.length * 0.045),
+            ease: "none",
+            onStart: () => {
+              // Side effects fire when the playhead reaches this tween (not at build time).
+              text.textContent = "";
+              if (s === HEADLINE_SENTENCES[1]) popChip(chipGetRef.current);
+              else if (s === HEADLINE_SENTENCES[2]) popChip(chipHireRef.current);
+              else dimChips();
+            },
+            onUpdate: () => {
+              text.textContent = s.slice(0, Math.floor(tp.n));
+            },
+            onComplete: () => {
+              text.textContent = s;
+            },
           });
-          ScrollTrigger.create({
-            trigger: badgeRef.current,
-            start: "top bottom",
-            once: true,
-            onEnter: countUp,
+        };
+        const erase = (s: string) => {
+          const ep = { n: s.length };
+          ct.to(ep, {
+            n: 0,
+            duration: Math.max(0.4, s.length * 0.02),
+            ease: "none",
+            onUpdate: () => {
+              text.textContent = s.slice(0, Math.floor(ep.n));
+            },
           });
+        };
+        const hold = (ms: number) => ct.to({}, { duration: ms / 1000 });
 
-          // --- Gentle float after the entrance completes -----------------
-          const startFloat = contextSafe(() =>
-            gsap.to(badgeRef.current, {
-              y: -6,
-              duration: 2.6,
-              repeat: -1,
-              yoyo: true,
-              ease: "sine.inOut",
-            })
-          );
-          tl.eventCallback("onComplete", startFloat);
+        // Sentence 1 is already rendered (SSR + entrance). Show it, then run
+        // one full cycle [s2 → s3 → s1] and settle on s1 forever.
+        hold(2400);
+        erase(HEADLINE_SENTENCES[0]);
+        type(HEADLINE_SENTENCES[1]);
+        hold(2400);
+        erase(HEADLINE_SENTENCES[1]);
+        type(HEADLINE_SENTENCES[2]);
+        hold(2400);
+        erase(HEADLINE_SENTENCES[2]);
+        type(HEADLINE_SENTENCES[0]);
+        hold(1200);
+      });
 
-          // --- Desktop scroll parallax on the photo stack ----------------
-          if (desktop) {
-            gsap.to(leftColRef.current, {
-              yPercent: 16,
-              autoAlpha: 0.35,
-              ease: "none",
-              scrollTrigger: {
-                trigger: sectionRef.current,
-                start: "top top",
-                end: "bottom top",
-                scrub: 0.6,
-              },
-            });
-            gsap.to(rightRef.current, {
-              yPercent: 10,
-              ease: "none",
-              scrollTrigger: {
-                trigger: sectionRef.current,
-                start: "top top",
-                end: "bottom top",
-                scrub: 0.6,
-              },
-            });
-          }
+      // --- 5K+ count-up when the badge scrolls into view ---------------------
+      const countUp = contextSafe(() => {
+        const counter = { val: 0 };
+        gsap.to(counter, {
+          val: 5,
+          duration: 1.4,
+          ease: "power1.out",
+          snap: { val: 1 },
+          onUpdate: () => {
+            if (countRef.current) countRef.current.textContent = `${Math.round(counter.val)}K+`;
+          },
+        });
+      });
+      ScrollTrigger.create({
+        trigger: badgeRef.current,
+        start: "top bottom",
+        once: true,
+        onEnter: countUp,
+      });
 
-          // --- Hover micro-interactions + magnetic CTA (fine pointers) ----
-          if (fine) {
-            hoverPhoto.current = contextSafe((over) =>
-              gsap.to(photoRef.current, {
-                scale: over ? 1.03 : 1,
-                rotation: over ? 1 : 0,
-                duration: 0.45,
-                ease: "power2.out",
-                overwrite: "auto",
-              })
-            );
-            hoverBadge.current = contextSafe((over) =>
-              gsap.to(badgeRef.current, {
-                y: over ? -5 : 0,
-                scale: over ? 1.05 : 1,
-                duration: 0.35,
-                ease: "power2.out",
-                overwrite: "auto",
-              })
-            );
-            hoverDarkCard.current = contextSafe((over) =>
-              gsap.to(darkCardRef.current, {
-                y: over ? -5 : 0,
-                rotation: over ? -2 : 0,
-                scale: over ? 1.05 : 1,
-                duration: 0.4,
-                ease: "power2.out",
-                overwrite: "auto",
-              })
-            );
-            magnetTo.current.x = gsap.quickTo(magnetRef.current, "x", { duration: 0.5, ease: "power3.out" });
-            magnetTo.current.y = gsap.quickTo(magnetRef.current, "y", { duration: 0.5, ease: "power3.out" });
-          }
-        }
+      // --- Gentle float after the entrance completes -------------------------
+      const startFloat = contextSafe(() =>
+        gsap.to(badgeRef.current, {
+          y: -6,
+          duration: 2.6,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+        })
       );
+      tl.eventCallback("onComplete", () => {
+        startFloat();
+        startCycler();
+      });
+
+      // --- Pause looping tweens when the tab is hidden -----------------------
+      const loopers: gsap.core.Animation[] = [drift1, drift2, breath1, breath2, pillRing, heartbeat, roll];
+      const onVisibility = () => {
+        const hidden = document.hidden;
+        loopers.forEach((t) => (hidden ? t.pause() : t.play()));
+      };
+      document.addEventListener("visibilitychange", onVisibility);
+
+      // --- Desktop scroll parallax on the photo stack ------------------------
+      mm.add({ desktop: MOTION_QUERIES.desktop }, () => {
+        gsap.to(leftColRef.current, {
+          yPercent: 16,
+          autoAlpha: 0.35,
+          ease: "none",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top top",
+            end: "bottom top",
+            scrub: 0.6,
+          },
+        });
+        gsap.to(rightRef.current, {
+          yPercent: 10,
+          ease: "none",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top top",
+            end: "bottom top",
+            scrub: 0.6,
+          },
+        });
+      });
+
+      // --- Hover micro-interactions + magnetic CTA (fine pointers only) ------
+      mm.add({ fine: MOTION_QUERIES.fine }, () => {
+        hoverPhoto.current = contextSafe((over) =>
+          gsap.to(photoRef.current, {
+            scale: over ? 1.03 : 1,
+            rotation: over ? 1 : 0,
+            duration: 0.45,
+            ease: "power2.out",
+            overwrite: "auto",
+          })
+        );
+        hoverBadge.current = contextSafe((over) =>
+          gsap.to(badgeRef.current, {
+            y: over ? -5 : 0,
+            scale: over ? 1.05 : 1,
+            duration: 0.35,
+            ease: "power2.out",
+            overwrite: "auto",
+          })
+        );
+        hoverDarkCard.current = contextSafe((over) =>
+          gsap.to(darkCardRef.current, {
+            y: over ? -5 : 0,
+            rotation: over ? -2 : 0,
+            scale: over ? 1.05 : 1,
+            duration: 0.4,
+            ease: "power2.out",
+            overwrite: "auto",
+          })
+        );
+        magnetTo.current.x = gsap.quickTo(magnetRef.current, "x", { duration: 0.5, ease: "power3.out" });
+        magnetTo.current.y = gsap.quickTo(magnetRef.current, "y", { duration: 0.5, ease: "power3.out" });
+      });
+
+      return () => document.removeEventListener("visibilitychange", onVisibility);
     },
     { scope: sectionRef }
   );
 
   return (
     <section id="home" ref={sectionRef} className="relative min-h-screen pt-28 pb-16 flex items-center mesh-bg overflow-hidden">
-      {/* Ambient mesh glows — slow drift (reduced-motion gated in useGSAP) */}
+      {/* Ambient mesh glows — slow drift + breath (reduced-motion gated in useGSAP) */}
       <div
         aria-hidden
         ref={glow1Ref}
@@ -217,19 +350,20 @@ export default function Hero() {
           >
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent-blue/10 border border-accent-blue/20 text-accent-blue text-sm font-semibold">
               <span className="relative flex h-2.5 w-2.5">
-                <span className="absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75 animate-ping" />
+                <span ref={pillRingRef} aria-hidden className="absolute inset-0 rounded-full bg-blue-400/70" />
                 <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-blue-500" />
               </span>
               Open to Freelance + AI Full-time
             </div>
           </div>
 
-          {/* Headline */}
+          {/* Headline — static sentence 1 for SEO/SSR; typewriter cycler takes over client-side */}
           <h1
             ref={h1Ref}
             className="font-display text-[2.25rem] sm:text-5xl lg:text-[3.75rem] font-extrabold tracking-tight text-dark-card leading-[1.05] mb-5"
           >
-            I build like it&apos;s my own company.
+            <span data-hl-text>I build like it&apos;s my own company.</span>
+            <span aria-hidden className="cursor-blink text-accent-blue select-none">▊</span>
           </h1>
 
           <div data-hero="copy" className="max-w-lg mb-8">
@@ -253,6 +387,15 @@ export default function Hero() {
               !
             </p>
           </div>
+
+          {/* Currently-shipping heartbeat line */}
+          <p className="flex items-center gap-2 font-mono text-xs text-muted-text mb-6">
+            <span className="relative flex h-2 w-2">
+              <span ref={heartbeatRef} aria-hidden className="absolute inset-0 rounded-full bg-accent-blue" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-accent-blue" />
+            </span>
+            // currently shipping: hireloop (live ai interviews)
+          </p>
 
           {/* CTAs */}
           <div className="flex flex-wrap items-center gap-3">
@@ -297,6 +440,27 @@ export default function Hero() {
               <span className="cursor-blink text-accent-blue ml-0.5" aria-hidden>▊</span>
             </span>
           </div>
+
+          {/* Proof chips — dim, light up when the headline cycler names them */}
+          <div className="mt-4 flex flex-wrap gap-2" aria-hidden>
+            <span
+              ref={chipGetRef}
+              data-chip="getplaced"
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-black/10 bg-white font-mono text-[10px] text-dark-card shadow-sm"
+            >
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" /> getPlaced · 5K+ users
+            </span>
+            <span
+              ref={chipHireRef}
+              data-chip="hireloop"
+              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-black/10 bg-white font-mono text-[10px] text-dark-card shadow-sm"
+            >
+              <span className="h-1.5 w-1.5 rounded-full bg-accent-blue" /> HireLoop · live AI interviews
+            </span>
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-black/10 bg-white font-mono text-[10px] text-dark-card shadow-sm">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#F97316]" /> freelance · open
+            </span>
+          </div>
         </div>
 
         {/* Right Column — Photo + Floating Cards */}
@@ -330,17 +494,25 @@ export default function Hero() {
               Built &amp; scaled getPlaced to <span ref={countRef}>5K+</span> users
             </div>
 
-            {/* Dark Info Card — Bottom Left */}
+            {/* Dark Info Card — Bottom Left (live terminal slot-roller) */}
             <div
               ref={darkCardRef}
               onMouseEnter={() => hoverDarkCard.current(true)}
               onMouseLeave={() => hoverDarkCard.current(false)}
               className="hidden sm:block absolute bottom-16 -left-8 lg:-left-10 bg-dark-card text-white p-4 rounded-xl shadow-xl border border-white/10 max-w-[180px] z-20 cursor-default"
             >
-              <p className="font-display font-bold text-sm mb-1">My edge:</p>
-              <p className="text-xs text-gray-300 leading-relaxed">
-                I&apos;ve sat in the user call AND written the code.
-              </p>
+              <p className="font-display font-bold text-sm mb-1.5">My edge:</p>
+              <div className="overflow-hidden" style={{ height: 15 }}>
+                <div ref={statusStackRef} className="space-y-1">
+                  {["user call: listened", "shipped: getPlaced", "building: hireloop", "open: freelance", "user call: listened"].map(
+                    (row, i) => (
+                      <p key={i} className="text-xs leading-[15px] text-gray-300 whitespace-nowrap">
+                        {row}
+                      </p>
+                    )
+                  )}
+                </div>
+              </div>
             </div>
 
           </div>
