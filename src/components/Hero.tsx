@@ -13,6 +13,9 @@ export default function Hero() {
   const darkCardRef = useRef<HTMLDivElement>(null);
   const countRef = useRef<HTMLSpanElement>(null);
   const h1Ref = useRef<HTMLHeadingElement>(null);
+  const leftColRef = useRef<HTMLDivElement>(null);
+  const glow1Ref = useRef<HTMLDivElement>(null);
+  const glow2Ref = useRef<HTMLDivElement>(null);
   const magnetRef = useRef<HTMLSpanElement>(null);
 
   // Hover/magnet functions are assigned inside useGSAP (gated by pointer type +
@@ -30,8 +33,8 @@ export default function Hero() {
     const r = el.getBoundingClientRect();
     const dx = e.clientX - (r.left + r.width / 2);
     const dy = e.clientY - (r.top + r.height / 2);
-    xTo(gsap.utils.clamp(-3, 3, dx * 0.3));
-    yTo(gsap.utils.clamp(-3, 3, dy * 0.3));
+    xTo(gsap.utils.clamp(-10, 10, dx * 0.35));
+    yTo(gsap.utils.clamp(-10, 10, dy * 0.35));
   };
   const handleMagnetLeave = () => {
     magnetTo.current.x?.(0);
@@ -57,6 +60,10 @@ export default function Hero() {
             desktop: boolean;
           };
           if (reduce) return; // reduced-motion: fully static, content visible
+
+          // --- Ambient mesh glows: slow drift (transform-only) ----------
+          gsap.to(glow1Ref.current, { x: 70, y: 50, duration: 24, repeat: -1, yoyo: true, ease: "sine.inOut" });
+          gsap.to(glow2Ref.current, { x: -60, y: -40, duration: 30, repeat: -1, yoyo: true, ease: "sine.inOut" });
 
           // --- Entrance choreography -------------------------------------
           const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
@@ -123,6 +130,17 @@ export default function Hero() {
 
           // --- Desktop scroll parallax on the photo stack ----------------
           if (desktop) {
+            gsap.to(leftColRef.current, {
+              yPercent: 16,
+              autoAlpha: 0.35,
+              ease: "none",
+              scrollTrigger: {
+                trigger: sectionRef.current,
+                start: "top top",
+                end: "bottom top",
+                scrub: 0.6,
+              },
+            });
             gsap.to(rightRef.current, {
               yPercent: 10,
               ease: "none",
@@ -175,19 +193,32 @@ export default function Hero() {
   );
 
   return (
-    <section id="home" ref={sectionRef} className="relative min-h-screen pt-28 pb-16 flex items-center mesh-bg">
+    <section id="home" ref={sectionRef} className="relative min-h-screen pt-28 pb-16 flex items-center mesh-bg overflow-hidden">
+      {/* Ambient mesh glows — slow drift (reduced-motion gated in useGSAP) */}
+      <div
+        aria-hidden
+        ref={glow1Ref}
+        className="pointer-events-none absolute -top-24 -left-20 w-[460px] h-[460px] rounded-full blur-3xl"
+        style={{ background: "radial-gradient(circle, rgba(37,99,235,0.16) 0%, transparent 65%)" }}
+      />
+      <div
+        aria-hidden
+        ref={glow2Ref}
+        className="pointer-events-none absolute top-1/4 -right-28 w-[520px] h-[520px] rounded-full blur-3xl"
+        style={{ background: "radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 65%)" }}
+      />
       <div className="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-6 items-center">
         {/* Left Column */}
-        <div className="lg:col-span-6 flex flex-col items-start">
+        <div ref={leftColRef} className="lg:col-span-6 flex flex-col items-start">
           {/* Eyebrow */}
           <div
             data-hero="eyebrow"
             className="flex flex-wrap items-center gap-3 mb-5"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-green-500/10 border border-green-500/20 text-green-700 text-sm font-semibold">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent-blue/10 border border-accent-blue/20 text-accent-blue text-sm font-semibold">
               <span className="relative flex h-2.5 w-2.5">
-                <span className="absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 animate-ping" />
-                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-green-500" />
+                <span className="absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75 animate-ping" />
+                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-blue-500" />
               </span>
               Available for Hiring
             </div>
@@ -259,9 +290,12 @@ export default function Hero() {
           >
             <span>20+ cold conversations with founders</span>
             <span className="text-accent-blue opacity-50">•</span>
-            <span>1 product shipped solo</span>
+            <span>2 products shipped</span>
             <span className="text-accent-blue opacity-50">•</span>
-            <span>0 specs. Just raw problems.</span>
+            <span>
+              0 specs. Just raw problems.
+              <span className="cursor-blink text-accent-blue ml-0.5" aria-hidden>▊</span>
+            </span>
           </div>
         </div>
 
@@ -309,12 +343,6 @@ export default function Hero() {
               </p>
             </div>
 
-            {/* Light Info Card — Bottom Right (de-emphasized: static, compact) */}
-            <div className="hidden sm:block absolute bottom-4 -right-6 lg:-right-10 bg-white/95 backdrop-blur-sm px-3.5 py-2.5 rounded-lg shadow-sm border border-black/5 max-w-[160px] z-20">
-              <p className="font-semibold text-[11px] text-dark-card leading-snug">
-                FastAPI · LangGraph · Firebase
-              </p>
-            </div>
           </div>
         </div>
       </div>

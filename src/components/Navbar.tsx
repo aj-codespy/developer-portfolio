@@ -19,8 +19,8 @@ export default function Navbar() {
     const r = el.getBoundingClientRect();
     const dx = e.clientX - (r.left + r.width / 2);
     const dy = e.clientY - (r.top + r.height / 2);
-    xTo(gsap.utils.clamp(-3, 3, dx * 0.3));
-    yTo(gsap.utils.clamp(-3, 3, dy * 0.3));
+    xTo(gsap.utils.clamp(-6, 6, dx * 0.3));
+    yTo(gsap.utils.clamp(-6, 6, dy * 0.3));
   };
   const handleMagnetLeave = () => {
     magnetTo.current.x?.(0);
@@ -79,8 +79,14 @@ export default function Navbar() {
       <Link
         href="/#home"
         aria-label="Ayush Jha — back to top"
-        className="text-sm sm:text-base font-bold text-dark-card pl-2.5 pr-3 py-2.5 rounded-full hover:bg-black/5 transition-colors whitespace-nowrap"
+        className="flex items-center gap-2 text-sm sm:text-base font-bold text-dark-card pl-1.5 pr-3 py-1.5 rounded-full hover:bg-black/5 transition-colors whitespace-nowrap"
       >
+        <span
+          className="flex items-center justify-center w-7 h-7 rounded-full bg-dark-card text-white font-mono text-[11px] font-bold shrink-0"
+          aria-hidden
+        >
+          aj<span className="text-accent-blue">&gt;</span>
+        </span>
         Ayush&nbsp;Jha
       </Link>
       <span className="h-5 w-px bg-black/10 mx-1" aria-hidden="true" />

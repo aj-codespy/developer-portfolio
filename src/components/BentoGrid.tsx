@@ -228,8 +228,11 @@ export default function BentoGrid() {
                 alt="Running for growth and discipline"
                 fill
                 sizes="(max-width: 1024px) 100vw, 350px"
-                className="object-cover transition-transform duration-700 group-hover:scale-110"
+                className="object-cover transition-transform duration-700 group-hover:scale-110 grayscale"
               />
+              <span className="absolute top-2 left-2 z-10 font-mono text-[9px] tracking-widest text-white/80 bg-dark-card/50 px-1.5 py-0.5 rounded">
+                FIG. 01
+              </span>
               <div className="absolute inset-0 bg-gradient-to-t from-dark-card/90 via-dark-card/20 to-transparent opacity-90" />
               <div className="absolute bottom-3 left-0 right-0 text-center">
                 <p className="text-xs font-bold text-white tracking-[0.2em] uppercase">
@@ -256,8 +259,12 @@ export default function BentoGrid() {
                 alt="Scenic landscape"
                 fill
                 sizes="(max-width: 1024px) 100vw, 350px"
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                className="object-cover transition-transform duration-700 group-hover:scale-105 grayscale"
               />
+              <span className="absolute top-2 left-2 z-10 font-mono text-[9px] tracking-widest text-white/80 bg-dark-card/50 px-1.5 py-0.5 rounded">
+                FIG. 02
+              </span>
+              <div className="absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-dark-card/50 to-transparent" />
             </div>
             
             <div
@@ -413,7 +420,7 @@ export default function BentoGrid() {
             <div className="flex flex-col gap-3 my-auto font-mono text-xs">
               <div className="flex justify-between items-center border-b border-white/10 pb-1.5">
                 <span className="text-gray-400 text-xs">EMPLOYMENT</span>
-                <span className="text-green-400 font-bold text-xs">SEEKING ROLES</span>
+                <span className="text-accent-blue font-bold text-xs">SEEKING ROLES</span>
               </div>
               <div className="flex justify-between items-center border-b border-white/10 pb-1.5">
                 <span className="text-gray-400 text-xs">LATEST INT.</span>

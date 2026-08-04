@@ -55,6 +55,7 @@ const EMAIL = "ajayush2301@gmail.com";
 export default function SocialsBar() {
   const [copied, setCopied] = useState(false);
   const [calLoaded, setCalLoaded] = useState(false);
+  const [calHydrated, setCalHydrated] = useState(false);
   const footerRef = useRef<HTMLElement>(null);
 
   useGSAP(
@@ -70,6 +71,16 @@ export default function SocialsBar() {
           ease: "power2.out",
           scrollTrigger: { trigger: footerRef.current, start: "top 92%", once: true },
         });
+        const receipt = footerRef.current?.querySelector("[data-receipt]");
+        if (receipt) {
+          gsap.from(receipt, {
+            y: 12,
+            autoAlpha: 0,
+            duration: 0.5,
+            ease: "power2.out",
+            scrollTrigger: { trigger: receipt, start: "top 98%", once: true },
+          });
+        }
       });
     },
     { scope: footerRef }
@@ -93,6 +104,26 @@ export default function SocialsBar() {
 
     return () => observer.disconnect();
   }, []);
+
+  // Detect when the Cal.com iframe has actually rendered (hydration done)
+  useEffect(() => {
+    const el = document.getElementById("my-cal-inline-30min");
+    if (!el) return;
+    const markHydrated = () => {
+      if (el.querySelector("iframe")) {
+        setCalHydrated(true);
+        mo.disconnect();
+      }
+    };
+    const mo = new MutationObserver(markHydrated);
+    mo.observe(el, { childList: true, subtree: true });
+    // Catch the case where Cal rendered before this effect ran (cached visit)
+    const raf = requestAnimationFrame(markHydrated);
+    return () => {
+      mo.disconnect();
+      cancelAnimationFrame(raf);
+    };
+  }, [calLoaded]);
 
   useEffect(() => {
     if (!calLoaded) return;
@@ -280,12 +311,51 @@ export default function SocialsBar() {
         <h2 className="font-display text-2xl font-black text-dark-card tracking-tight uppercase mb-6">
           Book a Call
         </h2>
-        <p className="text-sm text-gray-600 leading-relaxed max-w-md mb-6">
+        <p className="text-sm text-gray-600 leading-relaxed max-w-md mb-2">
           Tell me what you&apos;re building. Or what you&apos;d build differently.
+        </p>
+        <p className="font-mono text-xs text-muted-text mb-6">
+          30 min · Google Meet · no prep needed
         </p>
         <div className="w-full rounded-[2rem] border border-black/5 bg-white/40 backdrop-blur-md shadow-sm overflow-hidden h-[520px] relative">
           <div style={{ width: "100%", height: "100%", overflow: "scroll" }} id="my-cal-inline-30min" />
+          {!calHydrated && (
+            <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 bg-surface-muted/70 backdrop-blur-sm" aria-hidden>
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75 animate-ping" />
+                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-accent-blue" />
+              </span>
+              <span className="font-mono text-xs text-muted-text">{"// loading availability…"}</span>
+            </div>
+          )}
         </div>
+
+        {/* Always-visible fallback + build receipt */}
+        <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-xs text-muted-text">
+          <span>
+            Prefer email?{" "}
+            <a href={`mailto:${EMAIL}`} className="text-accent-blue hover:underline font-bold">
+              {EMAIL}
+            </a>
+          </span>
+          <span className="opacity-40">·</span>
+          <span>
+            DM{" "}
+            <a href="https://x.com/aj_livess" target="_blank" rel="noopener noreferrer" className="text-accent-blue hover:underline font-bold">
+              @aj_livess
+            </a>
+          </span>
+          <span className="opacity-40">·</span>
+          <span>
+            <a href="https://cal.com/aj-works/30min" target="_blank" rel="noopener noreferrer" className="text-accent-blue hover:underline font-bold">
+              cal.com/aj-works/30min
+            </a>
+          </span>
+        </div>
+        <p className="mt-3 font-mono text-xs text-muted-text" data-receipt>
+          5K users • 2 products • 9 wins • 0 specs
+          <span className="cursor-blink text-accent-blue ml-0.5" aria-hidden>▊</span>
+        </p>
       </div>
 
       <div className="border-t border-black/5 pt-12 mb-8 flex flex-col sm:flex-row sm:items-baseline justify-between gap-4">

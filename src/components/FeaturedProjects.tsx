@@ -19,6 +19,7 @@ interface Project {
   color: string;
   iconColor: string;
   iconType: string;
+  metric?: string;
 }
 
 const projects: Project[] = [
@@ -32,6 +33,7 @@ const projects: Project[] = [
     color: "from-emerald-500/10 to-teal-500/10",
     iconColor: "text-emerald-600",
     iconType: "graduation-cap",
+    metric: "5,000+ users",
   },
   {
     name: "Cureify",
@@ -325,12 +327,18 @@ export default function FeaturedProjects({
                       }`}>
                         {project.name}
                         {project.liveUrl && (
-                          <PhosphorIcon name="ArrowUpRight" className="h-4 w-4 opacity-0 -translate-y-0.5 translate-x-0.5 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all duration-300 text-accent-blue" />
+                          <PhosphorIcon name="ArrowUpRight" className="h-4 w-4 text-accent-blue transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                         )}
                       </h3>
                       <p className="text-xs font-mono text-gray-500 uppercase tracking-widest mt-0.5">
                         {project.pills[0]}
                       </p>
+                      {project.metric && (
+                        <span className="mt-2 inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-accent-blue/10 border border-accent-blue/20 text-accent-blue font-mono text-[11px] font-bold w-fit">
+                          <span className="h-1.5 w-1.5 rounded-full bg-accent-blue" aria-hidden />
+                          {project.metric}
+                        </span>
+                      )}
                     </div>
                   </div>
 
