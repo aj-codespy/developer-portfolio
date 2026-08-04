@@ -1,0 +1,243 @@
+"use client";
+
+import { Award, BarChart2, Trophy, Zap } from "lucide-react";
+
+interface Achievement {
+  position: string;
+  competition: string;
+  organizer: string;
+  details: string;
+}
+
+interface CodingPlatform {
+  name: string;
+  rating: string;
+  title: string;
+  solved: string;
+  percentile: string;
+  color: string;
+  profileUrl: string;
+}
+
+const platforms: CodingPlatform[] = [
+  {
+    name: "LeetCode",
+    rating: "1572",
+    title: "Active",
+    solved: "500+ Problems",
+    percentile: "Top 20% globally",
+    color: "border-yellow-500/20 text-yellow-600 bg-yellow-500/5",
+    profileUrl: "https://leetcode.com/u/aj_codess/"
+  },
+  {
+    name: "Codeforces",
+    rating: "1308",
+    title: "Pupil",
+    solved: "150+ Problems",
+    percentile: "Active Contestant",
+    color: "border-blue-500/20 text-blue-600 bg-blue-500/5",
+    profileUrl: "https://codeforces.com/profile/aj.codes.py"
+  },
+  {
+    name: "CodeChef",
+    rating: "1633",
+    title: "3-Star",
+    solved: "300+ Problems",
+    percentile: "Top 12% globally",
+    color: "border-emerald-500/20 text-emerald-600 bg-emerald-500/5",
+    profileUrl: "https://www.codechef.com/users/aj_codespy"
+  }
+];
+
+const achievements: Achievement[] = [
+  {
+    position: "2nd Prize",
+    competition: "Mindspark 2025",
+    organizer: "COEP Pune",
+    details: "Secured Second place in clear Analysis using visually appealing Dashboards"
+  },
+  {
+    position: "1st Prize",
+    competition: "Databot AI Hackathon",
+    organizer: "IIIT Kottayam",
+    details: "Developed a functional generative AI agent pipeline within a 36-hour sprint."
+  },
+  {
+    position: "1st Prize",
+    competition: "Datathon",
+    organizer: "SBUP College",
+    details: "Secured top rank by training and fine-tuning high-performance predictive algorithms."
+  },
+  {
+    position: "2nd Prize",
+    competition: "Start up Ideathon 2025",
+    organizer: "JSPM Tathwade College",
+    details: "Pitched an AI-driven startup prototype solving local agricultural and logistical issues."
+  },
+  {
+    position: "2nd Prize",
+    competition: "Quizatron (IT Tech Club)",
+    organizer: "MMCOE Dexterity 2025",
+    details: "Demonstrated broad knowledge in computer science, system architectures, and technology trivia."
+  },
+  {
+    position: "2nd Prize",
+    competition: "IIT Goa Datathon",
+    organizer: "IIT Goa",
+    details: "Competed nationally to engineer optimal predictive machine learning models."
+  },
+  {
+    position: "2nd Prize",
+    competition: "CodeVerse (Dexterity) 2024",
+    organizer: "MMCOE College",
+    details: "Competed in high-speed competitive coding and algorithmic puzzle challenges."
+  },
+  {
+    position: "2nd Prize",
+    competition: "Datathon",
+    organizer: "PICT College",
+    details: "Built and optimized data models to extract high-accuracy predictive insights."
+  },
+  {
+    position: "2nd Prize",
+    competition: "Dashboard Competition 2024",
+    organizer: "COEP Pune",
+    details: "Designed interactive data analytics dashboards to visualize complex civic data."
+  }
+];
+
+const firstPrizes = achievements.filter((a) => a.position === "1st Prize");
+const secondPrizes = achievements.filter((a) => a.position === "2nd Prize");
+
+export default function Achievements() {
+  return (
+    <section className="max-w-7xl mx-auto px-6 py-10">
+      <div className="bg-white/60 backdrop-blur-md rounded-[2rem] p-6 md:p-8 border border-black/5 shadow-sm">
+        <p className="text-xs uppercase tracking-widest text-accent-blue mb-4 font-bold font-mono">
+          {"// COMPETITIVE PROGRAMMING & HONORS"}
+        </p>
+        <h2 className="font-display text-3xl font-extrabold text-dark-card mb-8 tracking-tight">
+          Ratings & Achievements
+        </h2>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+          
+          {/* Left Column — Coding Platform Ratings */}
+          <div className="lg:col-span-5 flex flex-col gap-3">
+            <h3 className="text-sm font-bold text-dark-card border-b border-black/5 pb-2 mb-1 flex items-center gap-2">
+              <BarChart2 className="w-4 h-4 text-accent-blue" />
+              Platform Standings
+            </h3>
+            
+            <div className="grid grid-cols-1 gap-3">
+              {platforms.map((plat) => (
+                <a
+                  key={plat.name}
+                  href={plat.profileUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group bg-white rounded-2xl p-4 border border-black/5 shadow-sm hover:shadow-md transition-all hover:-translate-y-0.5 active:translate-y-0"
+                >
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="font-display font-bold text-sm text-dark-card group-hover:text-accent-blue transition-colors">
+                      {plat.name}
+                    </span>
+                    <span className={`text-xs font-mono font-bold px-2.5 py-0.5 rounded-full border ${plat.color}`}>
+                      {plat.title}
+                    </span>
+                  </div>
+                  
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-2xl font-extrabold text-dark-card tracking-tight">
+                      {plat.rating}
+                    </span>
+                    <span className="text-xs text-muted-text font-bold uppercase tracking-wider">
+                      Max Rating
+                    </span>
+                  </div>
+                  
+                  <div className="flex justify-between items-center mt-2.5 pt-2.5 border-t border-black/5 text-xs text-gray-600">
+                    <span>{plat.solved}</span>
+                    <span className="text-xs bg-black/5 text-dark-card font-mono px-2 py-0.5 rounded">
+                      {plat.percentile}
+                    </span>
+                  </div>
+                </a>
+              ))}
+            </div>
+            
+            <div className="bg-dark-card text-white p-4 rounded-2xl border border-white/5 shadow-md mt-1 flex-1 flex flex-col justify-between">
+              <div>
+                <h4 className="text-xs font-bold text-accent-blue uppercase tracking-widest mb-1.5 flex items-center gap-2">
+                  <Zap className="w-3.5 h-3.5" />
+                  ALGORITHMIC CORE
+                </h4>
+                <p className="text-xs text-gray-300 leading-relaxed">
+                  Solving complex problems isn&apos;t just about syntax. It&apos;s about data structures, time complexity bounds, and designing correct algorithms under pressure. My standings validate my capability to write highly optimized, correct code.
+                </p>
+              </div>
+              <p className="text-xs text-gray-500 mt-3 leading-tight font-mono">
+                {"// Solved 900+ algorithmic problems across all platforms."}
+              </p>
+            </div>
+          </div>
+
+          {/* Right Column — Competition Wins & Honors List */}
+          <div className="lg:col-span-7 flex flex-col gap-3">
+            <h3 className="text-sm font-bold text-dark-card border-b border-black/5 pb-2 mb-1 flex items-center gap-2">
+              <Trophy className="w-4 h-4 text-accent-blue" />
+              Competition Wins & Placement
+            </h3>
+
+            <div className="flex flex-col gap-3">
+              {firstPrizes.map((ach, idx) => (
+                <div key={idx} className="bg-white rounded-2xl border border-black/5 shadow-sm p-4 hover:bg-gray-50/50 transition-colors flex gap-4 items-start">
+                  <div className="bg-accent-blue/10 text-accent-blue p-2 rounded-lg shrink-0 mt-0.5">
+                    <Award className="w-4 h-4" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-1">
+                      <h4 className="text-xs font-bold text-dark-card truncate">
+                        {ach.position}
+                      </h4>
+                      <span className="text-xs font-bold text-accent-blue shrink-0">
+                        @{ach.organizer}
+                      </span>
+                    </div>
+                    <p className="text-xs font-bold text-dark-card mb-0.5">
+                      {ach.competition}
+                    </p>
+                    <p className="text-xs text-muted-text leading-relaxed">
+                      {ach.details}
+                    </p>
+                  </div>
+                </div>
+              ))}
+
+              <div className="bg-white rounded-2xl border border-black/5 shadow-sm p-4">
+                <h4 className="text-xs font-bold text-dark-card mb-3 flex items-center gap-2">
+                  <Award className="w-3.5 h-3.5 text-accent-blue" />
+                  2nd Prize — {secondPrizes.length} more wins
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-3">
+                  {secondPrizes.map((ach, idx) => (
+                    <div key={idx} className="text-xs leading-snug">
+                      <p className="font-bold text-dark-card">
+                        {ach.competition}
+                        <span className="text-muted-text font-normal"> · {ach.organizer}</span>
+                      </p>
+                      <p className="text-muted-text mt-0.5 leading-relaxed">
+                        {ach.details}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  );
+}

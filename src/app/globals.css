@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-geist), "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: var(--font-geist), "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: var(--font-jetbrains), "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Color Palette */
+  --color-page-base: #F0EEE9;
+  --color-surface-card: #FFFFFF;
+  --color-surface-muted: #F4F3EF;
+  --color-dark-card: #0F0F0F;
+  --color-accent: #2563EB;
+  --color-accent-blue: #2563EB;
+  --color-accent-blue-light: #DBEAFE;
+  --color-muted-text: #5C5C56;
+  --color-pill-bg: #E8E6DF;
+  --color-border-light: rgba(0, 0, 0, 0.06);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-size: 100%; /* Scales base to 16px for comfortable reading */
+    overflow-x: hidden;
+  }
+
+  body {
+    background-color: var(--color-page-base);
+    color: var(--color-dark-card);
+    font-family: var(--font-sans);
+    overflow: visible;
+  }
+}
+
+/* Radial mesh gradient hero background */
+.mesh-bg {
+  background-image:
+    radial-gradient(ellipse at 30% 50%, rgba(37, 99, 235, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(59, 130, 246, 0.06) 0%, transparent 50%);
+}
+
+/* Tech stack marquee animation */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  display: flex;
+  animation: marquee 25s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* Timeline line grow animation */
+@keyframes timeline-grow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* Green pulse for status dot */
+@keyframes pulse-green {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.pulse-green {
+  animation: pulse-green 2s ease-in-out infinite;
+}
+
+/* Hide scrollbars utility */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Accessibility: honor reduced-motion preferences (WCAG 2.3.3) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
