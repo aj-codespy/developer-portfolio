@@ -115,7 +115,7 @@ export default function BlogPreview() {
             <h3 className="font-display text-lg font-bold text-dark-card leading-snug mb-2 group-hover:text-accent-blue transition-colors duration-300">
               {post.title}
             </h3>
-            <p className="text-xs text-gray-600 leading-relaxed mb-6">
+            <p className="text-sm text-gray-600 leading-relaxed mb-6">
               {post.excerpt}
             </p>
             <div className="mt-auto flex items-center justify-between border-t border-black/5 pt-3">

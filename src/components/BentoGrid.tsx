@@ -135,7 +135,7 @@ export default function BentoGrid() {
       if (activity) {
         const lines = [
           "// shipping: hireloop (ai interviews)",
-          "// open to: freelance ai builds",
+          "// open to: freelance + ai full-time",
           "// seeking: ai roles",
         ];
         let i = 1;

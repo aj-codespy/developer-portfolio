@@ -220,7 +220,7 @@ export default function Hero() {
                 <span className="absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75 animate-ping" />
                 <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-blue-500" />
               </span>
-              Available for Hiring
+              Open to Freelance + AI Full-time
             </div>
           </div>
 
@@ -289,9 +289,9 @@ export default function Hero() {
             className="mt-8 border-t border-black/5 pt-5 w-full text-xs text-muted-text font-mono flex flex-wrap gap-y-2 gap-x-4 items-center"
           >
             <span>20+ cold conversations with founders</span>
-            <span className="text-accent-blue opacity-50">•</span>
+            <span className="text-gray-300">•</span>
             <span>2 products shipped</span>
-            <span className="text-accent-blue opacity-50">•</span>
+            <span className="text-gray-300">•</span>
             <span>
               0 specs. Just raw problems.
               <span className="cursor-blink text-accent-blue ml-0.5" aria-hidden>▊</span>
