@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import Link from "next/link";
 import { PhosphorIcon } from "@/components/icons/phosphor-icon";
-import { gsap, ScrollTrigger, useGSAP, MOTION_QUERIES } from "@/lib/gsap";
+import { gsap, ScrollTrigger, useGSAP, MOTION_QUERIES, prefersReducedMotion } from "@/lib/gsap";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -32,10 +32,9 @@ export default function Navbar() {
       const mm = gsap.matchMedia();
 
       // Entrance (skipped for reduced-motion users — nav stays visible)
-      mm.add({ reduce: MOTION_QUERIES.reduce }, (ctx) => {
-        if ((ctx.conditions ?? {}).reduce) return;
+      if (!prefersReducedMotion()) {
         gsap.from(navRef.current, { y: -20, autoAlpha: 0, duration: 0.5, ease: "power2.out" });
-      });
+      }
 
       // Scroll-aware pill: class swap at 80px (matches the previous listener)
       ScrollTrigger.create({

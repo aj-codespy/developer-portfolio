@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { gsap, useGSAP, MOTION_QUERIES } from "@/lib/gsap";
 import { PhosphorIcon } from "@/components/icons/phosphor-icon";
+import TypingEyebrow from "@/components/TypingEyebrow";
 
 const GithubIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="currentColor">
@@ -240,9 +241,9 @@ export default function FeaturedProjects({
       {/* Header row */}
       <div className="mb-8 flex items-center justify-between">
         <div className="flex flex-col gap-1">
-          <span className="font-mono text-xs uppercase tracking-widest text-muted-text">
+          <TypingEyebrow className="font-mono text-xs uppercase tracking-widest text-muted-text">
             {subtitle}
-          </span>
+          </TypingEyebrow>
           <h2 className="font-display text-2xl font-black text-dark-card tracking-tight uppercase">
             {title}
           </h2>

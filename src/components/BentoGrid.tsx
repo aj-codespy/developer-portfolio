@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { PhosphorIcon } from "@/components/icons/phosphor-icon";
-import { gsap, useGSAP, MOTION_QUERIES } from "@/lib/gsap";
+import { gsap, useGSAP, MOTION_QUERIES, prefersReducedMotion } from "@/lib/gsap";
 
 const highlights = [
   { category: "FOUNDER", desc: "Built and launched getPlaced, an AI resume builder scaled to 5,000+ active users at getplaced.online." },
@@ -108,6 +108,56 @@ export default function BentoGrid() {
           });
         }
       );
+    },
+    { scope: wrapRef }
+  );
+
+  // Entrance cascade + status-card ambient activity (runs once; reduced-motion gate)
+  useGSAP(
+    () => {
+      if (prefersReducedMotion()) return;
+      const cards = gsap.utils.toArray<HTMLElement>("[data-hovercard]");
+      gsap.fromTo(
+        cards,
+        { clipPath: "inset(6% 3% 10% 3%)", y: 26, autoAlpha: 0 },
+        {
+          clipPath: "inset(0% 0% 0% 0%)",
+          y: 0,
+          autoAlpha: 1,
+          duration: 0.6,
+          stagger: 0.07,
+          ease: "power2.out",
+          scrollTrigger: { trigger: wrapRef.current, start: "top 74%", once: true },
+        }
+      );
+
+      const activity = wrapRef.current?.querySelector("[data-activity]");
+      if (activity) {
+        const lines = [
+          "// shipping: hireloop (ai interviews)",
+          "// open to: freelance ai builds",
+          "// seeking: ai roles",
+        ];
+        let i = 1;
+        const cycle = () => {
+          gsap.to(activity, {
+            autoAlpha: 0,
+            duration: 0.4,
+            ease: "power2.out",
+            onComplete: () => {
+              activity.textContent = lines[i % lines.length];
+              i += 1;
+              gsap.to(activity, {
+                autoAlpha: 1,
+                duration: 0.4,
+                ease: "power2.out",
+                onComplete: () => gsap.delayedCall(2.6, cycle),
+              });
+            },
+          });
+        };
+        gsap.delayedCall(2.6, cycle);
+      }
     },
     { scope: wrapRef }
   );
@@ -434,6 +484,9 @@ export default function BentoGrid() {
             <a href="#contact" className="mt-auto text-center py-2.5 px-4 bg-white/5 border border-white/10 text-white rounded-xl text-xs font-bold hover:bg-white/10 transition-colors uppercase tracking-wider">
               Get in Touch
             </a>
+            <p className="mt-3 font-mono text-[10px] text-gray-500" data-activity>
+              {"// shipping: hireloop (ai interviews)"}
+            </p>
           </div>
         </div>
 

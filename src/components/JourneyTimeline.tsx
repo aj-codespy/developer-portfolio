@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import Image from "next/image";
 import { PhosphorIcon } from "@/components/icons/phosphor-icon";
+import TypingEyebrow from "@/components/TypingEyebrow";
 import { gsap, useGSAP, MOTION_QUERIES } from "@/lib/gsap";
 
 const timelineData = [
@@ -22,6 +23,8 @@ export default function JourneyTimeline() {
   const mobNodesRef = useRef<(HTMLDivElement | null)[]>([]);
   const footerRef = useRef<HTMLDivElement>(null);
   const photoRef = useRef<HTMLDivElement>(null);
+  const bleed1Ref = useRef<HTMLDivElement>(null);
+  const bleed2Ref = useRef<HTMLDivElement>(null);
   const hoverPhoto = useRef<(over: boolean) => void>(() => {});
 
   useGSAP(
@@ -44,6 +47,10 @@ export default function JourneyTimeline() {
             phone: boolean;
           };
           if (reduce) return;
+
+          // Ambient bleed glows around the dark card (slow drift)
+          gsap.to(bleed1Ref.current, { x: 60, y: 18, duration: 20, repeat: -1, yoyo: true, ease: "sine.inOut" });
+          gsap.to(bleed2Ref.current, { x: -45, y: 30, duration: 26, repeat: -1, yoyo: true, ease: "sine.inOut" });
 
           // Connecting line draw (scrub, follows scroll)
           if (tablet && lineHRef.current) {
@@ -112,12 +119,26 @@ export default function JourneyTimeline() {
   );
 
   return (
-    <section id="journey" ref={sectionRef} className="max-w-7xl mx-auto px-6 pt-20 pb-20">
-      <div className="bg-dark-card rounded-[2rem] pt-6 pb-8 px-6 md:pt-8 md:pb-10 md:px-10 text-white overflow-hidden border border-white/5">
+    <section id="journey" ref={sectionRef} className="relative max-w-7xl mx-auto px-6 pt-20 pb-20">
+      {/* Ambient bleed: blue glow crosses the light/dark boundary (GSAP drift) */}
+      <div
+        aria-hidden
+        ref={bleed1Ref}
+        className="pointer-events-none absolute -top-16 -left-12 w-[400px] h-[240px] rounded-full blur-3xl"
+        style={{ background: "radial-gradient(ellipse, rgba(37,99,235,0.16) 0%, transparent 70%)" }}
+      />
+      <div className="bg-dark-card rounded-[2rem] pt-6 pb-8 px-6 md:pt-8 md:pb-10 md:px-10 text-white overflow-hidden border border-white/5 relative">
+        {/* Inner glow (clipped to card) */}
+        <div
+          aria-hidden
+          ref={bleed2Ref}
+          className="pointer-events-none absolute -top-20 -right-20 w-[380px] h-[380px] rounded-full blur-3xl"
+          style={{ background: "radial-gradient(circle, rgba(37,99,235,0.13) 0%, transparent 70%)" }}
+        />
         {/* Header */}
-        <p className="text-xs uppercase tracking-widest text-accent-blue mb-4 font-bold font-mono">
+        <TypingEyebrow className="text-xs uppercase tracking-widest text-accent-blue mb-4 font-bold font-mono">
           {"// HOW I GOT HERE"}
-        </p>
+        </TypingEyebrow>
 
         {/* ===== Desktop / Horizontal Zig-Zag Timeline (md+) ===== */}
         <div className="hidden md:block relative h-[240px] my-2">
@@ -158,7 +179,7 @@ export default function JourneyTimeline() {
                   )}
 
                   {/* Dot (Guaranteed to be perfectly centered in the row) */}
-                  <div className="w-3.5 h-3.5 rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.3)] flex-shrink-0 z-20 group-hover:scale-110 group-hover:bg-accent-blue group-hover:shadow-[0_0_15px_rgba(37,99,235,0.8)] transition-all duration-300" />
+                  <div className={`w-3.5 h-3.5 rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.3)] flex-shrink-0 z-20 group-hover:scale-110 group-hover:bg-accent-blue group-hover:shadow-[0_0_15px_rgba(37,99,235,0.8)] transition-all duration-300 relative ${isLast ? "node-ping" : ""}`} />
                   
                   {/* Arrow Indicator for last item */}
                   {isLast && (
@@ -191,7 +212,7 @@ export default function JourneyTimeline() {
                   className="relative group cursor-default"
                 >
                   {/* Dot — positioned on the vertical line */}
-                  <div className="absolute -left-8 top-1.5 w-3.5 h-3.5 rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.3)] group-hover:scale-110 group-hover:bg-accent-blue group-hover:shadow-[0_0_15px_rgba(37,99,235,0.8)] transition-all duration-300" />
+                  <div className={`absolute -left-8 top-1.5 w-3.5 h-3.5 rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.3)] group-hover:scale-110 group-hover:bg-accent-blue group-hover:shadow-[0_0_15px_rgba(37,99,235,0.8)] transition-all duration-300 ${isLast ? "node-ping" : ""}`} />
 
                   {/* Content */}
                   <div className="flex items-baseline gap-4">

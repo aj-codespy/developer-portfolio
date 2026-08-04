@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { PhosphorIcon } from "@/components/icons/phosphor-icon";
+import TypingEyebrow from "@/components/TypingEyebrow";
 import { gsap, useGSAP, MOTION_QUERIES } from "@/lib/gsap";
 
 const blogPosts = [
@@ -87,9 +88,9 @@ export default function BlogPreview() {
 
   return (
     <section id="blog" ref={sectionRef} className="max-w-7xl mx-auto px-6 pt-20 pb-10">
-      <p className="text-xs uppercase tracking-widest text-gray-500 mb-4 font-bold font-mono">
+      <TypingEyebrow className="text-xs uppercase tracking-widest text-gray-500 mb-4 font-bold font-mono">
         {"// LATEST FROM THE BLOG"}
-      </p>
+      </TypingEyebrow>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {blogPosts.map((post, i) => (
@@ -107,7 +108,7 @@ export default function BlogPreview() {
           >
             <div className="flex items-center justify-between mb-4">
               <span className="text-xs font-mono text-gray-500 uppercase tracking-wider">
-                {post.date}
+                {"POST " + String(i + 1).padStart(3, "0")}
               </span>
               <PhosphorIcon name="ArrowUpRight" className="w-4 h-4 text-gray-400 group-hover:text-accent-blue group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
             </div>
@@ -118,7 +119,7 @@ export default function BlogPreview() {
               {post.excerpt}
             </p>
             <div className="mt-auto flex items-center justify-between border-t border-black/5 pt-3">
-              <span className="text-xs font-mono text-gray-500">{post.readTime}</span>
+              <span className="text-xs font-mono text-gray-500">{post.date} · {post.readTime}</span>
               <span className="text-xs font-bold text-accent-blue inline-flex items-center gap-1">
                 Read article
                 <PhosphorIcon name="ArrowRight" className="w-3 h-3 group-hover:translate-x-0.5 transition-transform duration-300" />

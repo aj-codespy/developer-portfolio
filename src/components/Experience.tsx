@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { gsap, useGSAP, MOTION_QUERIES } from "@/lib/gsap";
+import { gsap, useGSAP, prefersReducedMotion } from "@/lib/gsap";
 import { PhosphorIcon } from "@/components/icons/phosphor-icon";
+import TypingEyebrow from "@/components/TypingEyebrow";
 
 interface Job {
   id: string;
@@ -103,10 +104,7 @@ export default function Experience() {
   useGSAP(
     (_ctx, contextSafeArg) => {
       const contextSafe = contextSafeArg!;
-      const mm = gsap.matchMedia();
-      mm.add({ reduce: MOTION_QUERIES.reduce }, (ctx) => {
-        reducedRef.current = (ctx.conditions ?? {}).reduce ?? false;
-      });
+      reducedRef.current = prefersReducedMotion();
 
       positionHighlight(ranOnce.current && !reducedRef.current);
       ranOnce.current = true;
@@ -194,9 +192,9 @@ export default function Experience() {
       <div 
         className="bg-white/60 backdrop-blur-md rounded-[2rem] p-6 md:p-8 border border-black/5 shadow-sm relative overflow-hidden"
       >
-        <p className="text-xs uppercase tracking-widest text-accent-blue mb-4 font-bold font-mono">
+        <TypingEyebrow className="text-xs uppercase tracking-widest text-accent-blue mb-4 font-bold font-mono">
           {"// PROFESSIONAL EXPERIENCE"}
-        </p>
+        </TypingEyebrow>
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
           <h2 className="font-display text-3xl font-extrabold text-dark-card tracking-tight">
             Work History

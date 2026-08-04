@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { gsap, useGSAP, MOTION_QUERIES } from "@/lib/gsap";
+import { gsap, useGSAP, prefersReducedMotion } from "@/lib/gsap";
 import { PhosphorIcon } from "@/components/icons/phosphor-icon";
+import TypingEyebrow from "@/components/TypingEyebrow";
 
 /* Inline SVG icons for socials */
 const GithubIcon = () => (
@@ -60,28 +61,24 @@ export default function SocialsBar() {
 
   useGSAP(
     () => {
-      const mm = gsap.matchMedia();
-      mm.add({ reduce: MOTION_QUERIES.reduce }, (ctx) => {
-        const { reduce } = (ctx.conditions ?? {}) as { reduce: boolean };
-        if (reduce) return;
-        gsap.from(footerRef.current, {
-          y: 24,
-          autoAlpha: 0,
-          duration: 0.55,
-          ease: "power2.out",
-          scrollTrigger: { trigger: footerRef.current, start: "top 92%", once: true },
-        });
-        const receipt = footerRef.current?.querySelector("[data-receipt]");
-        if (receipt) {
-          gsap.from(receipt, {
-            y: 12,
-            autoAlpha: 0,
-            duration: 0.5,
-            ease: "power2.out",
-            scrollTrigger: { trigger: receipt, start: "top 98%", once: true },
-          });
-        }
+      if (prefersReducedMotion()) return;
+      gsap.from(footerRef.current, {
+        y: 24,
+        autoAlpha: 0,
+        duration: 0.55,
+        ease: "power2.out",
+        scrollTrigger: { trigger: footerRef.current, start: "top 92%", once: true },
       });
+      const receipt = footerRef.current?.querySelector("[data-receipt]");
+      if (receipt) {
+        gsap.from(receipt, {
+          y: 12,
+          autoAlpha: 0,
+          duration: 0.5,
+          ease: "power2.out",
+          scrollTrigger: { trigger: receipt, start: "top 98%", once: true },
+        });
+      }
     },
     { scope: footerRef }
   );
@@ -305,9 +302,9 @@ export default function SocialsBar() {
     >
       {/* Booking Widget */}
       <div id="booking" className="border-t border-black/5 pt-12 mb-12">
-        <p className="text-xs uppercase tracking-widest text-accent-blue mb-2 font-bold font-mono">
+        <TypingEyebrow className="text-xs uppercase tracking-widest text-accent-blue mb-2 font-bold font-mono">
           {"// BOOK A MEETING"}
-        </p>
+        </TypingEyebrow>
         <h2 className="font-display text-2xl font-black text-dark-card tracking-tight uppercase mb-6">
           Book a Call
         </h2>
@@ -360,9 +357,9 @@ export default function SocialsBar() {
 
       <div className="border-t border-black/5 pt-12 mb-8 flex flex-col sm:flex-row sm:items-baseline justify-between gap-4">
         <div>
-          <p className="text-xs uppercase tracking-widest text-accent-blue mb-2 font-bold font-mono">
-            {"// LET&apos;S CONNECT"}
-          </p>
+          <TypingEyebrow className="text-xs uppercase tracking-widest text-accent-blue mb-2 font-bold font-mono">
+            {"// LET'S CONNECT"}
+          </TypingEyebrow>
           <h2 className="font-display text-2xl font-black text-dark-card tracking-tight uppercase">
             Find Me Online
           </h2>
