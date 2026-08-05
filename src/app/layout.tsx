@@ -46,12 +46,12 @@ export const metadata: Metadata = {
   publisher: "Ayush Jha",
   icons: {
     icon: [
-      { url: "/icon.svg", type: "image/svg+xml" },
-      { url: "/favicon.ico?v=7" },
-      { url: "/favicon.png?v=7", type: "image/png" },
+      { url: "/icon.svg?v=8", type: "image/svg+xml" },
+      { url: "/favicon.ico?v=8" },
+      { url: "/favicon.png?v=8", type: "image/png" },
     ],
-    shortcut: "/favicon.ico?v=7",
-    apple: "/favicon.png?v=7",
+    shortcut: "/favicon.ico?v=8",
+    apple: "/favicon.png?v=8",
   },
   robots: {
     index: true,
