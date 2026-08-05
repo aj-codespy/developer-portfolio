@@ -360,10 +360,10 @@ export default function Hero() {
           {/* Headline — static sentence 1 for SEO/SSR; typewriter cycler takes over client-side */}
           <h1
             ref={h1Ref}
-            className="font-display text-[2.25rem] sm:text-5xl lg:text-[3.75rem] font-extrabold tracking-tight text-dark-card leading-[1.05] mb-5"
+            className="td-cycler font-display text-[2.25rem] max-[360px]:text-[1.8rem] sm:text-5xl lg:text-[3.75rem] font-extrabold tracking-tight text-dark-card leading-[1.05] mb-5"
           >
             <span data-hl-text>I build like it&apos;s my own company.</span>
-            <span aria-hidden className="cursor-blink text-accent-blue select-none">▊</span>
+            <span aria-hidden className="cursor-blink text-accent-blue select-none inline-block w-0 overflow-visible">▊</span>
           </h1>
 
           <div data-hero="copy" className="max-w-lg mb-8">
@@ -394,7 +394,7 @@ export default function Hero() {
               <span ref={heartbeatRef} aria-hidden className="absolute inset-0 rounded-full bg-accent-blue" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-accent-blue" />
             </span>
-            // currently shipping: hireloop (live ai interviews)
+            {"// currently shipping: hireloop (live ai interviews)"}
           </p>
 
           {/* CTAs */}

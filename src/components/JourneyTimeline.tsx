@@ -119,7 +119,7 @@ export default function JourneyTimeline() {
   );
 
   return (
-    <section id="journey" ref={sectionRef} className="relative max-w-7xl mx-auto px-6 pt-20 pb-20">
+    <section id="journey" ref={sectionRef} className="relative max-w-7xl mx-auto px-6 pt-20 pb-20 overflow-x-clip">
       {/* Ambient bleed: blue glow crosses the light/dark boundary (GSAP drift) */}
       <div
         aria-hidden

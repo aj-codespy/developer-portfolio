@@ -67,54 +67,56 @@ export default function Navbar() {
   ];
 
   return (
-    <nav
-      ref={navRef}
-      className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 rounded-full flex items-center px-1.5 py-1.5 max-w-[95%] sm:max-w-none ${
-        isScrolled
-          ? "bg-white/80 backdrop-blur-md shadow-lg shadow-black/5 border border-black/5"
-          : "bg-white/60 backdrop-blur-sm border border-black/5"
-      }`}
-    >
-      <Link
-        href="/#home"
-        aria-label="Ayush Jha — back to top"
-        className="flex items-center gap-2 text-sm sm:text-base font-bold text-dark-card pl-1.5 pr-3 py-1.5 rounded-full hover:bg-black/5 transition-colors whitespace-nowrap"
-      >
-        <span
-          className="flex items-center justify-center w-7 h-7 rounded-full bg-dark-card text-white font-mono text-[11px] font-bold shrink-0"
-          aria-hidden
-        >
-          aj<span className="text-accent-blue">&gt;</span>
-        </span>
-        Ayush&nbsp;Jha
-      </Link>
-      <span className="h-5 w-px bg-black/10 mx-1" aria-hidden="true" />
-      <ul className="flex items-center">
-        {links.map((link) => (
-          <li key={link.name} className={link.mobile ? "" : "hidden md:block"}>
-            <Link
-              href={link.href}
-              className="text-xs sm:text-sm font-medium text-dark-card/70 hover:text-dark-card px-2.5 sm:px-4 py-2.5 rounded-full transition-colors hover:bg-black/5 whitespace-nowrap"
-            >
-              {link.name}
-            </Link>
-          </li>
-        ))}
-      </ul>
-      <span
-        ref={navCtaRef}
-        className="inline-block ml-1"
-        onMouseMove={handleMagnetMove}
-        onMouseLeave={handleMagnetLeave}
+    <div className="fixed top-4 inset-x-0 z-50 flex justify-center px-3 pointer-events-none">
+      <nav
+        ref={navRef}
+        className={`pointer-events-auto max-w-full transition-all duration-300 rounded-full flex items-center px-1.5 py-1.5 ${
+          isScrolled
+            ? "bg-white/80 backdrop-blur-md shadow-lg shadow-black/5 border border-black/5"
+            : "bg-white/60 backdrop-blur-sm border border-black/5"
+        }`}
       >
         <Link
-          href="/#booking"
-          className="bg-dark-card text-white text-xs sm:text-sm font-semibold px-4 sm:px-5 py-2.5 rounded-full flex items-center gap-1.5 hover:bg-black transition-colors whitespace-nowrap"
+          href="/#home"
+          aria-label="Ayush Jha — back to top"
+          className="flex items-center gap-2 text-sm sm:text-base font-bold text-dark-card pl-1.5 pr-3 py-1.5 rounded-full hover:bg-black/5 transition-colors whitespace-nowrap"
         >
-          Book a Call
-          <PhosphorIcon name="ArrowRight" className="w-3.5 h-3.5 hidden sm:block" />
+          <span
+            className="flex items-center justify-center w-7 h-7 rounded-full bg-dark-card text-white font-mono text-[11px] font-bold shrink-0"
+            aria-hidden
+          >
+            aj<span className="text-accent-blue">&gt;</span>
+          </span>
+          <span className="hidden sm:inline">Ayush&nbsp;Jha</span>
         </Link>
-      </span>
-    </nav>
+        <span className="h-5 w-px bg-black/10 mx-1" aria-hidden="true" />
+        <ul className="flex items-center">
+          {links.map((link) => (
+            <li key={link.name} className={link.mobile ? "" : "hidden md:block"}>
+              <Link
+                href={link.href}
+                className="text-xs sm:text-sm font-medium text-dark-card/70 hover:text-dark-card px-2.5 sm:px-4 py-2.5 rounded-full transition-colors hover:bg-black/5 whitespace-nowrap"
+              >
+                {link.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
+        <span
+          ref={navCtaRef}
+          className="inline-block ml-1"
+          onMouseMove={handleMagnetMove}
+          onMouseLeave={handleMagnetLeave}
+        >
+          <Link
+            href="/#booking"
+            className="bg-dark-card text-white text-xs sm:text-sm font-semibold px-4 sm:px-5 py-2.5 rounded-full flex items-center gap-1.5 hover:bg-black transition-colors whitespace-nowrap"
+          >
+            Book a Call
+            <PhosphorIcon name="ArrowRight" className="w-3.5 h-3.5 hidden sm:block" />
+          </Link>
+        </span>
+      </nav>
+    </div>
   );
 }
