@@ -417,7 +417,7 @@ export default function Hero() {
             </Link>
             <a
               data-hero="cta"
-              href="https://drive.google.com/file/d/1btEtSIFYdw65ZmStVckE6DvITPPG4HRr/view?usp=share_link"
+              href="https://drive.google.com/file/d/1Lvo6cVsWBiSF6tZw9zeQP6i9eN7cbxKR/view?usp=share_link"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-white text-dark-card border border-black/10 px-6 py-3 rounded-xl font-semibold text-sm hover:bg-gray-50 transition-all hover:-translate-y-0.5 active:translate-y-0"

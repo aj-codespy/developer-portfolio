@@ -200,7 +200,7 @@ export default function Experience() {
             Work History
           </h2>
           <a
-            href="https://drive.google.com/file/d/1btEtSIFYdw65ZmStVckE6DvITPPG4HRr/view?usp=share_link"
+            href="https://drive.google.com/file/d/1Lvo6cVsWBiSF6tZw9zeQP6i9eN7cbxKR/view?usp=share_link"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-dark-card text-white hover:bg-black px-4 py-2.5 rounded-xl text-xs font-bold transition-all shadow-md hover:-translate-y-0.5 active:translate-y-0 w-fit"
